@@ -10,7 +10,8 @@
     "lint:fix": "next lint --fix",
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest"
   },
   "dependencies": {
     "next": "15.3.1",
