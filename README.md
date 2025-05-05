@@ -1,6 +1,6 @@
 # Next-Level Store
 
-Next-Level Store is a online store of lifestyle clothing for men.  
+Next-Level Store is a online store of books.  
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) was created as a final assignment for the RS School course.
 
 ## Technologies Used
@@ -15,6 +15,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - **GitHub Projects**: A tool for managing projects and tracking issues in GitHub.
 
 ## Installation
+
 - Use node 14.x or higher.
 - Clone this repo: $ git clone https://github.com/soljahd/next-level-store.git.
 - Go to downloaded folder: $ cd next-level-store.
@@ -53,6 +54,7 @@ pnpm dev
 # or
 bun dev
 ```
+
 </details>
 <details>
 <summary>"build"</summary>
@@ -67,6 +69,7 @@ pnpm build
 # or
 bun build
 ```
+
 </details>
 <details>
 <summary>"start"</summary>
@@ -81,6 +84,7 @@ pnpm start
 # or
 bun start
 ```
+
 </details>
 <details>
 <summary>"lint"</summary>
@@ -95,6 +99,7 @@ pnpm lint
 # or
 bun lint
 ```
+
 </details>
 <details>
 <summary>"lint:fix"</summary>
@@ -109,6 +114,7 @@ pnpm lint:fix
 # or
 bun lint:fix
 ```
+
 </details>
 <details>
 <summary>"format"</summary>
@@ -123,6 +129,7 @@ pnpm format
 # or
 bun format
 ```
+
 </details>
 <details>
 <summary>"format:fix"</summary>
@@ -137,6 +144,7 @@ pnpm format:fix
 # or
 bun format:fix
 ```
+
 </details>
 <details>
 <summary>"prepare"</summary>
@@ -151,6 +159,52 @@ pnpm prepare
 # or
 bun prepare
 ```
+
+</details>
+<details>
+<summary>"test"</summary>
+Prepares the project by installing the necessary dependencies and settings.
+
+```bash
+npm run test
+# or
+yarn test
+# or
+pnpm test
+# or
+bun test
+```
+
+</details>
+<details>
+<summary>"test:update"</summary>
+Prepares the project by installing the necessary dependencies and settings.
+
+```bash
+npm run test:update
+# or
+yarn test:update
+# or
+pnpm test:update
+# or
+bun test:update
+```
+
+</details>
+<details>
+<summary>"test:watch"</summary>
+Prepares the project by installing the necessary dependencies and settings.
+
+```bash
+npm run test:watch
+# or
+yarn test:watch
+# or
+pnpm test:watch
+# or
+bun test:watch
+```
+
 </details>
 
 ## Learn More
@@ -163,6 +217,7 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Project participants
+
 - [soljahd](https://github.com/soljahd)
 - [dmitriyradovnya](https://github.com/DmitriyRadovnya)
 - [kenny-alive](https://github.com/kenny-alive)
