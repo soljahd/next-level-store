@@ -14,6 +14,14 @@ export const loginScheme = z.object({
     .max(20, 'Password is too long'),
 });
 
+export const addressScheme = z.object({
+  street: z.string().min(1, 'Street name is too short').max(100, 'Street name is too long'),
+  postcode: z.string().regex(/^\d+$/, 'Please enter a valid postcode').length(6, 'Please enter a valid postcode'),
+  country: z.string().min(1, 'Please select a country'),
+  city: z.string().min(1, 'Please select a city'),
+  isDefault: z.boolean(),
+});
+
 export const registerScheme = loginScheme.extend({
   firstName: z
     .string()
@@ -30,11 +38,10 @@ export const registerScheme = loginScheme.extend({
     .refine((date) => date.isBefore(dayjs()), 'Please enter a valid date of Birth')
     .refine((date) => dayjs().diff(date, 'year') >= 13, 'Age must be at least 13 years')
     .refine((date) => dayjs().diff(date, 'year') <= 125, 'Incorrect date of Birth. Too old'),
-  street: z.string().min(1, 'Street name is too short').max(100, 'Street name is too long'),
-  postcode: z.string().regex(/^\d+$/, 'Please enter a valid postcode').length(6, 'Please enter a valid postcode'),
-  country: z.string().min(1, 'Please select a country'),
-  city: z.string().min(1, 'Please select a city'),
+  shippingAddress: addressScheme,
+  billingAddress: addressScheme.optional(),
 });
 
 export type LoginFormData = z.infer<typeof loginScheme>;
+export type AddressFormData = z.infer<typeof addressScheme>;
 export type RegisterFormData = z.infer<typeof registerScheme>;
