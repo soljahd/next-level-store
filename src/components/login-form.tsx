@@ -90,7 +90,7 @@ export default function LoginForm() {
         flexDirection: 'column',
         // justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        minHeight: '100vh',
         mt: 8,
       }}
     >
