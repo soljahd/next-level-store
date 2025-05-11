@@ -1,7 +1,5 @@
-export default function Home() {
-  return (
-    <div>
-      <h1>Hello it is Next-Level Store!</h1>
-    </div>
-  );
+import { redirect } from 'next/navigation';
+
+export default function Root() {
+  redirect('/main');
 }
