@@ -1,9 +1,5 @@
 'use client';
 import { Box, Checkbox, FormControlLabel, Grid, TextField, Typography, Button, Link } from '@mui/material';
-// import { LocalizationProvider } from '@mui/x-date-pickers';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import { DatePicker } from '@mui/x-date-pickers';
-// import { enGB } from 'date-fns/locale';
 import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,8 +11,9 @@ import AddressForm from './address-form';
 export default function RegisterForm() {
   const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(null);
   const [isBillingSameAsDelivery, setIsBillingSameAsDelivery] = React.useState(true);
-  // let date = Date()
-  // const {value, setValue} = React.useState(dayjs(date))
+  const [isDefaultDeliveryAddress, setDefaultDeliveryAddress] = React.useState(true);
+  const [isDefaultBillingAddress, setDefaultBillingAddress] = React.useState(true);
+
   return (
     <Box
       component="div"
@@ -28,16 +25,16 @@ export default function RegisterForm() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '1%',
+        padding: 1,
       }}
     >
       <Typography component="h1" variant="h4" sx={{ textAlign: 'center' }}>
         Registration
       </Typography>
-      <Typography component="p" sx={{ textAlign: 'center', opacity: 0.55, color: '#808080' }}>
+      <Typography component="p" color="textSecondary" sx={{ textAlign: 'center' }}>
         Welcome user, please sign up to continue
       </Typography>
-      <Box component="form" sx={{ width: '90%', display: 'flex', flexDirection: 'column', gap: 1, p: '1%' }}>
+      <Box component="form" sx={{ width: '90%', display: 'flex', flexDirection: 'column', gap: 1, p: 1 }}>
         <Typography component="p" sx={{ textAlign: 'start' }}>
           User
         </Typography>
@@ -75,23 +72,37 @@ export default function RegisterForm() {
             <TextField type="password" fullWidth required label="Password" variant="outlined" />
           </Grid>
         </Grid>
-        <AddressForm addressForWhat={'Delivery address'}></AddressForm>
+        <AddressForm
+          addressForWhat={'Delivery address'}
+          isDefaultAddress={isDefaultDeliveryAddress}
+          handleDefaultAddress={setDefaultDeliveryAddress}
+        ></AddressForm>
         <FormControlLabel
           control={
             <Checkbox
               checked={isBillingSameAsDelivery}
               onChange={(event) => setIsBillingSameAsDelivery(event.target.checked)}
+              sx={{ p: 0, pl: 1, pr: 1 / 2 }}
             />
           }
           labelPlacement="end"
           label="Use delivery address as billing address"
+          sx={{ mb: 1 }}
         ></FormControlLabel>
-        {isBillingSameAsDelivery ? '' : <AddressForm addressForWhat={'Billing address'}></AddressForm>}
+        {isBillingSameAsDelivery ? (
+          ''
+        ) : (
+          <AddressForm
+            addressForWhat={'Billing address'}
+            isDefaultAddress={isDefaultBillingAddress}
+            handleDefaultAddress={setDefaultBillingAddress}
+          ></AddressForm>
+        )}
         <Button type="submit" variant="contained" sx={{ alignSelf: 'center', width: '30%' }}>
           Register
         </Button>
         <Box sx={{ alignSelf: 'center', display: 'flex', gap: 1 / 2, alignItems: 'center' }}>
-          <Typography component="span" sx={{ opacity: 0.55, color: '#808080' }}>
+          <Typography component="span" color="textSecondary">
             Do you have an account?
           </Typography>
           <Link href="/login" underline="always">
