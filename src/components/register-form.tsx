@@ -48,6 +48,7 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerScheme),
+    shouldUnregister: true,
     mode: 'onSubmit',
   });
 
@@ -228,9 +229,7 @@ export default function RegisterForm() {
           labelPlacement="end"
           label="Use delivery address as billing address"
         ></FormControlLabel>
-        {isBillingSameAsDelivery ? (
-          ''
-        ) : (
+        {!isBillingSameAsDelivery && (
           <AddressForm
             addressForWhat={'Billing address'}
             control={control}
