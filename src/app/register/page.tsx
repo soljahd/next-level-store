@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Container } from '@mui/material';
 import RegisterForm from '@/components/register-form';
-// import RegisterForm from '@/components/register-form-my';
 
 export const metadata: Metadata = {
   title: 'Register | Next-Level Store',
@@ -19,7 +18,7 @@ export default function RegisterPage() {
       component="main"
       maxWidth="md"
       sx={{
-        minHeight: '100vh',
+        flexgrow: 1,
       }}
     >
       <RegisterForm />

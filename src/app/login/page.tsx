@@ -18,7 +18,7 @@ export default function LoginPage() {
       component="main"
       maxWidth="xs"
       sx={{
-        minHeight: '100vh',
+        flexgrow: 1,
       }}
     >
       <LoginForm />

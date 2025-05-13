@@ -3,7 +3,6 @@ import {
   Alert,
   Box,
   Button,
-  Checkbox,
   FormControlLabel,
   Grid,
   TextField,
@@ -12,6 +11,8 @@ import {
   IconButton,
   InputAdornment,
   Snackbar,
+  Stack,
+  Switch,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { DateField } from '@mui/x-date-pickers';
@@ -72,7 +73,6 @@ export default function RegisterForm() {
       await registerCustomer(userData);
       await loginCustomer(data.email, data.password);
       router.push('/main');
-      console.log(data);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -81,26 +81,15 @@ export default function RegisterForm() {
   };
 
   return (
-    <Box
+    <Stack
       component="form"
       onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       noValidate
       autoComplete="off"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-        pt: 8,
-      }}
+      gap={4}
+      paddingTop={8}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 1,
-        }}
-      >
+      <Stack gap={1} alignItems={'center'}>
         <Button component={Link} href="/main" sx={{ display: 'flex' }}>
           <Box component="img" src="/logo.svg" alt="Logo" sx={{ width: 60, height: 60 }} />
         </Button>
@@ -110,14 +99,13 @@ export default function RegisterForm() {
         <Typography component="h2" variant="body1" color="textSecondary">
           Welcome user, please register to continue
         </Typography>
-      </Box>
+      </Stack>
 
-      <Box component="div" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Stack gap={1}>
         <Typography component="p" sx={{ textAlign: 'start' }}>
           User
         </Typography>
-
-        <Grid container spacing={2} maxWidth="md" sx={{ margin: '0 auto 10px' }}>
+        <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 6, md: 9 / 2 }}>
             <TextField
               type="text"
@@ -169,7 +157,7 @@ export default function RegisterForm() {
 
           <Grid size={{ xs: 12, sm: 6 }}>
             <TextField
-              type="email"
+              type="text"
               label="Email*"
               placeholder="Email*"
               color="primary"
@@ -204,9 +192,9 @@ export default function RegisterForm() {
             />
           </Grid>
         </Grid>
-      </Box>
+      </Stack>
 
-      <Box component="div" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Stack gap={2}>
         <AddressForm
           addressForWhat={'Delivery address'}
           control={control}
@@ -218,17 +206,20 @@ export default function RegisterForm() {
             isDefault: errors.shippingAddress?.isDefault,
           }}
           prefix={'shippingAddress'}
-        ></AddressForm>
+        />
+
         <FormControlLabel
           control={
-            <Checkbox
+            <Switch
               checked={isBillingSameAsDelivery}
               onChange={(event) => setIsBillingSameAsDelivery(event.target.checked)}
             />
           }
           labelPlacement="end"
-          label="Use delivery address as billing address"
-        ></FormControlLabel>
+          label="Use delivery address as billing"
+          sx={{ width: 'fit-content', mr: 0 }}
+        />
+
         {!isBillingSameAsDelivery && (
           <AddressForm
             addressForWhat={'Billing address'}
@@ -241,18 +232,11 @@ export default function RegisterForm() {
               isDefault: errors.billingAddress?.isDefault,
             }}
             prefix={'billingAddress'}
-          ></AddressForm>
+          />
         )}
-      </Box>
+      </Stack>
 
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 2,
-        }}
-      >
+      <Stack gap={2} alignItems="center">
         <Button type="submit" variant="contained" fullWidth sx={{ alignSelf: 'center', maxWidth: '396px' }}>
           Register
         </Button>
@@ -262,7 +246,7 @@ export default function RegisterForm() {
             Login
           </MuiLink>
         </Typography>
-      </Box>
+      </Stack>
 
       <Snackbar
         open={!!errorMessage}
@@ -274,6 +258,6 @@ export default function RegisterForm() {
           {errorMessage}
         </Alert>
       </Snackbar>
-    </Box>
+    </Stack>
   );
 }

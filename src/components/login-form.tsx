@@ -94,7 +94,7 @@ export default function LoginForm() {
         }}
       >
         <TextField
-          type="email"
+          type="text"
           label="Email*"
           placeholder="Email*"
           color="primary"
