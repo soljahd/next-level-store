@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginScheme, type LoginFormData } from '@/lib/validation';
 import { loginCustomer } from '@/lib/commercetools/auth';
+import { useAuthStore } from '@/lib/store/auth-store';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +31,7 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
+  const { setLoginState } = useAuthStore();
   const router = useRouter();
 
   const {
@@ -45,6 +47,7 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await loginCustomer(data.email, data.password);
+      setLoginState(data.email);
       router.push('/main');
     } catch (error) {
       if (error instanceof Error) {
