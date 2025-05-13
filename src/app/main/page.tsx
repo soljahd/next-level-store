@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { Container } from '@mui/material';
-import Header from '@/components/header';
+import { Container, Typography } from '@mui/material';
 
 export const metadata: Metadata = {
   title: 'Home | Next-Level Store',
@@ -15,14 +14,15 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <Container
-      component="div"
+      component="main"
       maxWidth={false}
-      disableGutters
       sx={{
-        minHeight: '100vh',
+        flexGrow: 1,
       }}
     >
-      <Header />
+      <Typography component="h1" variant="h4" align="center">
+        Main page
+      </Typography>
     </Container>
   );
 }

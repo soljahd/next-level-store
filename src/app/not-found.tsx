@@ -14,16 +14,22 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Container maxWidth="sm">
+    <Container
+      component="main"
+      maxWidth="sm"
+      sx={{
+        flexgrow: 1,
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: '100vh',
           textAlign: 'center',
           gap: 2,
+          pt: 8,
         }}
       >
         <Typography variant="h1" component="h1" sx={{ fontSize: '4rem', fontWeight: 700 }}>
