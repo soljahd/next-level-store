@@ -157,7 +157,7 @@ export default function RegisterForm() {
 
           <Grid size={{ xs: 12, sm: 6 }}>
             <TextField
-              type="email"
+              type="text"
               label="Email*"
               placeholder="Email*"
               color="primary"
