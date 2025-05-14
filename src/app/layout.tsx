@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import theme from '@/theme';
 import '@/app/globals.css';
 import Header from '@/components/header';
+import Footer from '@/components/footer';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -29,6 +30,7 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <Header />
             {children}
+            <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
