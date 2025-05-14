@@ -26,6 +26,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerScheme, type RegisterFormData } from '@/lib/validation';
 import { loginCustomer, registerCustomer } from '@/lib/commercetools/auth';
+import { useAuthStore } from '@/lib/store/auth-store';
 import AddressForm from '@/components/address-form';
 
 export default function RegisterForm() {
@@ -39,6 +40,7 @@ export default function RegisterForm() {
     setShowPassword(!showPassword);
   };
 
+  const { setLoginState } = useAuthStore();
   const router = useRouter();
 
   const {
@@ -72,6 +74,7 @@ export default function RegisterForm() {
       };
       await registerCustomer(userData);
       await loginCustomer(data.email, data.password);
+      setLoginState(data.email);
       router.push('/main');
     } catch (error) {
       if (error instanceof Error) {
