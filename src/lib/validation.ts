@@ -18,7 +18,7 @@ export const addressScheme = z.object({
   street: z.string().min(1, 'Street name is too short').max(100, 'Street name is too long'),
   postcode: z.string().regex(/^\d+$/, 'Please enter a valid postcode').length(6, 'Please enter a valid postcode'),
   country: z.string().min(1, 'Please select a country'),
-  city: z.string().min(1, 'Please select a city'),
+  city: z.string().min(1, 'Please enter a city'),
   isDefault: z.boolean(),
 });
 

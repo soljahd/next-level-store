@@ -1,6 +1,5 @@
 'use client';
 import {
-  Alert,
   Box,
   Button,
   FormControlLabel,
@@ -10,7 +9,6 @@ import {
   Link as MuiLink,
   IconButton,
   InputAdornment,
-  Snackbar,
   Stack,
   Switch,
 } from '@mui/material';
@@ -21,12 +19,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerScheme, type RegisterFormData } from '@/lib/validation';
 import { loginCustomer, registerCustomer } from '@/lib/commercetools/auth';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { enqueueSnackbar } from 'notistack';
 import AddressForm from '@/components/address-form';
 
 export default function RegisterForm() {
@@ -43,6 +42,15 @@ export default function RegisterForm() {
   const { setLoginState } = useAuthStore();
   const router = useRouter();
 
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
   const {
     control,
     register,
@@ -57,24 +65,11 @@ export default function RegisterForm() {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      const userData = {
-        email: data.email,
-        password: data.password,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        dateOfBirth: data.dateOfBirth.format('YYYY-MM-DD'),
-        addresses: [
-          {
-            country: data.shippingAddress.country,
-            streetName: data.shippingAddress.street,
-            postalCode: data.shippingAddress.postcode,
-            city: data.shippingAddress.city,
-          },
-        ],
-      };
-      await registerCustomer(userData);
-      await loginCustomer(data.email, data.password);
-      setLoginState(data.email);
+      const { email, password } = data;
+      await registerCustomer(data);
+      await loginCustomer({ email, password });
+      setLoginState(email);
+      enqueueSnackbar('Account successfully created', { variant: 'success' });
       router.push('/main');
     } catch (error) {
       if (error instanceof Error) {
@@ -250,17 +245,6 @@ export default function RegisterForm() {
           </MuiLink>
         </Typography>
       </Stack>
-
-      <Snackbar
-        open={!!errorMessage}
-        autoHideDuration={4000}
-        onClose={handleCloseError}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert severity="error" onClose={handleCloseError}>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </Stack>
   );
 }

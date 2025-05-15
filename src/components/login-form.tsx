@@ -47,7 +47,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await loginCustomer(data.email, data.password);
+      await loginCustomer(data);
       setLoginState(data.email);
       router.push('/main');
     } catch (error) {
