@@ -2,6 +2,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { Roboto } from 'next/font/google';
 import type { Metadata } from 'next';
+import NotistackProvider from '@/providers/notistack-provider';
 import theme from '@/theme';
 import '@/app/globals.css';
 import Header from '@/components/header';
@@ -29,7 +30,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Header />
-            {children}
+            <NotistackProvider>{children}</NotistackProvider>
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>

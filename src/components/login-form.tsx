@@ -1,25 +1,16 @@
 'use client';
 
-import {
-  Alert,
-  Snackbar,
-  Typography,
-  TextField,
-  Button,
-  Box,
-  IconButton,
-  InputAdornment,
-  Link as MuiLink,
-} from '@mui/material';
+import { Typography, TextField, Button, Box, IconButton, InputAdornment, Link as MuiLink } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginScheme, type LoginFormData } from '@/lib/validation';
 import { loginCustomer } from '@/lib/commercetools/auth';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { enqueueSnackbar } from 'notistack';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,10 +25,20 @@ export default function LoginForm() {
   const { setLoginState } = useAuthStore();
   const router = useRouter();
 
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
   const {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginScheme),
@@ -51,7 +52,16 @@ export default function LoginForm() {
       router.push('/main');
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        if (error.message === 'Login failed: Account with the given credentials not found.') {
+          setError('email', {
+            type: 'manual',
+            message: 'Invalid credentials',
+          });
+          setError('password', {
+            type: 'manual',
+            message: 'Invalid credentials',
+          });
+        } else setErrorMessage(error.message);
       }
     }
   };
@@ -147,17 +157,6 @@ export default function LoginForm() {
           </MuiLink>
         </Typography>
       </Box>
-
-      <Snackbar
-        open={!!errorMessage}
-        autoHideDuration={4000}
-        onClose={handleCloseError}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert severity="error" onClose={handleCloseError}>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 }
