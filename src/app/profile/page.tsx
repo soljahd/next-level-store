@@ -2,26 +2,26 @@ import type { Metadata } from 'next';
 import { Container, Typography } from '@mui/material';
 
 export const metadata: Metadata = {
-  title: 'Home | Next-Level Store',
-  description: 'Welcom to our store',
-  keywords: ['online store', 'shop', 'ecommerce'],
+  title: 'Profile | Next-Level Store',
+  description: 'Manage your account, track orders, and customize your profile settings on Next-Level Store.',
+  keywords: ['online store', 'shop', 'ecommerce', 'user profile', 'account settings', 'order tracking', 'user account'],
   robots: {
     index: true,
     follow: true,
   },
 };
 
-export default function Home() {
+export default function Profile() {
   return (
     <Container
       component="main"
-      maxWidth={false}
+      maxWidth="md"
       sx={{
         flex: 1,
       }}
     >
       <Typography component="h1" variant="h4" align="center">
-        Main page
+        Profile page
       </Typography>
     </Container>
   );

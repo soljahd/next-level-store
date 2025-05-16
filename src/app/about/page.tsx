@@ -2,16 +2,27 @@ import type { Metadata } from 'next';
 import { Container, Typography } from '@mui/material';
 
 export const metadata: Metadata = {
-  title: 'Home | Next-Level Store',
-  description: 'Welcom to our store',
-  keywords: ['online store', 'shop', 'ecommerce'],
+  title: 'About Us | Next-Level Store',
+  description:
+    'Learn about our story, mission, and values. Discover how Next-Level Store became your favorite bookstore.',
+  keywords: [
+    'online store',
+    'shop',
+    'ecommerce',
+    'about us',
+    'company',
+    'bookstore',
+    'online store',
+    'our mission',
+    'team',
+  ],
   robots: {
     index: true,
     follow: true,
   },
 };
 
-export default function Home() {
+export default function About() {
   return (
     <Container
       component="main"
@@ -21,7 +32,7 @@ export default function Home() {
       }}
     >
       <Typography component="h1" variant="h4" align="center">
-        Main page
+        Authors page
       </Typography>
     </Container>
   );
