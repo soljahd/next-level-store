@@ -18,7 +18,7 @@ export default function NotFound() {
       component="main"
       maxWidth="sm"
       sx={{
-        flexgrow: 1,
+        flex: 1,
       }}
     >
       <Box

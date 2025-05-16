@@ -18,7 +18,7 @@ export default function RegisterPage() {
       component="main"
       maxWidth="md"
       sx={{
-        flexgrow: 1,
+        flex: 1,
       }}
     >
       <RegisterForm />
