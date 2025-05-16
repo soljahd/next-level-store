@@ -7,7 +7,7 @@ import type { LinkProps } from 'next/link';
 import type { ReactNode } from 'react';
 
 type IconButtonLinkProps = {
-  href: LinkProps['href'];
+  href?: LinkProps['href'];
   icon: ReactNode;
   text: string;
 } & ButtonProps;
@@ -15,7 +15,7 @@ type IconButtonLinkProps = {
 export default function IconButtonLink({ href, icon, text, ...props }: IconButtonLinkProps) {
   return (
     <Button
-      component={Link}
+      component={href ? Link : 'button'}
       href={href}
       variant="outlined"
       sx={{
