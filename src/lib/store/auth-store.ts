@@ -1,20 +1,26 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import Cookies from 'js-cookie';
+import { loginCustomer, logoutCustomer } from '@/lib/commercetools/auth';
+import { type LoginFormData, authStateScheme } from '@/lib/validation';
 
 type AuthState = {
   isLoggedIn: boolean;
-  user: null | { email: string };
-  setLoginState: (email: string) => void;
+  user: null | LoginFormData;
+  setLoginState: ({ email, password }: LoginFormData) => void;
   setLogoutState: () => void;
 };
 
 const authStateStorage = {
-  getItem: (name: string) => {
+  getItem: async (name: string) => {
     const localValue = Cookies.get(name);
     if (localValue) {
-      const parsed: unknown = JSON.parse(localValue);
-      return JSON.stringify(parsed);
+      const { state } = authStateScheme.parse(JSON.parse(localValue));
+      if (state.user) {
+        const { email, password } = state.user;
+        await loginCustomer({ email, password });
+      }
+      return localValue;
     } else {
       return null;
     }
@@ -28,6 +34,7 @@ const authStateStorage = {
   },
   removeItem: (name: string) => {
     Cookies.remove(name);
+    logoutCustomer();
   },
 };
 
@@ -36,8 +43,9 @@ export const useAuthStore = create(
     (set) => ({
       isLoggedIn: false,
       user: null,
-      setLoginState: (email) => set({ isLoggedIn: true, user: { email } }),
+      setLoginState: (data) => set({ isLoggedIn: true, user: data }),
       setLogoutState: () => {
+        set({ isLoggedIn: false });
         authStateStorage.removeItem('auth-storage');
       },
     }),

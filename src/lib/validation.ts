@@ -42,6 +42,15 @@ export const registerScheme = loginScheme.extend({
   billingAddress: addressScheme.optional(),
 });
 
+export const authStateScheme = z.object({
+  state: z.object({
+    isLoggedIn: z.boolean(),
+    user: loginScheme.nullable(),
+  }),
+  version: z.number(),
+});
+
 export type LoginFormData = z.infer<typeof loginScheme>;
 export type AddressFormData = z.infer<typeof addressScheme>;
 export type RegisterFormData = z.infer<typeof registerScheme>;
+export type AuthStateData = z.infer<typeof authStateScheme>;
