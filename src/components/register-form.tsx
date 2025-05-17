@@ -68,7 +68,7 @@ export default function RegisterForm() {
       const { email, password } = data;
       await registerCustomer(data);
       await loginCustomer({ email, password });
-      setLoginState(email);
+      setLoginState({ email, password });
       enqueueSnackbar('Account successfully created', { variant: 'success' });
       router.push('/main');
     } catch (error) {
