@@ -163,7 +163,7 @@ bun prepare
 </details>
 <details>
 <summary>"test"</summary>
-Prepares the project by installing the necessary dependencies and settings.
+Runs all test suites in the project.
 
 ```bash
 npm run test
@@ -178,7 +178,7 @@ bun test
 </details>
 <details>
 <summary>"test:update"</summary>
-Prepares the project by installing the necessary dependencies and settings.
+Updates Jest snapshots by running tests in snapshot update mode.
 
 ```bash
 npm run test:update
@@ -193,7 +193,7 @@ bun test:update
 </details>
 <details>
 <summary>"test:watch"</summary>
-Prepares the project by installing the necessary dependencies and settings.
+Runs tests in watch mode, re-executing when files change.
 
 ```bash
 npm run test:watch
