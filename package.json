@@ -61,6 +61,7 @@
     "jest-environment-jsdom": "^29",
     "lint-staged": "^15",
     "prettier": "^3",
+    "react-hook-form": "^7.56.4",
     "serve": "^14",
     "ts-node": "^10",
     "typescript": "^5",
