@@ -73,7 +73,9 @@ export default function RegisterForm() {
       router.push('/main');
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        if (error.message === 'Registration failed: There is already an existing customer with the provided email.') {
+          setErrorMessage('This email is already used by another customer. Please use another email.');
+        } else setErrorMessage(error.message);
       }
     }
   };
