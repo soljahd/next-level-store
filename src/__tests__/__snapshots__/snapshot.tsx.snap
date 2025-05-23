@@ -2,10 +2,196 @@
 
 exports[`renders homepage unchanged 1`] = `
 <div>
-  <div>
-    <h1>
-      Hello it is Next-Level Store!
+  <header
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionStatic css-94iixj-MuiPaper-root-MuiAppBar-root"
+    style="--Paper-shadow: none;"
+  >
+    <div
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1l20tnr-MuiToolbar-root"
+    >
+      <a
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1fk40gk-MuiButtonBase-root-MuiButton-root"
+        href="/main"
+        tabindex="0"
+      >
+        <img
+          alt="Logo"
+          class="MuiBox-root css-k4igk5"
+          src="/logo.svg"
+        />
+      </a>
+      <div
+        class="MuiBox-root css-tqrvs7"
+      >
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-bkvd1y-MuiButtonBase-root-MuiButton-root"
+          href="/catalog"
+          tabindex="0"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-f1o02l-MuiSvgIcon-root"
+            data-testid="MenuIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"
+            />
+          </svg>
+          <span
+            class="MuiTypography-root MuiTypography-button css-za3ef4-MuiTypography-root"
+          >
+            Catalog
+          </span>
+        </a>
+        <div
+          class="MuiFormControl-root MuiTextField-root css-zjyxdb-MuiFormControl-root-MuiTextField-root"
+        >
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart css-4bojcr-MuiInputBase-root-MuiOutlinedInput-root"
+          >
+            <div
+              class="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1nowbqt-MuiInputAdornment-root"
+            >
+              <span
+                aria-hidden="true"
+                class="notranslate"
+              >
+                ​
+              </span>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="SearchIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"
+                />
+              </svg>
+            </div>
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart css-1q55ijt-MuiInputBase-input-MuiOutlinedInput-input"
+              id="«r2»"
+              type="text"
+            />
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-w4cd9x"
+              >
+                <span
+                  aria-hidden="true"
+                  class="notranslate"
+                >
+                  ​
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1c20bdr"
+      >
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-bkvd1y-MuiButtonBase-root-MuiButton-root"
+          href="/about"
+          tabindex="0"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-f1o02l-MuiSvgIcon-root"
+            data-testid="HelpOutlineIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+            />
+          </svg>
+          <span
+            class="MuiTypography-root MuiTypography-button css-za3ef4-MuiTypography-root"
+          >
+            Authors
+          </span>
+        </a>
+        <div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-bkvd1y-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-f1o02l-MuiSvgIcon-root"
+              data-testid="AccountCircleIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6m0 14c-2.03 0-4.43-.82-6.14-2.88C7.55 15.8 9.68 15 12 15s4.45.8 6.14 2.12C16.43 19.18 14.03 20 12 20"
+              />
+            </svg>
+            <span
+              class="MuiTypography-root MuiTypography-button css-za3ef4-MuiTypography-root"
+            >
+              Account
+            </span>
+          </button>
+        </div>
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-bkvd1y-MuiButtonBase-root-MuiButton-root"
+          href="/cart"
+          tabindex="0"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-f1o02l-MuiSvgIcon-root"
+            data-testid="ShoppingCartIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2M1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2"
+            />
+          </svg>
+          <span
+            class="MuiTypography-root MuiTypography-button css-za3ef4-MuiTypography-root"
+          >
+            Cart
+          </span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main
+    class="MuiContainer-root css-1z7hhy-MuiContainer-root"
+  >
+    <h1
+      class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-1ya2hdm-MuiTypography-root"
+      style="--Typography-textAlign: center;"
+    >
+      Main page
     </h1>
-  </div>
+  </main>
+  <footer
+    class="MuiBox-root css-1r64eft"
+  >
+    <div
+      class="MuiStack-root css-si5z26-MuiStack-root"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-7ctihp-MuiTypography-root"
+      >
+        © 2025 Next-Level Store
+      </p>
+    </div>
+  </footer>
 </div>
 `;
