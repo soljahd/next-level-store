@@ -1,4 +1,5 @@
 'use client';
+
 import {
   Box,
   Button,
@@ -39,8 +40,14 @@ export default function RegisterForm() {
     setShowPassword(!showPassword);
   };
 
-  const { setLoginState } = useAuthStore();
+  const { isLoggedIn, setLoginState } = useAuthStore();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace('/main');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -70,7 +77,7 @@ export default function RegisterForm() {
       await loginCustomer({ email, password });
       setLoginState({ email, password });
       enqueueSnackbar('Account successfully created', { variant: 'success' });
-      router.push('/main');
+      router.replace('/main');
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Registration failed: There is already an existing customer with the provided email.') {
@@ -79,6 +86,10 @@ export default function RegisterForm() {
       }
     }
   };
+
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <Stack

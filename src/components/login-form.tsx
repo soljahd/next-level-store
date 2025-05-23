@@ -22,8 +22,14 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const { setLoginState } = useAuthStore();
+  const { isLoggedIn, setLoginState } = useAuthStore();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace('/main');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -39,17 +45,26 @@ export default function LoginForm() {
     handleSubmit,
     watch,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginScheme),
     mode: 'onSubmit',
   });
 
+  const emailValue = watch('email');
+  const passwordValue = watch('password');
+
+  useEffect(() => {
+    clearErrors('email');
+    clearErrors('password');
+  }, [emailValue, passwordValue, clearErrors]);
+
   const onSubmit = async (data: LoginFormData) => {
     try {
       await loginCustomer(data);
       setLoginState(data);
-      router.push('/main');
+      router.replace('/main');
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Login failed: Account with the given credentials not found.') {
@@ -65,6 +80,10 @@ export default function LoginForm() {
       }
     }
   };
+
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <Box
