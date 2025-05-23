@@ -15,10 +15,20 @@ export const loginScheme = z.object({
 });
 
 export const addressScheme = z.object({
-  street: z.string().min(1, 'Street name is too short').max(100, 'Street name is too long'),
+  street: z
+    .string()
+    .regex(/^\S(.*\S)?$/, 'Street must not contain leading or trailing whitespace')
+    .regex(/^(?=.*[a-zA-Z]).+$/, 'Please enter a correct street address')
+    .min(1, 'Please enter a street address')
+    .max(100, 'Street name is too long'),
   postcode: z.string().regex(/^\d+$/, 'Please enter a valid postcode').length(6, 'Please enter a valid postcode'),
   country: z.string().min(1, 'Please select a country'),
-  city: z.string().min(1, 'Please enter a city'),
+  city: z
+    .string()
+    .regex(/^\S(.*\S)?$/, 'City must not contain leading or trailing whitespace')
+    .regex(/^[a-zA-Z]+$/, 'Please enter a correct city')
+    .min(1, 'Please enter a city')
+    .max(100, 'City name is too long'),
   isDefault: z.boolean(),
 });
 

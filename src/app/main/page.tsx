@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Stack, Link as MuiLink } from '@mui/material';
 
 export const metadata: Metadata = {
   title: 'Home | Next-Level Store',
@@ -23,6 +23,14 @@ export default function Home() {
       <Typography component="h1" variant="h4" align="center">
         Main page
       </Typography>
+      <Stack gap={2}>
+        <MuiLink href="/login">Login</MuiLink>
+        <MuiLink href="/register">Register</MuiLink>
+        <MuiLink href="/profile">Profile</MuiLink>
+        <MuiLink href="/catalog">Catalog</MuiLink>
+        <MuiLink href="/about">Authors</MuiLink>
+        <MuiLink href="/cart">Cart</MuiLink>
+      </Stack>
     </Container>
   );
 }
