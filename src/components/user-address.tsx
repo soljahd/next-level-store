@@ -29,7 +29,7 @@ export default function UserAddress(props: UserAddressProps) {
         p: 3 / 2,
       }}
     >
-      <Typography>{address}</Typography>
+      <Typography variant="body1">{address}</Typography>
       <Typography color="text.secondary">{`${city}, ${country}, ${postcode}`}</Typography>
       <Stack spacing={1} direction="row">
         {isShipping && <Chip label="Shipping" color="primary" />}
