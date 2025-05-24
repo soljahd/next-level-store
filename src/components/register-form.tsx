@@ -210,8 +210,8 @@ export default function RegisterForm() {
           addressForWhat={'Delivery address'}
           control={control}
           errors={{
-            street: errors.shippingAddress?.street,
-            postcode: errors.shippingAddress?.postcode,
+            streetName: errors.shippingAddress?.streetName,
+            postalCode: errors.shippingAddress?.postalCode,
             country: errors.shippingAddress?.country,
             city: errors.shippingAddress?.city,
             isDefault: errors.shippingAddress?.isDefault,
@@ -236,8 +236,8 @@ export default function RegisterForm() {
             addressForWhat={'Billing address'}
             control={control}
             errors={{
-              street: errors.billingAddress?.street,
-              postcode: errors.billingAddress?.postcode,
+              streetName: errors.billingAddress?.streetName,
+              postalCode: errors.billingAddress?.postalCode,
               country: errors.billingAddress?.country,
               city: errors.billingAddress?.city,
               isDefault: errors.billingAddress?.isDefault,

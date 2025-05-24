@@ -19,8 +19,8 @@ type AddressFormProperty = {
   addressForWhat: string;
   control: Control<RegisterFormData>;
   errors: {
-    street?: { message?: string };
-    postcode?: { message?: string };
+    streetName?: { message?: string };
+    postalCode?: { message?: string };
     country?: { message?: string };
     city?: { message?: string };
     isDefault?: { message?: string };
@@ -28,7 +28,7 @@ type AddressFormProperty = {
   prefix: 'shippingAddress' | 'billingAddress';
 };
 
-type AddressFields = 'country' | 'city' | 'street' | 'postcode' | 'isDefault';
+type AddressFields = 'country' | 'city' | 'streetName' | 'postalCode' | 'isDefault';
 type PrefixedFields<T extends string> = `${T}.${AddressFields}`;
 
 export default function AddressForm(props: AddressFormProperty) {
@@ -37,8 +37,8 @@ export default function AddressForm(props: AddressFormProperty) {
   const fieldNames: Record<AddressFields, PrefixedFields<typeof prefix>> = {
     country: `${prefix}.country`,
     city: `${prefix}.city`,
-    street: `${prefix}.street`,
-    postcode: `${prefix}.postcode`,
+    streetName: `${prefix}.streetName`,
+    postalCode: `${prefix}.postalCode`,
     isDefault: `${prefix}.isDefault`,
   };
 
@@ -82,9 +82,9 @@ export default function AddressForm(props: AddressFormProperty) {
             label="Street*"
             placeholder="Street*"
             color="primary"
-            {...control.register(fieldNames.street)}
-            error={!!errors.street}
-            helperText={errors.street?.message}
+            {...control.register(fieldNames.streetName)}
+            error={!!errors.streetName}
+            helperText={errors.streetName?.message}
             fullWidth
           />
         </Grid>
@@ -94,9 +94,9 @@ export default function AddressForm(props: AddressFormProperty) {
             label="Postcode*"
             placeholder="Postcode*"
             color="primary"
-            {...control.register(fieldNames.postcode)}
-            error={!!errors.postcode}
-            helperText={errors.postcode?.message}
+            {...control.register(fieldNames.postalCode)}
+            error={!!errors.postalCode}
+            helperText={errors.postalCode?.message}
             fullWidth
           />
         </Grid>
