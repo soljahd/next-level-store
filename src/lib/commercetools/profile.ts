@@ -69,8 +69,8 @@ export async function updateMyAddress(
     const isCurrentlyBilling = currentBillingIds.includes(addressId);
     const isCurrentlyShippingDefault = customer.body.defaultShippingAddressId === addressId;
     const isCurrentlyBillingDefault = customer.body.defaultBillingAddressId === addressId;
-    const newAddress = { streetName, postalCode, country, city };
-    const actions: MyCustomerUpdateAction[] = [{ action: 'changeAddress', addressId, address: newAddress }];
+    const address = { streetName, postalCode, country, city };
+    const actions: MyCustomerUpdateAction[] = [{ action: 'changeAddress', addressId, address }];
 
     const wantsShipping = addressType.includes('shipping');
     if (wantsShipping && !isCurrentlyShipping) {
@@ -99,6 +99,82 @@ export async function updateMyAddress(
     }
 
     const response = await apiRoot.me().post({ body: { version, actions } }).execute();
+
+    return response.body;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(error.message);
+    }
+  }
+}
+
+export async function addMyNewAddress({
+  addressType,
+  streetName,
+  postalCode,
+  country,
+  city,
+  isShippingDefault,
+  isBillingDefault,
+}: addressEditFormData) {
+  try {
+    const customer = await apiRoot.me().get().execute();
+    const version = customer.body.version;
+    const address = { streetName, postalCode, country, city };
+
+    const addResponse = await apiRoot
+      .me()
+      .post({ body: { version, actions: [{ action: 'addAddress', address }] } })
+      .execute();
+
+    const newAddressId = addResponse.body.addresses.at(-1)?.id;
+    if (!newAddressId) {
+      throw new Error('Failed to get ID of new address');
+    }
+
+    const actions: MyCustomerUpdateAction[] = [];
+
+    if (addressType.includes('shipping')) {
+      actions.push({ action: 'addShippingAddressId', addressId: newAddressId });
+    }
+
+    if (addressType.includes('billing')) {
+      actions.push({ action: 'addBillingAddressId', addressId: newAddressId });
+    }
+
+    if (isShippingDefault) {
+      actions.push({ action: 'setDefaultShippingAddress', addressId: newAddressId });
+    }
+
+    if (isBillingDefault) {
+      actions.push({ action: 'setDefaultBillingAddress', addressId: newAddressId });
+    }
+
+    if (actions.length > 0) {
+      const updateResponse = await apiRoot
+        .me()
+        .post({ body: { version: addResponse.body.version, actions } })
+        .execute();
+      return updateResponse.body;
+    }
+
+    return addResponse.body;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(error.message);
+    }
+  }
+}
+
+export async function deleteMyAddress(addressId: string) {
+  try {
+    const customer = await apiRoot.me().get().execute();
+    const version = customer.body.version;
+
+    const response = await apiRoot
+      .me()
+      .post({ body: { version, actions: [{ action: 'removeAddress', addressId }] } })
+      .execute();
 
     return response.body;
   } catch (error) {
