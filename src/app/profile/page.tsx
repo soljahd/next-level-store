@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import Profile from '@/components/profile';
 
 export const metadata: Metadata = {
   title: 'Profile | Next-Level Store',
@@ -11,7 +12,39 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Profile() {
+export default function ProfilePage() {
+  const addressData = [
+    {
+      address: 'Lenina 12/42',
+      city: 'city',
+      country: 'country',
+      postcode: 333_333,
+      isShipping: true,
+      isShippingDefault: false,
+      isBilling: true,
+      isBillingDefault: true,
+    },
+    {
+      address: 'hello',
+      city: 'Hola',
+      country: 'Bel',
+      postcode: 333_333,
+      isShipping: false,
+      isShippingDefault: false,
+      isBilling: true,
+      isBillingDefault: false,
+    },
+    {
+      address: 'address',
+      city: 'city',
+      country: 'country',
+      postcode: 333_333,
+      isShipping: true,
+      isShippingDefault: true,
+      isBilling: true,
+      isBillingDefault: false,
+    },
+  ];
   return (
     <Container
       component="main"
@@ -20,9 +53,7 @@ export default function Profile() {
         flex: 1,
       }}
     >
-      <Typography component="h1" variant="h4" align="center">
-        Profile page
-      </Typography>
+      <Profile addressData={addressData}></Profile>
     </Container>
   );
 }

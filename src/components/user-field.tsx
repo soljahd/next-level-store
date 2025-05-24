@@ -3,11 +3,11 @@ import { Stack, Typography } from '@mui/material';
 
 type FieldProps = {
   label: string;
-  name: string;
+  value: string;
 };
 
 export default function UserField(props: FieldProps) {
-  const { label, name } = props;
+  const { label, value } = props;
 
   return (
     <Stack direction="row" spacing={2}>
@@ -15,7 +15,7 @@ export default function UserField(props: FieldProps) {
         {label}
       </Typography>
       <Typography component="p" variant="body2" color="text.secondary">
-        {name}
+        {value}
       </Typography>
     </Stack>
   );
