@@ -13,48 +13,78 @@ import {
   FormControl,
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
-import ProductCard from './product-card';
+import ProductsList from './product-list';
 import { searchProducts, getAllCategories } from '@/lib/commercetools/catalog';
 import type { ProductProjectionPagedSearchResponse, ProductProjection } from '@commercetools/platform-sdk';
+
+type Category = { id: string; name: string };
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [popularOption, setPopularOption] = useState<string>('popular');
   const [breadcrumb, setBreadcrumb] = useState<string[]>(['Books']);
 
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchInitialData = async () => {
       try {
+        const categoriesResponse = await getAllCategories();
+        if (categoriesResponse && categoriesResponse.results) {
+          const cats = categoriesResponse.results.map((cat) => ({
+            id: cat.id,
+            name: cat.name?.en || cat.id,
+          }));
+          setCategories(cats);
+        }
+
         const data: ProductProjectionPagedSearchResponse | undefined = await searchProducts({ limit: 50 });
         if (data) {
           setProducts(data.results);
-        }
-
-        const categoriesResponse = await getAllCategories();
-        if (categoriesResponse && categoriesResponse.results) {
-          const cats = categoriesResponse.results.map((cat) => cat.name?.en || cat.id);
-          setCategories(cats);
         }
       } finally {
         setLoading(false);
       }
     };
-    fetchData().catch(() => {
+    fetchInitialData().catch(() => {
       setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    const fetchProductsByCategory = async () => {
+      setLoading(true);
+      try {
+        const data = await searchProducts({
+          limit: 50,
+          categoryId: selectedCategoryId || undefined,
+        });
+        if (data) {
+          setProducts(data.results);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (selectedCategoryId) {
+      fetchProductsByCategory().catch(() => setLoading(false));
+    }
+  }, [selectedCategoryId]);
 
   const handlePopularChange = (event: SelectChangeEvent) => {
     setPopularOption(event.target.value);
   };
 
-  const handleCategoryClick = (category: string) => {
-    if (category === 'Fiction') {
+  const handleCategoryClick = (category: Category) => {
+    setSelectedCategoryId(category.id);
+
+    if (category.name === 'Fiction') {
       setBreadcrumb(['Books', 'Fiction']);
     } else {
-      setBreadcrumb(['Books', 'Fiction', category]);
+      setBreadcrumb(['Books', 'Fiction', category.name]);
     }
   };
 
@@ -110,7 +140,6 @@ export default function CatalogPage() {
           gap: 2,
         }}
       >
-        {/* Левая колонка фильтров */}
         <Box
           sx={{
             flex: '1 1 25%',
@@ -128,9 +157,9 @@ export default function CatalogPage() {
             Book Categories
           </Typography>
           <Box sx={{ maxWidth: 311 }}>
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <Typography
-                key={index}
+                key={category.id}
                 sx={{
                   cursor: 'pointer',
                   padding: '4px 8px',
@@ -144,7 +173,7 @@ export default function CatalogPage() {
                 }}
                 onClick={() => handleCategoryClick(category)}
               >
-                {category}
+                {category.name}
               </Typography>
             ))}
           </Box>
@@ -200,7 +229,6 @@ export default function CatalogPage() {
           </Button>
         </Box>
 
-        {/* Правая колонка с карточками */}
         <Box
           sx={{
             flex: '1 1 75%',
@@ -210,7 +238,6 @@ export default function CatalogPage() {
             gap: 2,
           }}
         >
-          {/* Хлебные крошки */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, flexWrap: 'wrap' }}>
             {breadcrumb.map((part, index) => (
               <React.Fragment key={index}>
@@ -232,7 +259,6 @@ export default function CatalogPage() {
             ))}
           </Box>
 
-          {/* Селектор сортировки */}
           <FormControl sx={{ width: 200 }}>
             <InputLabel id="popular-label">Books</InputLabel>
             <Select
@@ -256,7 +282,6 @@ export default function CatalogPage() {
             </Select>
           </FormControl>
 
-          {/* Карточки продуктов */}
           <Box
             sx={{
               display: 'flex',
@@ -268,30 +293,7 @@ export default function CatalogPage() {
               },
             }}
           >
-            {products.map((product, index) => {
-              const title = product.name?.en || '';
-              const attribute = product.masterVariant?.attributes?.find((attribute) => attribute.name === 'author');
-              const author = typeof attribute?.value === 'string' ? attribute.value : '';
-              const image = product.masterVariant?.images?.[0]?.url || '';
-              const pagesAttribute = product.masterVariant?.attributes?.find((attribute) => attribute.name === 'pages');
-              const pages = typeof pagesAttribute?.value === 'number' ? pagesAttribute.value : 0;
-              const priceCents = product.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-              const price = (priceCents / 100).toFixed(2);
-              const oldPriceCents = product.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-              const oldPrice = (oldPriceCents / 100).toFixed(2);
-
-              return (
-                <ProductCard
-                  key={index}
-                  image={image}
-                  title={title}
-                  author={author}
-                  year={pages}
-                  price={price}
-                  oldPrice={oldPrice}
-                />
-              );
-            })}
+            <ProductsList categoryId={selectedCategoryId} />
           </Box>
         </Box>
       </Box>
