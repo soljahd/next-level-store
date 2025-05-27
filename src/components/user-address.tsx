@@ -10,10 +10,21 @@ type UserAddressProps = {
   isShippingDefault: boolean;
   isBilling: boolean;
   isBillingDefault: boolean;
+  setEditingMode: (mode: string | null) => void;
 };
 
 export default function UserAddress(props: UserAddressProps) {
-  const { address, city, country, postcode, isShipping, isBilling, isShippingDefault, isBillingDefault } = props;
+  const {
+    address,
+    city,
+    country,
+    postcode,
+    isShipping,
+    isBilling,
+    isShippingDefault,
+    isBillingDefault,
+    setEditingMode,
+  } = props;
 
   return (
     <Paper
@@ -38,7 +49,8 @@ export default function UserAddress(props: UserAddressProps) {
         {isBilling && isBillingDefault && <Chip label="Billing Default" color="secondary" />}
       </Stack>
       <IconButton
-        color="secondary"
+        onClick={() => setEditingMode('address')}
+        color="primary"
         aria-label="edit user address"
         sx={{
           position: 'absolute',
@@ -49,8 +61,8 @@ export default function UserAddress(props: UserAddressProps) {
         <Edit />
       </IconButton>
       <IconButton
-        color="secondary"
-        aria-label="edit user address"
+        color="primary"
+        aria-label="delete user address"
         sx={{
           position: 'absolute',
           right: 1,

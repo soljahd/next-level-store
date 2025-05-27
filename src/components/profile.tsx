@@ -1,7 +1,8 @@
-import { IconButton, Paper, Stack, Typography } from '@mui/material';
+import { Button, IconButton, Paper, Stack, Typography } from '@mui/material';
 import UserField from './user-field';
-import { Edit } from '@mui/icons-material';
+import { Add, Edit } from '@mui/icons-material';
 import UserAddress from './user-address';
+
 type ProfileProps = {
   addressData: {
     address: string;
@@ -13,10 +14,12 @@ type ProfileProps = {
     isBilling: boolean;
     isBillingDefault: boolean;
   }[];
+  setEditingMode: (mode: string | null) => void;
 };
 
 export default function Profile(props: ProfileProps) {
-  const { addressData } = props;
+  const { addressData, setEditingMode } = props;
+
   return (
     <Stack spacing={2}>
       <Typography component="h1" variant="h4">
@@ -44,7 +47,8 @@ export default function Profile(props: ProfileProps) {
           <UserField label="Date of Birth: " value="01/01/2000"></UserField>
           <UserField label="Email: " value="pet@pet.pe"></UserField>
           <IconButton
-            color="secondary"
+            onClick={() => setEditingMode('profile')}
+            color="primary"
             aria-label="edit user info"
             sx={{
               position: 'absolute',
@@ -72,8 +76,9 @@ export default function Profile(props: ProfileProps) {
         >
           <UserField label="Password: " value={'*'}></UserField>
           <IconButton
-            color="secondary"
-            aria-label="edit user info"
+            color="primary"
+            aria-label="edit password"
+            onClick={() => setEditingMode('password')}
             sx={{
               position: 'absolute',
               right: 1,
@@ -84,11 +89,11 @@ export default function Profile(props: ProfileProps) {
           </IconButton>
         </Paper>
       </Stack>
-      <Stack spacing={0.5}>
+      <Stack spacing={0.5} sx={{ position: 'relative' }}>
         <Typography component="p" variant="body2">
           Address
         </Typography>
-        <Stack spacing={2}>
+        <Stack spacing={1}>
           {addressData.map((data, index) => {
             return (
               <UserAddress
@@ -101,9 +106,18 @@ export default function Profile(props: ProfileProps) {
                 isShippingDefault={data.isShippingDefault}
                 isBilling={data.isBilling}
                 isBillingDefault={data.isBillingDefault}
+                setEditingMode={setEditingMode}
               ></UserAddress>
             );
           })}
+          <Button
+            variant="outlined"
+            onClick={() => setEditingMode('addNewAddress')}
+            sx={{ border: '2px solid', borderColor: 'primary.light' }}
+          >
+            <Add />
+            <Typography>Add new address</Typography>
+          </Button>
         </Stack>
       </Stack>
     </Stack>
