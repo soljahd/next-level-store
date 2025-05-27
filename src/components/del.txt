@@ -1,0 +1,4345 @@
+[
+    {
+        "id": "9b6d8ee1-71b8-4d37-8cd5-36c72732f5a5",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Fahrenheit 451"
+        },
+        "description": {
+            "en": "In a future where books are banned, Guy Montag, a fireman, begins to question his role in a society that burns knowledge and suppresses intellectual freedom."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "fahrenheit-451"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Ray Bradbury"
+                },
+                {
+                    "name": "pages",
+                    "value": 2009
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/tsKDn9tf/Fahrenheit-451-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/bZD3vZbk/Fahrenheit-451-2.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/gw3sv1g0/Fahrenheit-451-3.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "6c75f554-ebdd-48da-8018-7ca0788c018c",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 2100,
+                        "fractionDigits": 2
+                    },
+                    "key": "fahrenheit_451_regular_price"
+                }
+            ],
+            "key": "book-40-master",
+            "sku": "bradbury-fahrenheit-451-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-40",
+        "createdAt": "2025-05-15T14:00:52.721Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.393Z"
+    },
+    {
+        "id": "885bc381-1cbf-42c9-b604-587a38018d01",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Ender's Game"
+        },
+        "description": {
+            "en": "Ender Wiggin, a young genius, is trained in a military academy to fight in a war against alien invaders, but he soon learns the dark truths behind his mission."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "enders-game"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Orson Scott Card"
+                },
+                {
+                    "name": "pages",
+                    "value": 2022
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/XX4Hg7S6/Ender-s-Game-1.webp",
+                    "dimensions": {
+                        "w": 119,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/TpPtZ73k/Ender-s-Game-2.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/zVPx5CLq/Ender-s-Game-3.webp",
+                    "dimensions": {
+                        "w": 120,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "7b14df41-1e5c-4d74-953e-704d49bfe88b",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 555,
+                        "fractionDigits": 2
+                    },
+                    "key": "ender_game_regular_price"
+                }
+            ],
+            "key": "book-38-master",
+            "sku": "card-enders-game-standard ",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-38",
+        "createdAt": "2025-05-15T14:00:52.687Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.374Z"
+    },
+    {
+        "id": "dd59a3e7-5312-42da-a2a1-6113a8c1b6c8",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Frankenstein"
+        },
+        "description": {
+            "en": "The tale of Victor Frankenstein’s creation of a monster, and the tragic consequences that arise when his creation seeks acceptance and revenge."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "frankenstein"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Mary Shelley"
+                },
+                {
+                    "name": "pages",
+                    "value": 1981
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/fk8KjcfY/Frankenstein-1.webp",
+                    "dimensions": {
+                        "w": 123,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/N94xnmqq/Frankenstein-2.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 137
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/V5fgCGnY/Frankenstein-3.webp",
+                    "dimensions": {
+                        "w": 119,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "7697b767-7bc4-46b2-b3f8-2409a520bd2c",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 700,
+                        "fractionDigits": 2
+                    },
+                    "key": "frankenstein_regular_price"
+                }
+            ],
+            "key": "book-15-master",
+            "sku": "shelley-frankenstein-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-15",
+        "createdAt": "2025-05-15T14:00:51.703Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.375Z"
+    },
+    {
+        "id": "dc3865a3-66dd-4068-a5f6-b98910823213",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Heart of Darkness"
+        },
+        "description": {
+            "en": "The journey of Marlow as he navigates through the jungles of Africa to find Kurtz, a man consumed by greed, power, and madness, revealing the darkness within humanity."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "heart-of-darkness"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Joseph Conrad"
+                },
+                {
+                    "name": "pages",
+                    "value": 2004
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/sGgJCxsB/Heart-of-Darkness-1.webp",
+                    "dimensions": {
+                        "w": 127,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/N5LxNKdS/Heart-of-Darkness-2.webp",
+                    "dimensions": {
+                        "w": 127,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/F7qVwhqR/Heart-of-Darkness-3.webp",
+                    "dimensions": {
+                        "w": 127,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "9f845378-d89a-401b-99ad-b4e074bb9dd5",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 400,
+                        "fractionDigits": 2
+                    },
+                    "key": "heart_of_darkness_regular_price"
+                }
+            ],
+            "key": "book-29-master",
+            "sku": "conrad-heart-of-darkness-standard ",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-29",
+        "createdAt": "2025-05-15T14:00:52.350Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.442Z"
+    },
+    {
+        "id": "742efdba-704e-4b43-93ae-019ac86ac583",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Great Alone"
+        },
+        "description": {
+            "en": "Set in the unforgiving wilderness of 1970s Alaska, The Great Alone by Kristin Hannah tells the story of the Allbright family as they seek a new beginning. Struggling with the aftermath of war and personal demons, they are tested by the harsh climate, isolation, and the emotional turmoil that comes with survival. Through heartbreak and resilience, this powerful novel explores love, trauma, and the enduring strength of the human spirit."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "d03ad6d4-327e-40b6-ab12-0303205e1a30"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-great-alone"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Kristin Hannah"
+                },
+                {
+                    "name": "pages",
+                    "value": 2000
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/tTDYgBqd/The-Great-Alone-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Y09jLQ05/The-Great-Alone-2.webp",
+                    "dimensions": {
+                        "w": 521,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/qq5qsgCz/The-Great-Alone-3.webp",
+                    "dimensions": {
+                        "w": 489,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "67da2954-8dd8-45b0-afca-611c983f8772",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 4412,
+                        "fractionDigits": 2
+                    },
+                    "key": "great_alone_regular_price"
+                }
+            ],
+            "key": "book-23-master",
+            "sku": "hannah-great-alone-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-23",
+        "createdAt": "2025-05-15T14:00:52.260Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.475Z"
+    },
+    {
+        "id": "37a63e3b-9fc9-4cb3-a830-4b700a5bf20f",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Lord of the Rings"
+        },
+        "description": {
+            "en": "The epic tale of Frodo Baggins' quest to destroy the One Ring, set in the rich and imaginative world of Middle-earth, fighting against the forces of darkness."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "0f5a2cf6-2855-4710-89e3-56130279fdf2"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-lord-of-the-rings"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "J.R.R. Tolkien"
+                },
+                {
+                    "name": "pages",
+                    "value": 2022
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/ZKN47wGf/The-Lord-of-the-Rings-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/YCfkkhqY/The-Lord-of-the-Rings-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/7ZyDpgDq/The-Lord-of-the-Rings-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "2909e27f-31f5-4997-a217-9af7354f47c4",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 77700,
+                        "fractionDigits": 2
+                    },
+                    "key": "lord_of_the_rings_regular_price"
+                }
+            ],
+            "key": "book-18-master",
+            "sku": "tolkien-lord-of-the-rings-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-18",
+        "createdAt": "2025-05-15T14:00:52.155Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.974Z"
+    },
+    {
+        "id": "12ff3d48-85b4-435f-b3eb-32a72c0af316",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Chronicles of Narnia"
+        },
+        "description": {
+            "en": "A series of adventures in the magical land of Narnia, where children discover their destiny, fight evil, and ultimately learn the power of courage and faith."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "0f5a2cf6-2855-4710-89e3-56130279fdf2"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-chronicles-of-narnia"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "C.S. Lewis"
+                },
+                {
+                    "name": "pages",
+                    "value": 2007
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/jjPfR6nv/The-Chronicles-of-Narnia-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/L8rfdQ5n/The-Chronicles-of-Narnia-2.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 750
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/NMxrHg4H/The-Chronicles-of-Narnia-3.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 750
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "33b5e6ef-f891-4e2c-90a6-48fae679520b",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 2499,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_chronicles_of_narnia_regular_price"
+                }
+            ],
+            "key": "book-27-master",
+            "sku": "lewis-chronicles-of-narnia-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-27",
+        "createdAt": "2025-05-15T14:00:52.364Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.435Z"
+    },
+    {
+        "id": "7c685c1a-8620-4c8d-8738-66d9e55e375b",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Anna Karenina"
+        },
+        "description": {
+            "en": "The tragic story of Anna Karenina explores themes of love, infidelity, and societal expectations in imperial Russia, ultimately leading to her downfall."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "anna-karenina"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Leo Tolstoy"
+                },
+                {
+                    "name": "pages",
+                    "value": 2008
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/hfM0s989/Anna-Karenina-1.webp",
+                    "dimensions": {
+                        "w": 130,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/ns9Yngyk/Anna-Karenina-2.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/MnTmFvtg/Anna-Karenina-3.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "81c59622-7508-4aef-a42f-3e9c5f71f046",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3411,
+                        "fractionDigits": 2
+                    },
+                    "key": "anna_karenina_regular_price"
+                }
+            ],
+            "key": "book-12-master",
+            "sku": "tolstoy-anna-karenina-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-12",
+        "createdAt": "2025-05-15T14:00:51.699Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.369Z"
+    },
+    {
+        "id": "d1fc0cc5-9a05-4554-ac2d-ebc1e97ee24d",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Divergent"
+        },
+        "description": {
+            "en": "In a divided society, Beatrice \"Tris\" Prior discovers she is \"Divergent\"—a person who does not fit neatly into any one faction—and must navigate the dangers of a society bent on control."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "divergent"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Veronica Roth"
+                },
+                {
+                    "name": "pages",
+                    "value": 1991
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/fVpq7cZ8/Divergent-1.webp",
+                    "dimensions": {
+                        "w": 117,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/gwhSgx2m/Divergent-2.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 131
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/gXPMQGxR/Divergent-3.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 131
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "cd0c61f2-5cba-4c21-9e0a-1adb1c52db2a",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1700,
+                        "fractionDigits": 2
+                    },
+                    "key": "divergent_regular_price"
+                }
+            ],
+            "key": "book-37-master",
+            "sku": "roth-divergent-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-37",
+        "createdAt": "2025-05-15T14:00:52.696Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.379Z"
+    },
+    {
+        "id": "54f02f9b-d17e-4279-ba73-772bebd41476",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Little Women"
+        },
+        "description": {
+            "en": "The coming-of-age story of four sisters, Meg, Jo, Beth, and Amy, as they navigate the challenges of love, family, and personal growth during the American Civil War."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "little-women"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Louisa May Alcott"
+                },
+                {
+                    "name": "pages",
+                    "value": 2020
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/PCwQjBsM/Little-Women-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/d7cmt4Jc/Little-Women-2.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 135
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/v1771fmg/Little-Women-3.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "e95a219f-a428-4868-a017-4eae57f6a1e1",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1800,
+                        "fractionDigits": 2
+                    },
+                    "key": "little_women_regular_price"
+                }
+            ],
+            "key": "book-24-master",
+            "sku": "alcott-little-women-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-24",
+        "createdAt": "2025-05-15T14:00:52.265Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.366Z"
+    },
+    {
+        "id": "8533225e-6560-4fad-bda3-270828c76478",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Catcher in the Rye"
+        },
+        "description": {
+            "en": "The novel chronicles the disillusionment of Holden Caulfield, a disaffected teenager grappling with alienation and the search for meaning in a world he finds phony."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-catcher-in-the-rye"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "J.D. Salinger"
+                },
+                {
+                    "name": "pages",
+                    "value": 2002
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/3Jfm1xHj/The-Catcher-in-the-Rye-1.webp",
+                    "dimensions": {
+                        "w": 503,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/y8J9bCVM/The-Catcher-in-the-Rye-2.webp",
+                    "dimensions": {
+                        "w": 497,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/85G6cFhG/The-Catcher-in-the-Rye-3.webp",
+                    "dimensions": {
+                        "w": 702,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "63842c7e-28ca-4f1d-a0ea-9023e2924d26",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1212,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_catcher_in_the_rye_regular_price"
+                }
+            ],
+            "key": "book-7-master",
+            "sku": "salinger-the-catcher-in-the-rye-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-7",
+        "createdAt": "2025-05-15T14:00:51.592Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.458Z"
+    },
+    {
+        "id": "db26c092-5048-442d-a074-d4754779babd",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Brothers Karamazov"
+        },
+        "description": {
+            "en": "Through the lives of the Karamazov brothers, Dostoevsky explores deep philosophical and theological questions about faith, morality, and human nature."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-brothers-karamazov"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Fyodor Dostoevsky"
+                },
+                {
+                    "name": "pages",
+                    "value": 2000
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/fLQxdqQ6/The-Brothers-Karamazov-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/qRc2xckg/The-Brothers-Karamazov-2.webp",
+                    "dimensions": {
+                        "w": 630,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/pr2zG9TC/The-Brothers-Karamazov-3.webp",
+                    "dimensions": {
+                        "w": 630,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "539ba6d9-2c42-4d76-a7c2-62a556fc8415",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1700,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_brothers_karamazov_regular_price"
+                }
+            ],
+            "key": "book-13-master",
+            "sku": "dostoevsky-brothers-karamazov-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-13",
+        "createdAt": "2025-05-15T14:00:51.854Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.457Z"
+    },
+    {
+        "id": "a7af881c-f8ed-44f0-8482-f830e906a33f",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Moby-Dick"
+        },
+        "description": {
+            "en": "The epic story of Captain Ahab's obsessive quest to hunt down the elusive white whale, Moby-Dick, intertwines themes of fate, revenge, and the nature of man."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "moby-dick"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Herman Melville"
+                },
+                {
+                    "name": "pages",
+                    "value": 1993
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/KkZPtjK9/Moby-Dick-1.webp",
+                    "dimensions": {
+                        "w": 130,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Lg5j0W3L/Moby-Dick-2.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/gXNvsp8G/Moby-Dick-3.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "dfb300ed-5003-4e19-8405-a2285c90c5f6",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 6900,
+                        "fractionDigits": 2
+                    },
+                    "key": "moby_dick_regular_price"
+                }
+            ],
+            "key": "book-5-master",
+            "sku": "melville-moby-dick-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-5",
+        "createdAt": "2025-05-15T14:00:51.446Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.454Z"
+    },
+    {
+        "id": "c1b3eeb6-a459-4f96-9950-d738147aa89c",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Brave New World"
+        },
+        "description": {
+            "en": "A chilling vision of a future society driven by technology, hedonism, and state control, where individuality and free will are suppressed for the sake of stability."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "brave-new-world"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Aldous Huxley"
+                },
+                {
+                    "name": "pages",
+                    "value": 2004
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/nj8KrTZt/Brave-New-World-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/sGsp9Xv6/Brave-New-World-2.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/wyhXmJTR/Brave-New-World-3.webp",
+                    "dimensions": {
+                        "w": 118,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "b9845ddd-c0b7-4e80-8696-6234826818ad",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 999,
+                        "fractionDigits": 2
+                    },
+                    "key": "brave_new_world_regular_price"
+                }
+            ],
+            "key": "book-14-master",
+            "sku": "huxley-brave-new-world-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-14",
+        "createdAt": "2025-05-15T14:00:51.691Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.374Z"
+    },
+    {
+        "id": "709e4b64-9d58-4d46-b294-2975835ffa02",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Grapes of Wrath"
+        },
+        "description": {
+            "en": "The Joad family’s desperate journey westward during the Dust Bowl, highlighting the harsh realities of poverty, social injustice, and the American Dream."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-grapes-of-wrath"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "John Steinbeck"
+                },
+                {
+                    "name": "pages",
+                    "value": 2000
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/CKTZrZr8/The-Grapes-of-Wrath-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/yNmDMV2b/The-Grapes-of-Wrath-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/fLMVZGNT/The-Grapes-of-Wrath-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "ce97ea4a-d560-468a-8964-55ba12f5a197",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3200,
+                        "fractionDigits": 2
+                    },
+                    "key": "grapes_of_wrath_regular_price"
+                }
+            ],
+            "key": "book-21-master",
+            "sku": "steinbeck-grapes-of-wrath-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-21",
+        "createdAt": "2025-05-15T14:00:52.259Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.908Z"
+    },
+    {
+        "id": "e2938d0b-44a0-4cfb-be84-0051191ecc0d",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Dracula"
+        },
+        "description": {
+            "en": "Count Dracula's attempts to move from Transylvania to England in order to spread the undead curse, and his battle against a group of determined heroes."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "cbec943c-538f-41ad-ab78-bf3fc6154519"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "dracula"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Bram Stoker"
+                },
+                {
+                    "name": "pages",
+                    "value": 2000
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Wt89YLTF/Dracula-1.webp",
+                    "dimensions": {
+                        "w": 117,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/gXqMP1h7/Dracula-2.webp",
+                    "dimensions": {
+                        "w": 180,
+                        "h": 135
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/K3G0cQr8/Dracula-3.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "9db07ee9-b29b-41d1-ad2a-fed6434cd8d8",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3000,
+                        "fractionDigits": 2
+                    },
+                    "key": "dracula_regular_price"
+                }
+            ],
+            "key": "book-17-master",
+            "sku": "stoker-dracula-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-17",
+        "createdAt": "2025-05-15T14:00:52.150Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.940Z"
+    },
+    {
+        "id": "47fa9e50-1873-490f-8f1d-bc74fd9f09d8",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Fault in Our Stars"
+        },
+        "description": {
+            "en": "Two teenagers, Hazel and Gus, fall in love while battling cancer, discovering that love can transcend the most difficult and painful experiences."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "14eeb729-898e-470c-95e6-61c57b6640d4"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-fault-in-our-stars"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "John Green"
+                },
+                {
+                    "name": "pages",
+                    "value": 2011
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/bNr2Zf2Z/The-Fault-in-Our-Stars-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/28tLv942/The-Fault-in-Our-Stars-2.webp",
+                    "dimensions": {
+                        "w": 512,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/mgFzS3jR/The-Fault-in-Our-Stars-3.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 788
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "6cde3f46-69fd-434c-8236-e609636afeaa",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 955,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_fault_in_our_stars_regular_price"
+                }
+            ],
+            "key": "book-35-master",
+            "sku": "green-fault-in-our-stars-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-35",
+        "createdAt": "2025-05-15T14:00:52.555Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.934Z"
+    },
+    {
+        "id": "c320f89a-06cf-49b4-a31d-83a419815c4e",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Of Mice and Men"
+        },
+        "description": {
+            "en": "The tale of two displaced migrant workers, George and Lennie, whose friendship and dreams are tragically shattered by the harshness of the world they live in."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "of-mice-and-men"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "John Steinbeck"
+                },
+                {
+                    "name": "pages",
+                    "value": 2021
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/9rvyJJRw/Of-Mice-and-Men-1.webp",
+                    "dimensions": {
+                        "w": 115,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/87MM3MMK/Of-Mice-and-Men-2.webp",
+                    "dimensions": {
+                        "w": 117,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/kVCKdGyn/Of-Mice-and-Men-3.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "2f7024fe-3c1d-4fa4-b13a-41568ed53052",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 4400,
+                        "fractionDigits": 2
+                    },
+                    "key": "of_mice_and_men_regular_price"
+                }
+            ],
+            "key": "book-22-master",
+            "sku": "steinbeck-of-mice-and-men-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-22",
+        "createdAt": "2025-05-15T14:00:52.230Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.906Z"
+    },
+    {
+        "id": "c3783b79-5769-46a9-b145-6c9467c4fbd0",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "To Kill a Mockingbird"
+        },
+        "description": {
+            "en": "Set in the racially segregated South, it follows Scout Finch and her father, Atticus, in their fight against racial injustice."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "to-kill-a-mockingbird"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Harper Lee"
+                },
+                {
+                    "name": "pages",
+                    "value": 2001
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/MpT2ktN2/To-Kill-a-Mockingbird-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/q7hPqqp1/To-Kill-a-Mockingbird-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/1zkLqSts/To-Kill-a-Mockingbird-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "9d0c3d14-335e-41e5-bc30-1761605a0659",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 300,
+                        "fractionDigits": 2
+                    },
+                    "key": "to_kill_a_mockingbird_regular_price"
+                }
+            ],
+            "key": "book-2-master",
+            "sku": "lee-to-kill-a-mockingbird-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-2",
+        "createdAt": "2025-05-15T14:00:51.445Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.600Z"
+    },
+    {
+        "id": "456a85ec-4651-4f0a-8f70-6b5ad3890328",
+        "version": 14,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "A Tale of Two Cities"
+        },
+        "description": {
+            "en": "Set against the backdrop of the French Revolution, the story explores themes of resurrection, sacrifice, and the complexities of human nature through the lives of Charles Darnay and Sydney Carton."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "a-tale-of-two-cities"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Charles Dickens"
+                },
+                {
+                    "name": "pages",
+                    "value": 2020
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Rq7d6rNp/A-Tale-of-Two-Cities-1.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/KRmNt9TG/A-Tale-of-Two-Cities-2.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/VJVWQmVv/A-Tale-of-Two-Cities-3.webp",
+                    "dimensions": {
+                        "w": 116,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "9a474005-8ab4-4d66-8f89-eb840db99dd3",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "USD",
+                        "centAmount": 1530,
+                        "fractionDigits": 2
+                    },
+                    "key": "a_tale_of_two_cities_regular_price"
+                }
+            ],
+            "key": "book-30-master",
+            "sku": "dickens-tale-of-two-cities-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-30",
+        "createdAt": "2025-05-15T14:00:52.351Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.644Z"
+    },
+    {
+        "id": "c75e6312-c1d7-4044-9cff-9436432f94bb",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Wuthering Heights"
+        },
+        "description": {
+            "en": "A dark and passionate tale of love and revenge between Heathcliff and Catherine Earnshaw, set on the moody Yorkshire moors."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "wuthering-heights"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Emily Brontë"
+                },
+                {
+                    "name": "pages",
+                    "value": 1999
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/hjVN8Yzx/Wuthering-Heights-1.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 750
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/L5RwxVLW/Wuthering-Heights-2.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 750
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/yxP5tST8/Wuthering-Heights-3.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 750
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "6b1a2b87-28af-4344-b2fd-613372ce01d0",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 800,
+                        "fractionDigits": 2
+                    },
+                    "key": "wuthering_heights_regular_price"
+                }
+            ],
+            "key": "book-6-master",
+            "sku": "bronte-wuthering-heights-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-6",
+        "createdAt": "2025-05-15T14:00:51.590Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.649Z"
+    },
+    {
+        "id": "c5a3fe7a-0fd8-4fab-b231-728429f75956",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Martian"
+        },
+        "description": {
+            "en": "Mark Watney, an astronaut stranded on Mars, must use his ingenuity to survive, all while maintaining humor and hope in the face of impossible odds."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-martian"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Andy Weir"
+                },
+                {
+                    "name": "pages",
+                    "value": 2020
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/yN1KNsk5/The-Martian-1.webp",
+                    "dimensions": {
+                        "w": 508,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/q71ThSK7/The-Martian-2.webp",
+                    "dimensions": {
+                        "w": 509,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/hvdWYG5J/The-Martian-3.webp",
+                    "dimensions": {
+                        "w": 510,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "54b04c1f-46e8-4030-84f4-4d30b8f2f014",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3400,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_martian_regular_price"
+                }
+            ],
+            "key": "book-43-master",
+            "sku": "weir-martian-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-43",
+        "createdAt": "2025-05-15T14:00:52.857Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.631Z"
+    },
+    {
+        "id": "3a5f749d-8a66-468b-996a-0cb13ceb7d20",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Hobbit"
+        },
+        "description": {
+            "en": "Bilbo Baggins embarks on an unexpected journey filled with danger, magic, and adventure, encountering trolls, dragons, and treasure along the way."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "0f5a2cf6-2855-4710-89e3-56130279fdf2"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-hobbit"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "J.R.R. Tolkien"
+                },
+                {
+                    "name": "pages",
+                    "value": 2013
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/5y6N21k1/The-Hobbit-1.webp",
+                    "dimensions": {
+                        "w": 700,
+                        "h": 700
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/qB5vZhz7/The-Hobbit-2.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/bNSwXyt9/The-Hobbit-3.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "1f1001a3-e38d-46fd-992f-d96a21d7eda7",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3900,
+                        "fractionDigits": 2
+                    },
+                    "key": "hobbit_regular_price"
+                }
+            ],
+            "key": "book-8-master",
+            "sku": "tolkien-hobbit-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-8",
+        "createdAt": "2025-05-15T14:00:51.595Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.621Z"
+    },
+    {
+        "id": "994a29d4-059b-4328-b70d-8e829ee7b1d5",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Odyssey"
+        },
+        "description": {
+            "en": "Odysseus’ perilous 10-year journey home from the Trojan War is fraught with gods, monsters, and temptations that test his will and perseverance."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-odyssey"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Homer"
+                },
+                {
+                    "name": "pages",
+                    "value": 1666
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/dtGDkQVt/The-Odyssey-1.webp",
+                    "dimensions": {
+                        "w": 563,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/h4zXn1Fm/The-Odyssey-3.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/y6Mk83Bb/The-Odyssey-2.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "0a78ecdf-bf64-4cd4-b78f-fce669b1bf31",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 900,
+                        "fractionDigits": 2
+                    },
+                    "key": "odyssey_regular_price"
+                }
+            ],
+            "key": "book-9-master",
+            "sku": "homer-odyssey-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-9",
+        "createdAt": "2025-05-15T14:00:51.604Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.635Z"
+    },
+    {
+        "id": "8d3fd9da-17bc-47d5-aa1d-85a7c70fe6c7",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Shining"
+        },
+        "description": {
+            "en": "Jack Torrance’s descent into madness while isolated at the Overlook Hotel, with supernatural forces preying on his family, is a terrifying exploration of isolation and fear."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "cbec943c-538f-41ad-ab78-bf3fc6154519"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-shining"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Stephen King"
+                },
+                {
+                    "name": "pages",
+                    "value": 2009
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/gkKmbx0R/The-Shining-1.webp",
+                    "dimensions": {
+                        "w": 557,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/y8YB17JG/The-Shining-2.webp",
+                    "dimensions": {
+                        "w": 558,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/0yWvrhDy/The-Shining-3.webp",
+                    "dimensions": {
+                        "w": 558,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "c5203feb-0c36-469b-ab46-89ba64edf94a",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 7100,
+                        "fractionDigits": 2
+                    },
+                    "key": "shining_regular_price"
+                }
+            ],
+            "key": "book-19-master",
+            "sku": "king-shining-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-19",
+        "createdAt": "2025-05-15T14:00:52.157Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.652Z"
+    },
+    {
+        "id": "edd7a9bd-078f-408f-b6ef-9a98a10c2c8e",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Pride and Prejudice"
+        },
+        "description": {
+            "en": "This classic tale explores love, marriage, and social standing in early 19th-century England, particularly through the relationship between Elizabeth Bennet and Mr. Darcy."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "pride-and-prejudice"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Jane Austen"
+                },
+                {
+                    "name": "pages",
+                    "value": 2005
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/ZqGLcKps/Pride-and-Prejudice-1.webp",
+                    "dimensions": {
+                        "w": 563,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/4dpQFk1f/Pride-and-Prejudice-2.webp",
+                    "dimensions": {
+                        "w": 563,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/PJhzg36m/Pride-and-Prejudice-3.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "99e74c98-3a2d-49ce-98dc-a7ceb012d3f2",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1200,
+                        "fractionDigits": 2
+                    },
+                    "key": "pride_and_prejudice_regular_price"
+                }
+            ],
+            "key": "book-4-master",
+            "sku": "austen-pride-and-prejudice-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-4",
+        "createdAt": "2025-05-15T14:00:51.441Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.369Z"
+    },
+    {
+        "id": "2355a7ef-4356-45f5-8496-bedd429c2d32",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Sphere"
+        },
+        "description": {
+            "en": "Scientists discover a mysterious alien sphere beneath the ocean’s surface, leading to a psychological and dangerous journey that explores the limits of human knowledge and fear."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "sphere"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Michael Crichton"
+                },
+                {
+                    "name": "pages",
+                    "value": 2015
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/d3Bmw2Xg/Sphere-1.webp https://i.postimg.cc/nVY14xzT/Sphere-2.webp",
+                    "dimensions": {
+                        "w": 513,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/nVY14xzT/Sphere-2.webp",
+                    "dimensions": {
+                        "w": 514,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "bc982e62-4678-405f-9e38-13e4f2744f09",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 4300,
+                        "fractionDigits": 2
+                    },
+                    "key": "sphere_regular_price"
+                }
+            ],
+            "key": "book-42-master",
+            "sku": "crichton-sphere-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-42",
+        "createdAt": "2025-05-15T14:00:52.832Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.439Z"
+    },
+    {
+        "id": "151790ee-cdb2-4a3b-a75e-a10cf79e2279",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Les Misérables"
+        },
+        "description": {
+            "en": "Victor Hugo's monumental novel follows the journey of Jean Valjean, a former convict seeking redemption, as he navigates a society riddled with injustice, poverty, and revolution in 19th-century France. The story intertwines personal struggles and moral dilemmas with sweeping historical events, highlighting themes of grace, law, and the transformative power of compassion."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "les-miserables"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Victor Hugo"
+                },
+                {
+                    "name": "pages",
+                    "value": 1999
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/bNJrLX81/Les-Mis-rables-1.webp",
+                    "dimensions": {
+                        "w": 563,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/PrRxR6r9/Les-Mis-rables-2.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/bwSJcQZJ/Les-Mis-rables-3.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "d95b8b4d-5a34-499f-a4a1-825cf6258ce5",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 690,
+                        "fractionDigits": 2
+                    },
+                    "key": "les_miserables_regular_price"
+                }
+            ],
+            "key": "book-50-master",
+            "sku": "hugo-les-miserables-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-50",
+        "createdAt": "2025-05-15T14:00:52.979Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.393Z"
+    },
+    {
+        "id": "8d33e401-5909-4060-acf3-39d0bf8156c7",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "1984"
+        },
+        "description": {
+            "en": "In a totalitarian society, Winston Smith seeks truth and freedom, only to find himself at odds with the omnipresent Party."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "1984"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "George Orwell"
+                },
+                {
+                    "name": "pages",
+                    "value": 1971
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/nj7kGgTz/1984-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/ctBBV3pG/1984-2.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/sGrJ6m0J/1984-3.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "736dff5d-96a1-40d2-85e1-aa1e4e750a59",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1111,
+                        "fractionDigits": 2
+                    },
+                    "key": "1984_regular_price"
+                }
+            ],
+            "key": "book-3-master",
+            "sku": "orwell-1984-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-3",
+        "createdAt": "2025-05-15T14:00:51.467Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.465Z"
+    },
+    {
+        "id": "77894fdb-56e0-4f35-bc05-3f5a0dc3dab1",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Count of Monte Cristo"
+        },
+        "description": {
+            "en": "Alexandre Dumas’s classic tale of betrayal and revenge follows Edmond Dantès, a young sailor wrongfully imprisoned. After escaping and discovering a vast hidden treasure, he reinvents himself as the mysterious Count of Monte Cristo and embarks on a calculated quest to bring justice to those who wronged him. Set against the backdrop of post-Napoleonic France, the novel explores themes of vengeance, fate, and redemption."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-count-of-monte-cristo"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Alexandre Dumas"
+                },
+                {
+                    "name": "pages",
+                    "value": 2021
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/sfPHm8Kf/The-Count-of-Monte-Cristo-1.webp",
+                    "dimensions": {
+                        "w": 534,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/1XSCPcRZ/The-Count-of-Monte-Cristo-2.webp",
+                    "dimensions": {
+                        "w": 534,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/tJzrgZ7n/The-Count-of-Monte-Cristo-3.webp",
+                    "dimensions": {
+                        "w": 534,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "f5b03d4c-cf95-4114-bb78-5197d483b93b",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 7700,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_count_of_monte_cristo_regular_price"
+                }
+            ],
+            "key": "book-49-master",
+            "sku": "dumas-count-of-monte-cristo-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-49",
+        "createdAt": "2025-05-15T14:00:52.997Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.393Z"
+    },
+    {
+        "id": "04c3551d-4f82-4aad-a59a-f7085f656afd",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Neuromancer"
+        },
+        "description": {
+            "en": "A hacker named Case is pulled into a world of artificial intelligence, cyberspace, and dangerous underworld dealings in this groundbreaking cyberpunk novel."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "neuromancer"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "William Gibson"
+                },
+                {
+                    "name": "pages",
+                    "value": 2024
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/NLj8MyvF/Neuromancer-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Sj16zymr/Neuromancer-2.webp",
+                    "dimensions": {
+                        "w": 144,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/D8WqrtZK/Neuromancer-3.webp",
+                    "dimensions": {
+                        "w": 142,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "c788eac8-e970-4fe8-bde5-baef31961c96",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 100000,
+                        "fractionDigits": 2
+                    },
+                    "key": "neuromancer_regular_price"
+                }
+            ],
+            "key": "book-39-master",
+            "sku": "gibson-neuromancer-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-39",
+        "createdAt": "2025-05-15T14:00:52.722Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.456Z"
+    },
+    {
+        "id": "ec06ed6a-73bf-4cff-ba2f-55691b85c33d",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Catcher in the Rye"
+        },
+        "description": {
+            "en": "The story of Holden Caulfield’s coming-of-age as he navigates the challenges of teenage rebellion, alienation, and a search for authenticity in a hypocritical world."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "catcher-in-the-rye"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "J.D. Salinger"
+                },
+                {
+                    "name": "pages",
+                    "value": 2002
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/cthfDS3s/Catcher-in-the-Rye-1.webp",
+                    "dimensions": {
+                        "w": 135,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/xq27F3m7/Catcher-in-the-Rye-2.webp",
+                    "dimensions": {
+                        "w": 125,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/ThJS85qP/Catcher-in-the-Rye-3.webp",
+                    "dimensions": {
+                        "w": 125,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "7663dd90-5a54-4b5c-bbcd-a852fc851496",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3200,
+                        "fractionDigits": 2
+                    },
+                    "key": "salinger_catcher-in_the_rye_regular_price"
+                }
+            ],
+            "key": "book-33-master",
+            "sku": "salinger-catcher-in-the-rye-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-33",
+        "createdAt": "2025-05-15T14:00:52.520Z",
+        "lastModifiedAt": "2025-05-27T09:06:17.508Z"
+    },
+    {
+        "id": "26158f43-f638-4010-a62c-ce84fb7435f8",
+        "version": 14,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Call of the Wild"
+        },
+        "description": {
+            "en": "In the Yukon Territory, Buck, a domesticated dog, answers the call of the wild and embarks on a journey of survival, primal instincts, and freedom."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-call-of-the-wild"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Jack London"
+                },
+                {
+                    "name": "pages",
+                    "value": 1996
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/gjNRfYLW/The-Call-of-the-Wild-1.webp",
+                    "dimensions": {
+                        "w": 551,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/kMcxVy1p/The-Call-of-the-Wild-2.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 759
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Wb100Jxb/The-Call-of-the-Wild-3.webp",
+                    "dimensions": {
+                        "w": 529,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "a7e70990-b72d-4275-a423-4c95f159e800",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 4800,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_call_of_the_wild_regular_price"
+                }
+            ],
+            "key": "book-26-master",
+            "sku": "london-call-of-the-wild-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-26",
+        "createdAt": "2025-05-15T14:00:52.362Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.878Z"
+    },
+    {
+        "id": "fcadd10e-e88a-48f3-be79-cca4389aa9d6",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Old Man and the Sea"
+        },
+        "description": {
+            "en": "The story of Santiago, an old fisherman who battles a giant marlin, symbolizing the struggle between man and nature, fate, and human perseverance."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-old-man-and-the-sea"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Ernest Hemingway"
+                },
+                {
+                    "name": "pages",
+                    "value": 2022
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/QdsCpLFg/The-Old-Man-and-the-Sea-1.webp",
+                    "dimensions": {
+                        "w": 502,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Z5cRHfNG/The-Old-Man-and-the-Sea-2.webp",
+                    "dimensions": {
+                        "w": 494,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/W4Y4LhXS/The-Old-Man-and-the-Sea-3.webp",
+                    "dimensions": {
+                        "w": 662,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "cd4975c9-e2b9-458e-afb9-7daf1248d2a8",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 100,
+                        "fractionDigits": 2
+                    },
+                    "key": "old_man_and_the_sea_regular_price"
+                }
+            ],
+            "key": "book-31-master",
+            "sku": "hemingway-old-man-and-the-sea-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-31",
+        "createdAt": "2025-05-15T14:00:52.519Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.939Z"
+    },
+    {
+        "id": "0b63f625-9e1b-40b0-8abe-fbb8c187258a",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Sun Also Rises"
+        },
+        "description": {
+            "en": "A novel about a disillusioned group of expatriates in post-World War I Europe, grappling with the loss of traditional values and the search for meaning."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-sun-also-rises"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Ernest Hemingway"
+                },
+                {
+                    "name": "pages",
+                    "value": 2019
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/zf41FWdm/The-Sun-Also-Rises-1.webp",
+                    "dimensions": {
+                        "w": 511,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/3wkTG9FC/The-Sun-Also-Rises-2.webp",
+                    "dimensions": {
+                        "w": 521,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/W3rcW3Kd/The-Sun-Also-Rises-3.webp",
+                    "dimensions": {
+                        "w": 367,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "03f11959-6ae3-4b55-915f-b2754d4073d6",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 6600,
+                        "fractionDigits": 2
+                    },
+                    "key": "sun_also_rises_regular_price"
+                }
+            ],
+            "key": "book-32-master",
+            "sku": "hemingway-sun-also-rises-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-32",
+        "createdAt": "2025-05-15T14:00:52.546Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.964Z"
+    },
+    {
+        "id": "cca4876e-8885-41a1-a13d-bf0792f6a302",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Secret Garden"
+        },
+        "description": {
+            "en": "The transformation of a lonely, sickly girl into a joyful and strong young lady as she discovers the healing power of nature in a secret garden."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-secret-garden"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Frances Hodgson Burnett"
+                },
+                {
+                    "name": "pages",
+                    "value": 2001
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/4ykssttv/The-Secret-Garden-1.webp",
+                    "dimensions": {
+                        "w": 576,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/dQrJnHP5/The-Secret-Garden-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/02vP4Y9P/The-Secret-Garden-3.webp",
+                    "dimensions": {
+                        "w": 505,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "4284358a-76ff-4f97-9da8-badf452e3f2b",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3900,
+                        "fractionDigits": 2
+                    },
+                    "key": "secret_garden_regular_price"
+                }
+            ],
+            "key": "book-25-master",
+            "sku": "burnett-secret-garden-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-25",
+        "createdAt": "2025-05-15T14:00:52.254Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.947Z"
+    },
+    {
+        "id": "9292587c-ad4d-45a3-8452-156da7cfadd2",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Scarlet Letter"
+        },
+        "description": {
+            "en": "Set in Puritan New England, Hester Prynne is shunned for her adultery and must wear the scarlet letter \"A\" as a symbol of her sin, while she seeks redemption."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-scarlet-letter"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Nathaniel Hawthorne"
+                },
+                {
+                    "name": "pages",
+                    "value": 1990
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/q7FpDWv5/The-Scarlet-Letter-1.webp",
+                    "dimensions": {
+                        "w": 576,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/rps8JqM4/The-Scarlet-Letter-2.webp",
+                    "dimensions": {
+                        "w": 505,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/hj7ckMJP/The-Scarlet-Letter-3.webp",
+                    "dimensions": {
+                        "w": 505,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "92b61345-3d30-4900-a395-43bde819b72f",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 7100,
+                        "fractionDigits": 2
+                    },
+                    "key": "scarlet_letter_regular_price"
+                }
+            ],
+            "key": "book-28-master",
+            "sku": "hawthorne-scarlet-letter-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-28",
+        "createdAt": "2025-05-15T14:00:52.377Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.941Z"
+    },
+    {
+        "id": "b26e2ff7-9a1f-413d-a041-6dd8a848859a",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Great Gatsby"
+        },
+        "description": {
+            "en": "Set in the wilds of Alaska, the story follows the Allbright family as they struggle to survive and heal from the trauma of war and isolation."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-great-gatsby"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "F. Scott Fitzgerald"
+                },
+                {
+                    "name": "pages",
+                    "value": 1991
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/PrCPtbBZ/The-Great-Gatsby-1.webp",
+                    "dimensions": {
+                        "w": 550,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/y6QD4prs/The-Great-Gatsby-2.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 732
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/L6GhhYpW/The-Great-Gatsby-3.webp",
+                    "dimensions": {
+                        "w": 535,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "8b2f9e8c-095a-449f-8ac9-8b1f72ac2559",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 2400,
+                        "fractionDigits": 2
+                    },
+                    "key": "great_gatsby_regular_price"
+                }
+            ],
+            "key": "book-1-master",
+            "sku": "fitzgerald-great-gatsby-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-1",
+        "createdAt": "2025-05-15T14:00:51.458Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.933Z"
+    },
+    {
+        "id": "268c2fb2-a660-44d0-a0f4-5247e20d9850",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Handmaid's Tale"
+        },
+        "description": {
+            "en": "In a future theocratic society, women’s rights are stripped away, and Offred, a handmaid, struggles for survival and resistance in a world of oppression and control."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-handmaids-tale"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Margaret Atwood"
+                },
+                {
+                    "name": "pages",
+                    "value": 2023
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Hk5nMYWk/The-Handmaid-s-Tale-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/pdHTYwyY/The-Handmaid-s-Tale-2.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/QtNdvcQF/The-Handmaid-s-Tale-3.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "3dea57d6-a9c1-40a1-8275-9b392b7a1cf7",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 5499,
+                        "fractionDigits": 2
+                    },
+                    "key": "handmaids_tale_regular_price"
+                }
+            ],
+            "key": "book-20-master",
+            "sku": "atwood-handmaids-tale-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-20",
+        "createdAt": "2025-05-15T14:00:52.152Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.949Z"
+    },
+    {
+        "id": "8293341f-45ac-4e1a-bede-94d6021071ba",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Hunger Games"
+        },
+        "description": {
+            "en": "In a dystopian future, Katniss Everdeen volunteers to take her sister’s place in the Hunger Games, a brutal televised fight to the death, sparking a revolution."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-hunger-games"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Suzanne Collins"
+                },
+                {
+                    "name": "pages",
+                    "value": 2020
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/kgrXq0N3/The-Hunger-Games-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/vZW8B0X1/The-Hunger-Games-2.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/Ls29Zj0x/The-Hunger-Games-3.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "eb2fcbe7-70d2-4bad-a310-3b3ea73095fb",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3600,
+                        "fractionDigits": 2
+                    },
+                    "key": "hunger_games_regular_price"
+                }
+            ],
+            "key": "book-36-master",
+            "sku": "collins-hunger-games-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-36",
+        "createdAt": "2025-05-15T14:00:52.725Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.954Z"
+    },
+    {
+        "id": "641c61c5-2168-401b-8f7c-a4d10f87d64b",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Time Machine"
+        },
+        "description": {
+            "en": "The story of a Victorian scientist who builds a machine that allows him to travel through time, exploring the far future and the consequences of technological progress."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-time-machine"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "H.G. Wells"
+                },
+                {
+                    "name": "pages",
+                    "value": 2015
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/fyNn6snB/The-Time-Machine-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/zXqY7qkf/The-Time-Machine-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/kMQdW2KZ/The-Time-Machine-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "bc2c1824-08ed-4b01-8625-f62896baefb2",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 200,
+                        "fractionDigits": 2
+                    },
+                    "key": "time_machine_regular_price"
+                }
+            ],
+            "key": "book-45-master",
+            "sku": "wells-time-machine-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-45",
+        "createdAt": "2025-05-15T14:00:52.837Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.973Z"
+    },
+    {
+        "id": "ad771608-fd17-4d62-a703-f6308996fe71",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Invisible Man"
+        },
+        "description": {
+            "en": "A scientist discovers the secret of invisibility, but as he becomes more unhinged, he seeks to use his newfound power for revenge and domination."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-invisible-man"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "H.G. Wells"
+                },
+                {
+                    "name": "pages",
+                    "value": 2007
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Bvpq5tr4/The-Invisible-Man-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/fLbM8DsX/The-Invisible-Man-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/26XrJMjt/The-Invisible-Man-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "76e2fe86-539f-4132-8d7f-7a9c77b32281",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1800,
+                        "fractionDigits": 2
+                    },
+                    "key": "invisible_man_regular_price"
+                }
+            ],
+            "key": "book-46-master",
+            "sku": "wells-invisible-man-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-46",
+        "createdAt": "2025-05-15T14:00:52.985Z",
+        "lastModifiedAt": "2025-05-27T09:06:25.002Z"
+    },
+    {
+        "id": "055c35ef-50db-4aa8-9aab-9282990f8481",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Island of Dr. Moreau"
+        },
+        "description": {
+            "en": "Shipwrecked on a mysterious island, Edward Prendick discovers that Dr. Moreau is conducting cruel experiments, turning animals into human-like creatures with dire consequences."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-island-of-dr-moreau"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "H.G. Wells"
+                },
+                {
+                    "name": "pages",
+                    "value": 2000
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/cCpZ13nM/The-Island-of-Doctor-Moreau-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/8cJNV4jz/The-Island-of-Doctor-Moreau-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/2jMC7sKb/The-Island-of-Doctor-Moreau-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "af15dbec-e7a7-4948-a289-ae3a22509506",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 3700,
+                        "fractionDigits": 2
+                    },
+                    "key": "island_of_doctor_moreau_regular_price"
+                }
+            ],
+            "key": "book-48-master",
+            "sku": "wells-island-of-doctor-moreau-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-48",
+        "createdAt": "2025-05-15T14:00:52.992Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.944Z"
+    },
+    {
+        "id": "71b5ae13-24d2-4788-aa8c-bbffc14496c2",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Divine Comedy"
+        },
+        "description": {
+            "en": "Dante’s epic journey through Hell, Purgatory, and Heaven reveals his spiritual and philosophical musings on sin, redemption, and divine justice."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-divine-comedy"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Dante Alighieri"
+                },
+                {
+                    "name": "pages",
+                    "value": 1900
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/fyTS762g/The-Divine-Comedy-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/fy2t8B1W/The-Divine-Comedy-2.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/ryQrywz6/The-Divine-Comedy-3.webp",
+                    "dimensions": {
+                        "w": 564,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "821b56a0-13d5-496f-a0b6-f148f762d1bb",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1999,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_divine_comedy_regular_price"
+                }
+            ],
+            "key": "book-11-master",
+            "sku": "dante-divine-comedy-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-11",
+        "createdAt": "2025-05-15T14:00:51.844Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.929Z"
+    },
+    {
+        "id": "a40a3aee-f528-40bc-a0a0-b27fbe6d9efe",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The War of the Worlds"
+        },
+        "description": {
+            "en": "Martians invade Earth in this groundbreaking science fiction novel, causing widespread destruction as humanity struggles to survive and fight back against the alien invaders."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-war-of-the-worlds"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "H.G. Wells"
+                },
+                {
+                    "name": "pages",
+                    "value": 2013
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/6qfJKPBw/The-War-of-the-Worlds-1.webp",
+                    "dimensions": {
+                        "w": 499,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/28TRXgH7/The-War-of-the-Worlds-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/bwBXqkfG/The-War-of-the-Worlds-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "2b183155-55c4-4a0e-975b-dbfcb8ce2612",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 5200,
+                        "fractionDigits": 2
+                    },
+                    "key": "war_of_the_worlds_regular_price"
+                }
+            ],
+            "key": "book-47-master",
+            "sku": "wells-war-of-the-worlds-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-47",
+        "createdAt": "2025-05-15T14:00:52.974Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.993Z"
+    },
+    {
+        "id": "cb7ca66a-b463-4f57-9f69-ca3f90c09c9c",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Outsiders"
+        },
+        "description": {
+            "en": "The struggles of the Greasers, a gang of working-class teens, as they fight against the wealthier Socs, exploring themes of class division, loyalty, and friendship."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "14eeb729-898e-470c-95e6-61c57b6640d4"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-outsiders"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "S.E. Hinton"
+                },
+                {
+                    "name": "pages",
+                    "value": 2023
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Gpmp5kJH/The-Outsiders-1.webp",
+                    "dimensions": {
+                        "w": 490,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/MTcpWqLw/The-Outsiders-2.webp",
+                    "dimensions": {
+                        "w": 490,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/k4kXGLrb/The-Outsiders-3.webp",
+                    "dimensions": {
+                        "w": 477,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "6e68fd24-dfbc-4182-a5bd-e05c54947e49",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 6200,
+                        "fractionDigits": 2
+                    },
+                    "key": "outsiders_regular_price"
+                }
+            ],
+            "key": "book-34-master",
+            "sku": "hinton-outsiders-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-34",
+        "createdAt": "2025-05-15T14:00:52.520Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.999Z"
+    },
+    {
+        "id": "af446922-2464-4598-8f1b-71813aac67cd",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Hitchhiker's Guide to the Galaxy"
+        },
+        "description": {
+            "en": "Arthur Dent is whisked off Earth just before it’s destroyed, and he embarks on a humorous and philosophical space adventure in this classic work of British science fiction."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "ac970d0c-bff9-4301-8fef-7af98adfbd67"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-hitchhikers-guide-to-the-galaxy"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Douglas Adams"
+                },
+                {
+                    "name": "pages",
+                    "value": 2006
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Xvkv2sCM/The-Hitchhiker-s-Guide-to-the-Galaxy-1.webp",
+                    "dimensions": {
+                        "w": 800,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/63HpKTcY/The-Hitchhiker-s-Guide-to-the-Galaxy-2.webp",
+                    "dimensions": {
+                        "w": 610,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/XqmNZhT5/The-Hitchhiker-s-Guide-to-the-Galaxy-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "887d2315-697d-4665-9493-24d7a19457e5",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 99900,
+                        "fractionDigits": 2
+                    },
+                    "key": "hitchhikers_guide_regular_price"
+                }
+            ],
+            "key": "book-44-master",
+            "sku": "adams-hitchhikers-guide-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-44",
+        "createdAt": "2025-05-15T14:00:52.842Z",
+        "lastModifiedAt": "2025-05-27T09:06:24.909Z"
+    },
+    {
+        "id": "725d19f4-ce5a-45ae-9be8-97caed711852",
+        "version": 19,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Picture of Dorian Gray"
+        },
+        "description": {
+            "en": "The story of Dorian Gray, whose portrait ages while he remains youthful, symbolizes his descent into corruption, indulgence, and moral decay."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-picture-of-dorian-gray"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Oscar Wilde"
+                },
+                {
+                    "name": "pages",
+                    "value": 1999
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/D0LfX5FY/The-Picture-of-Dorian-Gray-1.webp",
+                    "dimensions": {
+                        "w": 554,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/2jZSMjvF/The-Picture-of-Dorian-Gray-2.webp",
+                    "dimensions": {
+                        "w": 1000,
+                        "h": 763
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/kXPgmrvr/The-Picture-of-Dorian-Gray-3.webp",
+                    "dimensions": {
+                        "w": 533,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "4719a0c9-47b9-4ec6-9749-ed7ae836bc17",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 99,
+                        "fractionDigits": 2
+                    },
+                    "key": "the_picture_of_dorian_gray_regular_price"
+                }
+            ],
+            "key": "book-16-master",
+            "sku": "wilde-dorian-gray-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-16",
+        "createdAt": "2025-05-15T14:00:52.142Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.608Z"
+    },
+    {
+        "id": "e65ce520-5ba4-487a-ac39-412c5c49b7d4",
+        "version": 13,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "Crime and Punishment"
+        },
+        "description": {
+            "en": "The psychological unraveling of Rodion Raskolnikov, who commits murder and grapples with guilt, moral justification, and redemption in 19th-century St. Petersburg."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "b00796a1-6841-43e8-a5e7-a28aa5978e3b"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "crime-and-punishment"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Fyodor Dostoevsky"
+                },
+                {
+                    "name": "pages",
+                    "value": 2019
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/Tp2sT2CJ/Crime-and-Punishment-1.webp",
+                    "dimensions": {
+                        "w": 106,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/kBjpGrH3/Crime-and-Punishment-2.webp",
+                    "dimensions": {
+                        "w": 121,
+                        "h": 180
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/SnJtzT0X/Crime-and-Punishment-3.webp",
+                    "dimensions": {
+                        "w": 117,
+                        "h": 180
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "9c881fc3-6a25-4bde-bf33-a3136b6c9955",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1900,
+                        "fractionDigits": 2
+                    },
+                    "key": "crime_and_punishment_standard_regular_price"
+                }
+            ],
+            "key": "book-10-master",
+            "sku": "dostoevsky-crime-and-punishment-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-10",
+        "createdAt": "2025-05-15T14:00:51.602Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.635Z"
+    },
+    {
+        "id": "b143a484-ac18-4e31-a18d-0e65b2b2dfc3",
+        "version": 16,
+        "productType": {
+            "typeId": "product-type",
+            "id": "1ac2d933-f91f-469b-970e-3c0e00570427"
+        },
+        "name": {
+            "en": "The Road"
+        },
+        "description": {
+            "en": "A father and son travel through a post-apocalyptic world, struggling to survive amidst the desolation, while holding on to the love and hope that bind them together."
+        },
+        "categories": [
+            {
+                "typeId": "category",
+                "id": "3ae090b9-4b0e-4537-a08d-041d282456f2"
+            },
+            {
+                "typeId": "category",
+                "id": "a13c8819-5ee1-4ad5-ab3e-931b57c15738"
+            }
+        ],
+        "categoryOrderHints": {},
+        "slug": {
+            "en": "the-road"
+        },
+        "variants": [],
+        "masterVariant": {
+            "attributes": [
+                {
+                    "name": "author",
+                    "value": "Cormac McCarthy"
+                },
+                {
+                    "name": "pages",
+                    "value": 2012
+                }
+            ],
+            "assets": [],
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/9FPFXxLD/The-Road-1.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/QdXNFpz0/The-Road-2.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                },
+                {
+                    "url": "https://i.postimg.cc/FHDr3Y5m/The-Road-3.webp",
+                    "dimensions": {
+                        "w": 600,
+                        "h": 800
+                    }
+                }
+            ],
+            "prices": [
+                {
+                    "id": "5535c6be-8879-4f6d-b186-5ea1efbed321",
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 2200,
+                        "fractionDigits": 2
+                    },
+                    "key": "road_regular_price"
+                }
+            ],
+            "key": "book-41-master",
+            "sku": "mccarthy-road-standard",
+            "id": 1
+        },
+        "searchKeywords": {},
+        "attributes": [],
+        "hasStagedChanges": false,
+        "published": true,
+        "key": "book-41",
+        "createdAt": "2025-05-15T14:00:52.841Z",
+        "lastModifiedAt": "2025-05-27T09:06:31.607Z"
+    }
+]
