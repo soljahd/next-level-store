@@ -9,7 +9,7 @@ type ProductSortField = 'name' | 'price';
 type ProductSortDirection = 'asc' | 'desc';
 type ProductSortOption = `${ProductSortField} ${ProductSortDirection}`;
 
-type SearchProductsParameters = {
+export type SearchProductsParameters = {
   limit?: number;
   offset?: number;
   searchQuery?: string;

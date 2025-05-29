@@ -1,33 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ProductCard from './product-card';
-import { searchProducts } from '@/lib/commercetools/catalog';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 
 type ProductsListProps = {
-  categoryId: string | null;
+  products: ProductProjection[];
 };
 
-export default function ProductsList({ categoryId }: ProductsListProps) {
-  const [products, setProducts] = useState<ProductProjection[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const data = await searchProducts({ limit: 50, categoryId: categoryId || undefined });
-        setProducts(data?.results || []);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void fetchProducts();
-  }, [categoryId]);
-
-  if (loading) return <div>Loading...</div>;
+export default function ProductsList({ products }: ProductsListProps) {
   if (products.length === 0) return <div>No products found.</div>;
 
   return (
@@ -39,8 +20,8 @@ export default function ProductsList({ categoryId }: ProductsListProps) {
         const image = product.masterVariant?.images?.[0]?.url || '';
         const pagesAttribute = product.masterVariant?.attributes?.find((attribute) => attribute.name === 'pages');
         const pages = typeof pagesAttribute?.value === 'number' ? pagesAttribute.value : 0;
-        const priceCents = product.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-        const price = (priceCents / 100).toFixed(2);
+        const discountedPriceCents = product.masterVariant?.prices?.[0]?.discounted?.value?.centAmount || 0;
+        const price = (discountedPriceCents / 100).toFixed(2);
         const oldPriceCents = product.masterVariant?.prices?.[0]?.value?.centAmount || 0;
         const oldPrice = (oldPriceCents / 100).toFixed(2);
 

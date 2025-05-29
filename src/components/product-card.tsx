@@ -22,6 +22,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, author, year, p
         padding: 2,
         border: '1px solid #ccc',
         boxSizing: 'border-box',
+        borderRadius: '8px',
+        transition: 'transform 0.3s, box-shadow 0.3s, background-color 0.3s',
+        '&:hover': {
+          transform: 'scale(1.05)',
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
+          backgroundColor: '#f0f0f0',
+        },
+        '&:active': {
+          transform: 'scale(1)',
+        },
       }}
     >
       <Box sx={{ p: 3 }}>
@@ -88,6 +98,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, author, year, p
           width: '60%',
           backgroundColor: 'primary.main',
           color: '#ffffff',
+          '&:hover': {
+            backgroundColor: 'primary.dark',
+          },
         }}
       >
         Add to Cart
