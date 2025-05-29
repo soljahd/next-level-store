@@ -5,9 +5,9 @@ type ProductSearchQueryArguments = NonNullable<
   Parameters<ByProjectKeyProductProjectionsSearchRequestBuilder['get']>[0]
 >['queryArgs'];
 
-type ProductSortField = 'name' | 'price';
-type ProductSortDirection = 'asc' | 'desc';
-type ProductSortOption = `${ProductSortField} ${ProductSortDirection}`;
+// type ProductSortField = 'name.en' | 'price';
+// type ProductSortDirection = 'asc' | 'desc';
+// type ProductSortOption = `${ProductSortField} ${ProductSortDirection}`;
 
 export type SearchProductsParameters = {
   limit?: number;
@@ -15,7 +15,7 @@ export type SearchProductsParameters = {
   searchQuery?: string;
   fuzzy?: boolean;
   fuzzyLevel?: number;
-  sort?: ProductSortOption;
+  sort?: string;
   categoryId?: string;
   authors?: string[];
   yearOfPublication?: {
@@ -93,6 +93,21 @@ export async function searchProducts(parameters: SearchProductsParameters) {
     }
 
     const response = await apiRoot.productProjections().search().get({ queryArgs: queryArguments }).execute();
+
+    return response.body;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(error.message);
+    }
+  }
+}
+
+export async function getAllProducts() {
+  try {
+    const response = await apiRoot
+      .productProjections()
+      .get({ queryArgs: { limit: 100, offset: 0 } })
+      .execute();
 
     return response.body;
   } catch (error) {

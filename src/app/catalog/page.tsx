@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import CatalogPage from '@/components/catalog';
 
 export const metadata: Metadata = {
@@ -33,9 +33,6 @@ export default function Catalog() {
         flex: 1,
       }}
     >
-      <Typography component="h1" variant="h4" align="center">
-        Catalog page
-      </Typography>
       <CatalogPage />
     </Container>
   );

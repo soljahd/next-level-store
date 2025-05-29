@@ -1,7 +1,5 @@
 'use client';
-
-import React from 'react';
-import ProductCard from './product-card';
+import ProductCard from '@/components/product-card';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 
 type ProductsListProps = {
@@ -14,6 +12,7 @@ export default function ProductsList({ products }: ProductsListProps) {
   return (
     <>
       {products.map((product, index) => {
+        const slug = product.slug?.en;
         const title = product.name?.en || '';
         const attribute = product.masterVariant?.attributes?.find((attribute) => attribute.name === 'author');
         const author = typeof attribute?.value === 'string' ? attribute.value : '';
@@ -27,6 +26,7 @@ export default function ProductsList({ products }: ProductsListProps) {
 
         return (
           <ProductCard
+            slug={slug}
             key={index}
             image={image}
             title={title}
