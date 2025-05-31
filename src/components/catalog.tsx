@@ -31,7 +31,6 @@ export default function CatalogPage() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
 
-  const [authorsToShowCount, setAuthorsToShowCount] = useState(6);
   const authorsContainerReference = useRef<HTMLDivElement | null>(null);
 
   const [publicationYearFrom, setPublicationYearFrom] = useState<string>('');
@@ -316,8 +315,6 @@ export default function CatalogPage() {
             authors={uniqueAuthors}
             selectedAuthors={selectedAuthors}
             setSelectedAuthors={setSelectedAuthors}
-            authorsToShowCount={authorsToShowCount}
-            setAuthorsToShowCount={setAuthorsToShowCount}
             authorsContainerReference={authorsContainerReference}
           />
 
