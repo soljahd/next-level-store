@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Button, IconButton, Dialog, DialogContent } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos, Close } from '@mui/icons-material';
 import type { ProductProjection } from '@commercetools/platform-sdk';
@@ -19,7 +18,7 @@ function isNumber(value: unknown): value is number {
   return typeof value === 'number';
 }
 
-const ProductDetails: React.FC<ProductDetailsProps> = ({ product, breadcrumb }) => {
+export default function ProductDetails({ product, breadcrumb }: ProductDetailsProps) {
   const title = product.name?.en || '';
   const description = product.description?.en || '';
   const authorAttribute = product.masterVariant?.attributes?.find((a) => a.name === 'author');
@@ -72,7 +71,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, breadcrumb }) 
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="subtitle2" sx={{ mb: 3, color: 'text.secondary', fontSize: '1rem' }}>
+      <Typography variant="subtitle2" sx={{ mb: 3, color: 'text.secondary', fontSize: '1rem', display: 'none' }}>
         {breadcrumb.join(' / ')} / {title}
       </Typography>
 
@@ -123,6 +122,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, breadcrumb }) 
                   fill
                   style={{ objectFit: 'contain', borderRadius: '8px' }}
                   sizes="(max-width: 768px) 100vw, 460px"
+                  priority
                 />
               </Box>
             ))}
@@ -194,7 +194,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, breadcrumb }) 
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <Typography variant="h5" sx={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'primary.main' }}>
+              <Typography variant="h5" sx={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'red' }}>
                 €{price}
               </Typography>
               {oldPrice && (
@@ -361,6 +361,4 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, breadcrumb }) 
       </Dialog>
     </Box>
   );
-};
-
-export default ProductDetails;
+}

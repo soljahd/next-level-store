@@ -46,10 +46,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ slug, image, title, author, y
       <Stack paddingY={1}>
         <Stack direction="row" gap={1}>
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'red' }}>
-            {price}
+            €{price}
           </Typography>
           <Typography variant="h6" sx={{ textDecoration: 'line-through', color: 'text.secondary' }}>
-            {oldPrice}
+            €{oldPrice}
           </Typography>
         </Stack>
         <Typography variant="h6">{title}</Typography>

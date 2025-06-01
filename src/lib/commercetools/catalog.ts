@@ -71,17 +71,13 @@ export async function searchProducts(parameters: SearchProductsParameters) {
         yearParts.push(parameters.yearOfPublication.max);
       }
       if (yearParts.length > 0) {
-        filters.push(`variants.attributes.yearOfPublication:range (${yearParts.join(' to ')})`);
+        filters.push(`variants.attributes.pages:range (${yearParts.join(' to ')})`);
       }
     }
 
     if (parameters.authors && parameters.authors.length > 0) {
-      if (parameters.authors.length === 1) {
-        filters.push(`variants.attributes.author:"${parameters.authors[0]}"`);
-      } else {
-        const authorFilters = parameters.authors.map((author) => `variants.attributes.author:"${author}"`);
-        filters.push(`(${authorFilters.join(' or ')})`);
-      }
+      const authorValues = parameters.authors.map((author) => `"${author}"`).join(',');
+      filters.push(`variants.attributes.author:${authorValues}`);
     }
 
     if (filters.length > 0) {
@@ -119,7 +115,10 @@ export async function getAllProducts() {
 
 export async function getAllCategories() {
   try {
-    const response = await apiRoot.categories().get().execute();
+    const response = await apiRoot
+      .categories()
+      .get({ queryArgs: { expand: ['parent'], sort: 'orderHint asc' } })
+      .execute();
 
     return response.body;
   } catch (error) {

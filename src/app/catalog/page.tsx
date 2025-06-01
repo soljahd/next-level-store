@@ -31,6 +31,8 @@ export default function Catalog() {
       maxWidth={false}
       sx={{
         flex: 1,
+        paddingX: { xs: 2, md: 8, xl: 20 },
+        paddingY: 2,
       }}
     >
       <CatalogPage />

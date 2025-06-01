@@ -3,7 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   // output: 'export',
   images: {
-    domains: ['i.postimg.cc'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.postimg.cc',
+      },
+    ],
   },
 };
 

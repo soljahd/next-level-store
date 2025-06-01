@@ -17,8 +17,8 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
   const uniqueAuthors = [...new Set(authors)];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" sx={{ mt: 3, alignSelf: 'flex-start', marginLeft: 5 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxWidth: 230, width: '100%' }}>
+      <Typography variant="h6" sx={{ alignSelf: 'flex-start' }}>
         Authors
       </Typography>
       <Box
@@ -26,12 +26,11 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 1,
           maxWidth: 230,
           width: '100%',
           maxHeight: 300,
           overflowY: 'auto',
-          pr: 1,
+          pl: 2,
         }}
       >
         {uniqueAuthors.map((author, index) => (
@@ -39,6 +38,7 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
             key={index}
             control={
               <Checkbox
+                size="small"
                 checked={selectedAuthors.includes(author)}
                 onChange={(event) => {
                   const checked = event.target.checked;
