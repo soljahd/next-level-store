@@ -1,7 +1,20 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { Stack, Box, Typography, Button, Breadcrumbs, Link, type SelectChangeEvent } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
+import { useState, useEffect, Suspense } from 'react';
+import {
+  IconButton,
+  Drawer,
+  Stack,
+  Box,
+  Typography,
+  Button,
+  Breadcrumbs,
+  Link,
+  useTheme,
+  useMediaQuery,
+  type SelectChangeEvent,
+} from '@mui/material';
+import { Home as HomeIcon, Close as CloseIcon, FilterList as FilterListIcon } from '@mui/icons-material';
+import { useSearchParams } from 'next/navigation';
 import { type ProductProjection, type Category } from '@commercetools/platform-sdk';
 import { searchProducts, getAllCategories } from '@/lib/commercetools/catalog';
 import ProductsList from '@/components/product-list';
@@ -18,7 +31,7 @@ type BreadcrumbItem = {
 };
 
 export type FilterOption = {
-  categoryId?: string;
+  categoryId?: string | null;
   authors?: string[];
   yearOfPublication?: {
     min: number;
@@ -30,7 +43,9 @@ export type FilterOption = {
   };
 };
 
-export default function CatalogPage() {
+function Catalog() {
+  const searchParameters = useSearchParams();
+  const searchQuery = searchParameters.get('search') || '';
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [categories, setCategories] = useState<CategoryWithChildren[]>([]);
@@ -38,6 +53,9 @@ export default function CatalogPage() {
   const [filterOption, setFilterOption] = useState<FilterOption>({});
   const [categoryId, setCategoryId] = useState<string | null>(null);
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const buildCategoryPath = (
     categories: CategoryWithChildren[],
@@ -77,16 +95,34 @@ export default function CatalogPage() {
     if (id === 'root') {
       setCategoryId(null);
       setBreadcrumbs([{ id: 'root', name: 'Books' }]);
-      await handleFilterApply({});
+      const data = await searchProducts({
+        limit: 50,
+        offset: 0,
+        searchQuery: searchQuery,
+        sort: sortOption,
+        categoryId: null,
+        authors: filterOption.authors,
+        yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+        priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+      });
+      const products = data?.results;
+      if (products) setProducts(products);
       return;
     }
 
     setCategoryId(id);
-    const newFilterOption = {
+    const data = await searchProducts({
+      limit: 50,
+      offset: 0,
+      searchQuery: searchQuery,
+      sort: sortOption,
       categoryId: id,
-    };
-    setFilterOption(newFilterOption);
-    await handleFilterApply(newFilterOption);
+      authors: filterOption.authors,
+      yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+      priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+    });
+    const products = data?.results;
+    if (products) setProducts(products);
 
     const path = buildCategoryPath(categories, id);
     if (path) {
@@ -99,7 +135,8 @@ export default function CatalogPage() {
       limit: 50,
       offset: 0,
       sort: event.target.value,
-      categoryId: filterOption.categoryId,
+      searchQuery: searchQuery,
+      categoryId: categoryId,
       authors: filterOption.authors,
       yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
       priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
@@ -115,6 +152,7 @@ export default function CatalogPage() {
       limit: 50,
       offset: 0,
       sort: sortOption,
+      searchQuery: searchQuery,
       categoryId: filters.categoryId,
       authors: filters.authors,
       yearOfPublication: { min: filters.yearOfPublication?.min, max: filters.yearOfPublication?.max },
@@ -154,10 +192,18 @@ export default function CatalogPage() {
         const categoryTree = buildTree(allCategories);
         setCategories(categoryTree);
 
-        const data = await searchProducts({ limit: 50, offset: 0, sort: sortOption });
-        if (data) {
-          setProducts(data.results);
-        }
+        const data = await searchProducts({
+          limit: 50,
+          offset: 0,
+          sort: sortOption,
+          searchQuery: searchQuery,
+          categoryId: categoryId,
+          authors: filterOption.authors,
+          yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+          priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+        });
+        const products = data?.results;
+        if (products) setProducts(products);
       } finally {
         setLoading(false);
       }
@@ -165,63 +211,112 @@ export default function CatalogPage() {
     fetchInitialData().catch(() => {
       setLoading(false);
     });
-  }, []);
+  }, [searchQuery]);
 
   if (loading) {
-    return (
-      <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', color: 'primary.main' }}>
-          Loading...
-        </Typography>
-      </Box>
-    );
+    return null;
+    // <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    //   <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', color: 'primary.main' }}>
+    //     Loading...
+    //   </Typography>
+    // </Box>
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-      <FilterForm
-        products={products}
-        categories={categories}
-        categoryId={categoryId}
-        setCategoryId={handleCategorySelect}
-        setFilterOption={setFilterOption}
-        handleFilterApply={handleFilterApply}
-      />
+    <>
+      {searchQuery && (
+        <Typography sx={{ width: '100%', p: 2 }}>Search results for: &quot;{searchQuery}&quot;</Typography>
+      )}
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
+        <Drawer
+          anchor="left"
+          open={mobileFiltersOpen}
+          onClose={() => setMobileFiltersOpen(false)}
+          sx={{
+            '& .MuiDrawer-paper': {
+              width: '100%',
+              p: 2,
+            },
+            display: { xs: 'flex', sm: 'none' },
+            position: 'relative',
+          }}
+        >
+          <IconButton sx={{ position: 'absolute', top: 8, right: 8 }} onClick={() => setMobileFiltersOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+          <FilterForm
+            products={products}
+            categories={categories}
+            categoryId={categoryId}
+            setCategoryId={handleCategorySelect}
+            setFilterOption={setFilterOption}
+            handleFilterApply={async (filters) => {
+              await handleFilterApply(filters);
+              setMobileFiltersOpen(false);
+            }}
+          />
+        </Drawer>
 
-      <Box sx={{ flex: '1 1 75%', minWidth: 300, display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            underline="hover"
-            color={breadcrumbs.length === 1 ? 'text.primary' : 'inherit'}
-            sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-            onClick={() => void handleBreadcrumbClick('root')}
-          >
-            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-            All
-          </Link>
-          {breadcrumbs.slice(1).map((crumb, index) => (
+        {!isMobile && (
+          <FilterForm
+            products={products}
+            categories={categories}
+            categoryId={categoryId}
+            setCategoryId={handleCategorySelect}
+            setFilterOption={setFilterOption}
+            handleFilterApply={handleFilterApply}
+          />
+        )}
+
+        <Box sx={{ flex: '1 1 75%', minWidth: 300, display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Breadcrumbs aria-label="breadcrumb">
             <Link
-              key={crumb.id}
-              underline={index === breadcrumbs.length - 2 ? 'none' : 'hover'}
-              color={index === breadcrumbs.length - 2 ? 'text.primary' : 'inherit'}
-              sx={{ cursor: 'pointer' }}
-              onClick={() => void handleBreadcrumbClick(crumb.id)}
+              underline="hover"
+              color={breadcrumbs.length === 1 ? 'text.primary' : 'inherit'}
+              sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => void handleBreadcrumbClick('root')}
             >
-              {crumb.name}
+              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              All
             </Link>
-          ))}
-        </Breadcrumbs>
+            {breadcrumbs.slice(1).map((crumb, index) => (
+              <Link
+                key={crumb.id}
+                underline={index === breadcrumbs.length - 2 ? 'none' : 'hover'}
+                color={index === breadcrumbs.length - 2 ? 'text.primary' : 'inherit'}
+                sx={{ cursor: 'pointer' }}
+                onClick={() => void handleBreadcrumbClick(crumb.id)}
+              >
+                {crumb.name}
+              </Link>
+            ))}
+          </Breadcrumbs>
 
-        <Stack direction="row" gap={2} sx={{ justifyContent: { xs: 'space-around', sm: 'start' } }}>
-          <SortSelect sortOption={sortOption} handleSortChange={handleSortChange} />
-          <Button variant="outlined" fullWidth sx={{ flex: 1, maxWidth: 160, display: { xs: 'block', sm: 'none' } }}>
-            Filters
-          </Button>
-        </Stack>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5 }}>
-          <ProductsList products={products} />
+          <Stack direction="row" gap={2} sx={{ justifyContent: { xs: 'space-around', sm: 'start' } }}>
+            <SortSelect sortOption={sortOption} handleSortChange={handleSortChange} />
+            <Button
+              variant="outlined"
+              startIcon={<FilterListIcon />}
+              fullWidth
+              sx={{ flex: 1, maxWidth: 160, display: { xs: 'inline-flex', sm: 'none' } }}
+              onClick={() => setMobileFiltersOpen(true)}
+            >
+              Filters
+            </Button>
+          </Stack>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5 }}>
+            <ProductsList products={products} />
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </>
+  );
+}
+
+export default function CatalogPage() {
+  return (
+    <Suspense>
+      <Catalog />
+    </Suspense>
   );
 }

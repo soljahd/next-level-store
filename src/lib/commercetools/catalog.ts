@@ -16,7 +16,7 @@ export type SearchProductsParameters = {
   fuzzy?: boolean;
   fuzzyLevel?: number;
   sort?: string;
-  categoryId?: string;
+  categoryId?: string | null;
   authors?: string[];
   yearOfPublication?: {
     min?: number;

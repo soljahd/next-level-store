@@ -2,6 +2,7 @@
 import { useState, useRef, type Dispatch, type SetStateAction } from 'react';
 import { Divider, Box, Button } from '@mui/material';
 import { type ProductProjection } from '@commercetools/platform-sdk';
+import { useRouter } from 'next/navigation';
 import YearPriceFilters from '@/components/years-price-filter';
 import AuthorFilter from '@/components/author-filters';
 import CategoryList from '@/components/categories-list';
@@ -24,6 +25,7 @@ export default function FilterForm({
   setFilterOption,
   handleFilterApply,
 }: FilterFormProps) {
+  const router = useRouter();
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const authorsContainerReference = useRef<HTMLDivElement | null>(null);
   const [publicationYearFrom, setPublicationYearFrom] = useState<string>('');
@@ -47,6 +49,15 @@ export default function FilterForm({
 
     const newFilterOption = {
       categoryId: categoryId,
+      authors: selectedAuthors ?? undefined,
+      yearOfPublication: {
+        min: publicationYearFrom ? Number(publicationYearFrom) : 0,
+        max: publicationYearTo ? Number(publicationYearTo) : 3000,
+      },
+      priceRange: {
+        min: priceFrom ? Number(priceFrom) * 100 : 0,
+        max: priceTo ? Number(priceTo) * 100 : 100_000,
+      },
     };
 
     setFilterOption(newFilterOption);
@@ -55,6 +66,7 @@ export default function FilterForm({
 
   const handleApplyButton = async () => {
     const newFilterOption = {
+      categoryId: categoryId,
       authors: selectedAuthors ?? undefined,
       yearOfPublication: {
         min: publicationYearFrom ? Number(publicationYearFrom) : 0,
@@ -78,6 +90,7 @@ export default function FilterForm({
     setPriceFrom('');
     setPriceTo('');
     setFilterOption({});
+    router.replace('/catalog');
     await handleFilterApply({});
   };
 
@@ -86,7 +99,7 @@ export default function FilterForm({
       sx={{
         flex: '1 1 25%',
         minWidth: 250,
-        display: { xs: 'none', sm: 'flex' },
+        display: 'flex',
         flexDirection: 'column',
         gap: 2,
         alignItems: 'center',
