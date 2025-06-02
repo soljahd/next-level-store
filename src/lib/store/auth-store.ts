@@ -52,9 +52,9 @@ export const useAuthStore = create(
         authStateStorage.removeItem('auth-storage');
       },
       // updateProfileState: (newData: Partial<LoginFormData>) => {
-      //   set((prev) => ({
-      //     ...prev,
-      //     user: prev.user ? { ...prev.user, ...newData } : { ...(newData as LoginFormData) },
+      //   set((previous) => ({
+      //     ...previous,
+      //     user: previous.user ? { ...previous.user, ...newData } : { ...(newData as LoginFormData) },
       //   }));
       // },
     }),

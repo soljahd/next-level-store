@@ -21,9 +21,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction, useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { enqueueSnackbar } from 'notistack';
 
 type EditAddressProps = {
   isNewAddress: boolean;
@@ -39,23 +39,33 @@ export default function EditAddress(props: EditAddressProps) {
   const [isShippingDefault, setShippingDefault] = useState<boolean>(false);
   const [isBillingDefault, setBillingDefault] = useState<boolean>(false);
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
   const {
     control,
     setValue,
-    // register,
+    register,
     handleSubmit,
-    // watch,
-    // reset,
     formState: { errors },
   } = useForm<addressEditFormData>({
     resolver: zodResolver(addressEditScheme),
     shouldUnregister: true,
     mode: 'onSubmit',
     defaultValues: {
-      //   country: '',
-      //   city: '',
-      //   streetName: '',
-      //   postalCode: '',
+      country: '',
+      city: '',
+      streetName: '',
+      postalCode: '',
       isShippingDefault: false,
       isBillingDefault: false,
     },
@@ -80,7 +90,7 @@ export default function EditAddress(props: EditAddressProps) {
       setEditingMode(null);
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Ошибка формы адреса:', error.message);
+        setErrorMessage(error.message);
       }
     }
   };
@@ -123,7 +133,7 @@ export default function EditAddress(props: EditAddressProps) {
   return (
     <Stack
       component="form"
-      onSubmit={() => handleSubmit(onSubmit)}
+      onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       noValidate
       autoComplete="off"
       gap={3}
@@ -135,6 +145,7 @@ export default function EditAddress(props: EditAddressProps) {
       <FormControl fullWidth>
         <InputLabel id="select-chips-label">Address option</InputLabel>
         <Select
+          {...register('addressType')}
           multiple
           value={selectedValues}
           onChange={handleAddressType}
@@ -196,13 +207,11 @@ export default function EditAddress(props: EditAddressProps) {
           <FormControlLabel
             control={
               <Switch
-                checked={field.value}
-                {...control.register('isShippingDefault')}
+                checked={field.value || false}
                 onChange={(event) => {
                   field.onChange(event.target.checked);
                   handleDefaultChange('shipping');
                 }}
-                required={false}
               />
             }
             label="Use as shipping default"
@@ -218,13 +227,11 @@ export default function EditAddress(props: EditAddressProps) {
           <FormControlLabel
             control={
               <Switch
-                checked={field.value}
-                {...control.register('isBillingDefault')}
+                checked={field.value || false}
                 onChange={(event) => {
                   field.onChange(event.target.checked);
                   handleDefaultChange('billing');
                 }}
-                required={false}
               />
             }
             label="Use as billing default"

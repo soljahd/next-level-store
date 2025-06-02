@@ -11,18 +11,30 @@ import EditProfile from './edit-profile';
 import EditAddress from './edit-address';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { useRouter } from 'next/navigation';
+import { enqueueSnackbar } from 'notistack';
 
 export default function Profile() {
   const [editingMode, setEditingMode] = useState<string | null>(null);
   const [profileState, setProfileState] = useState<Customer | null>(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
   const { isLoggedIn } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.replace('/main');
+      router.replace('/login');
     }
   }, [isLoggedIn, router]);
 
@@ -36,17 +48,24 @@ export default function Profile() {
         setProfileState(data);
       } catch (error) {
         if (error instanceof Error) {
-          // setError(err.message);
-        } else {
-          // setError('Ошибка загрузки данных');
+          setErrorMessage(error.message);
         }
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     };
-
-    void fetchProfile();
+    fetchProfile().catch(() => {
+      setLoading(false);
+    });
   }, []);
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
+  if (loading) {
+    return null;
+  }
 
   if (
     !profileState ||

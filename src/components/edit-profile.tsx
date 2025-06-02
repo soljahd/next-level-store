@@ -10,7 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { updateMyProfile } from '@/lib/commercetools/profile';
 import { useAuthStore } from '@/lib/store/auth-store';
 import type { Customer } from '@commercetools/platform-sdk';
-import type { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+import { enqueueSnackbar } from 'notistack';
 
 type EditProfileProps = {
   setProfileState: Dispatch<SetStateAction<Customer | null>>;
@@ -20,11 +21,22 @@ type EditProfileProps = {
 export default function EditProfile(props: EditProfileProps) {
   const { setProfileState, setEditingMode } = props;
   const { setLoginState, user } = useAuthStore();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
   const {
     control,
     register,
     handleSubmit,
-    // watch,
     formState: { errors },
   } = useForm<profileEditFormData>({
     resolver: zodResolver(profileEditScheme),
@@ -51,7 +63,7 @@ export default function EditProfile(props: EditProfileProps) {
       setEditingMode(null);
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Ошибка обновления профиля:', error.message);
+        setErrorMessage(error.message);
       }
     }
   };
@@ -59,7 +71,7 @@ export default function EditProfile(props: EditProfileProps) {
   return (
     <Stack
       component="form"
-      onSubmit={() => handleSubmit(onSubmit)}
+      onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       noValidate
       autoComplete="off"
       gap={3}
