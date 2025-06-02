@@ -1,8 +1,9 @@
-// import { deleteMyAddress } from '@/lib/commercetools/profile';
+import { deleteMyAddress } from '@/lib/commercetools/profile';
 import type { Customer } from '@commercetools/platform-sdk';
 import { Delete, Edit } from '@mui/icons-material';
 import { Chip, IconButton, Paper, Stack, Typography } from '@mui/material';
-import type { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction, useState, useEffect } from 'react';
+import { enqueueSnackbar } from 'notistack';
 
 type UserAddressProps = {
   addressId: string;
@@ -29,9 +30,35 @@ export default function UserAddress(props: UserAddressProps) {
     isBilling,
     isShippingDefault,
     isBillingDefault,
-    // setProfileState,
+    setProfileState,
     setEditingMode,
   } = props;
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  const deleteButtonHandler = async () => {
+    try {
+      const response = await deleteMyAddress(addressId);
+      if (!response) {
+        throw new Error('Ошибка удаления адреса');
+      }
+      setProfileState(response);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
 
   const fullCountryName = country === 'BY' ? 'Belarus' : 'Russia';
 
@@ -72,19 +99,7 @@ export default function UserAddress(props: UserAddressProps) {
         <Edit />
       </IconButton>
       <IconButton
-        // onClick={async () => {
-        //   try {
-        //     const response = await deleteMyAddress(addressId);
-        //     if (!response) {
-        //       throw new Error('Ошибка удаления адреса');
-        //     }
-        //     setProfileState(response);
-        //   } catch (error) {
-        //     if (error instanceof Error) {
-        //       console.error('Ошибка удаления адреса', error.message);
-        //     }
-        //   }
-        // }}
+        onClick={() => void deleteButtonHandler()}
         color="primary"
         aria-label="delete user address"
         sx={{
