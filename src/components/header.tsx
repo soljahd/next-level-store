@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  IconButton,
   AppBar,
   Toolbar,
   Button,
@@ -25,8 +26,9 @@ import {
 } from '@mui/icons-material';
 import Link from 'next/link';
 import IconButtonLink from '@/components/icon-button-link';
-import MenuLink from './menu-link';
+import MenuLink from '@/components/menu-link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';
 
 const CustomMenuItem = styled(MenuItem)({
@@ -43,6 +45,16 @@ const CustomMenuItem = styled(MenuItem)({
 
 export default function Header() {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/catalog?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
   const open = Boolean(anchorElement);
   const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElement(event.currentTarget);
@@ -83,13 +95,20 @@ export default function Header() {
           <IconButtonLink href="/catalog" icon={<MenuIcon sx={{ width: 28, height: 28 }} />} text="Catalog" />
 
           <TextField
+            component="form"
+            onSubmit={handleSearch}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search products..."
             variant="outlined"
             size="small"
             slotProps={{
               input: {
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Search />
+                    <IconButton type="submit" edge="end">
+                      <Search />
+                    </IconButton>
                   </InputAdornment>
                 ),
               },

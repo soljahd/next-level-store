@@ -1,5 +1,3 @@
-// YearPriceFilters.tsx
-import React from 'react';
 import { TextField, Box, Typography } from '@mui/material';
 
 type YearPriceFiltersProps = {
@@ -11,10 +9,9 @@ type YearPriceFiltersProps = {
   priceTo: string;
   setPriceFrom: (value: string) => void;
   setPriceTo: (value: string) => void;
-  handleKeyPress: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
-const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
+export default function YearPriceFilters({
   publicationYearFrom,
   publicationYearTo,
   setPublicationYearFrom,
@@ -23,10 +20,9 @@ const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
   priceTo,
   setPriceFrom,
   setPriceTo,
-  handleKeyPress,
-}) => {
+}: YearPriceFiltersProps) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       <Typography variant="h6" sx={{ alignSelf: 'flex-start' }}>
         Publication Year
       </Typography>
@@ -37,7 +33,11 @@ const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
           type="number"
           value={publicationYearFrom}
           onChange={(event) => setPublicationYearFrom(event.target.value)}
-          onKeyDown={handleKeyPress}
+          slotProps={{
+            htmlInput: {
+              min: 0,
+            },
+          }}
         />
         <Typography>-</Typography>
         <TextField
@@ -46,7 +46,11 @@ const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
           type="number"
           value={publicationYearTo}
           onChange={(event) => setPublicationYearTo(event.target.value)}
-          onKeyDown={handleKeyPress}
+          slotProps={{
+            htmlInput: {
+              min: 0,
+            },
+          }}
         />
       </Box>
 
@@ -60,6 +64,11 @@ const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
           type="number"
           value={priceFrom}
           onChange={(event) => setPriceFrom(event.target.value)}
+          slotProps={{
+            htmlInput: {
+              min: 0,
+            },
+          }}
         />
         <Typography>-</Typography>
         <TextField
@@ -68,10 +77,13 @@ const YearPriceFilters: React.FC<YearPriceFiltersProps> = ({
           type="number"
           value={priceTo}
           onChange={(event) => setPriceTo(event.target.value)}
+          slotProps={{
+            htmlInput: {
+              min: 0,
+            },
+          }}
         />
       </Box>
     </Box>
   );
-};
-
-export default YearPriceFilters;
+}

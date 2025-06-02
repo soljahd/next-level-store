@@ -1,30 +1,24 @@
-import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Select, MenuItem, FormControl } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 
 type SortSelectProps = {
-  popularOption: string;
-  handlePopularChange: (event: SelectChangeEvent) => void;
+  sortOption: string;
+  handleSortChange: (event: SelectChangeEvent) => Promise<void>;
 };
 
-const SortSelect: React.FC<SortSelectProps> = ({ popularOption, handlePopularChange }) => {
+const SortSelect = ({ sortOption, handleSortChange }: SortSelectProps) => {
   return (
-    <FormControl sx={{ width: 200 }}>
-      <InputLabel id="popular-label">Books</InputLabel>
+    <FormControl sx={{ width: 160 }}>
       <Select
-        labelId="popular-label"
-        value={popularOption}
-        onChange={handlePopularChange}
-        label="Books"
-        sx={{ border: 'none', boxShadow: 'none' }}
+        variant="standard"
+        value={sortOption}
+        onChange={(event) => void handleSortChange(event)}
         MenuProps={{ disableScrollLock: true }}
       >
-        <MenuItem value="all"></MenuItem>
-        <MenuItem value="alphabetical">Alphabetical (A-Z)</MenuItem>
-        <MenuItem value="alphabeticalReverse">Alphabetical (Z-A)</MenuItem>
-        <MenuItem value="highToLow">Price: High to Low</MenuItem>
-        <MenuItem value="lowToHigh">Price: Low to High</MenuItem>
-        <MenuItem value="bestSellers">Best Sellers</MenuItem>
+        <MenuItem value="name.en asc">Sort by name (A-Z)</MenuItem>
+        <MenuItem value="name.en desc">Sort by name (Z-A)</MenuItem>
+        <MenuItem value="price asc">Price: Low to High</MenuItem>
+        <MenuItem value="price desc">Price: High to Low</MenuItem>
       </Select>
     </FormControl>
   );

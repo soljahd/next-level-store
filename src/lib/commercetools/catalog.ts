@@ -5,9 +5,9 @@ type ProductSearchQueryArguments = NonNullable<
   Parameters<ByProjectKeyProductProjectionsSearchRequestBuilder['get']>[0]
 >['queryArgs'];
 
-type ProductSortField = 'name' | 'price';
-type ProductSortDirection = 'asc' | 'desc';
-type ProductSortOption = `${ProductSortField} ${ProductSortDirection}`;
+// type ProductSortField = 'name.en' | 'price';
+// type ProductSortDirection = 'asc' | 'desc';
+// type ProductSortOption = `${ProductSortField} ${ProductSortDirection}`;
 
 export type SearchProductsParameters = {
   limit?: number;
@@ -15,8 +15,8 @@ export type SearchProductsParameters = {
   searchQuery?: string;
   fuzzy?: boolean;
   fuzzyLevel?: number;
-  sort?: ProductSortOption;
-  categoryId?: string;
+  sort?: string;
+  categoryId?: string | null;
   authors?: string[];
   yearOfPublication?: {
     min?: number;
@@ -71,17 +71,13 @@ export async function searchProducts(parameters: SearchProductsParameters) {
         yearParts.push(parameters.yearOfPublication.max);
       }
       if (yearParts.length > 0) {
-        filters.push(`variants.attributes.yearOfPublication:range (${yearParts.join(' to ')})`);
+        filters.push(`variants.attributes.pages:range (${yearParts.join(' to ')})`);
       }
     }
 
     if (parameters.authors && parameters.authors.length > 0) {
-      if (parameters.authors.length === 1) {
-        filters.push(`variants.attributes.author:"${parameters.authors[0]}"`);
-      } else {
-        const authorFilters = parameters.authors.map((author) => `variants.attributes.author:"${author}"`);
-        filters.push(`(${authorFilters.join(' or ')})`);
-      }
+      const authorValues = parameters.authors.map((author) => `"${author}"`).join(',');
+      filters.push(`variants.attributes.author:${authorValues}`);
     }
 
     if (filters.length > 0) {
@@ -102,9 +98,27 @@ export async function searchProducts(parameters: SearchProductsParameters) {
   }
 }
 
+export async function getAllProducts() {
+  try {
+    const response = await apiRoot
+      .productProjections()
+      .get({ queryArgs: { limit: 100, offset: 0 } })
+      .execute();
+
+    return response.body;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(error.message);
+    }
+  }
+}
+
 export async function getAllCategories() {
   try {
-    const response = await apiRoot.categories().get().execute();
+    const response = await apiRoot
+      .categories()
+      .get({ queryArgs: { expand: ['parent'], sort: 'orderHint asc' } })
+      .execute();
 
     return response.body;
   } catch (error) {

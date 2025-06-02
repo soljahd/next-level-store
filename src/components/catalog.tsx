@@ -1,110 +1,209 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import { Box, Typography, Button, TextField, InputAdornment } from '@mui/material';
-import { Search } from '@mui/icons-material';
+import { useState, useEffect, Suspense } from 'react';
+import {
+  IconButton,
+  Drawer,
+  Stack,
+  Box,
+  Typography,
+  Button,
+  Breadcrumbs,
+  Link,
+  useTheme,
+  useMediaQuery,
+  type SelectChangeEvent,
+} from '@mui/material';
+import { Home as HomeIcon, Close as CloseIcon, FilterList as FilterListIcon } from '@mui/icons-material';
+import { useSearchParams } from 'next/navigation';
+import { type ProductProjection, type Category } from '@commercetools/platform-sdk';
 import { searchProducts, getAllCategories } from '@/lib/commercetools/catalog';
-import type { SearchProductsParameters } from '@/lib/commercetools/catalog';
-import type { SelectChangeEvent } from '@mui/material';
-import type { ProductProjectionPagedSearchResponse, ProductProjection } from '@commercetools/platform-sdk';
-import ProductsList from './product-list';
-import YearPriceFilters from './years-price-filter';
-import SortSelect from './sort-select';
-import AuthorFilter from './author-filters';
+import ProductsList from '@/components/product-list';
+import SortSelect from '@/components/sort-select';
+import FilterForm from '@/components/filters-form';
 
-type Category = { id: string; name: string };
+export type CategoryWithChildren = {
+  children?: CategoryWithChildren[];
+} & Category;
 
-type SearchParameters = {
-  limit?: number;
-  categoryId?: string;
-  authors?: string[];
-  publicationYearFrom?: number;
-  publicationYearTo?: number;
-  priceFrom?: number;
-  priceTo?: number;
-  name?: string;
+type BreadcrumbItem = {
+  id: string;
+  name: string;
 };
 
-export default function CatalogPage() {
-  const [products, setProducts] = useState<ProductProjection[]>([]);
+export type FilterOption = {
+  categoryId?: string | null;
+  authors?: string[];
+  yearOfPublication?: {
+    min: number;
+    max: number;
+  };
+  priceRange?: {
+    min: number;
+    max: number;
+  };
+};
+
+function Catalog() {
+  const searchParameters = useSearchParams();
+  const searchQuery = searchParameters.get('search') || '';
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [popularOption, setPopularOption] = useState<string>('all');
-  const [breadcrumb, setBreadcrumb] = useState<string[]>(['Books']);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
+  const [products, setProducts] = useState<ProductProjection[]>([]);
+  const [categories, setCategories] = useState<CategoryWithChildren[]>([]);
+  const [sortOption, setSortOption] = useState<string>('name.en asc');
+  const [filterOption, setFilterOption] = useState<FilterOption>({});
+  const [categoryId, setCategoryId] = useState<string | null>(null);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [authorsToShowCount, setAuthorsToShowCount] = useState(6);
-  const authorsContainerReference = useRef<HTMLDivElement | null>(null);
+  const buildCategoryPath = (
+    categories: CategoryWithChildren[],
+    targetId: string,
+    path: BreadcrumbItem[] = [{ id: 'root', name: 'Books' }],
+  ): BreadcrumbItem[] | null => {
+    for (const category of categories) {
+      const currentPath = [...path, { id: category.id, name: category.name?.en || 'Untitled' }];
 
-  const [publicationYearFrom, setPublicationYearFrom] = useState<string>('');
-  const [publicationYearTo, setPublicationYearTo] = useState<string>('');
-
-  const [priceFrom, setPriceFrom] = useState<string>('');
-  const [priceTo, setPriceTo] = useState<string>('');
-
-  const [searchText, setSearchText] = useState('');
-
-  const [appliedFilters, setAppliedFilters] = useState<{
-    publicationYearFrom?: number;
-    publicationYearTo?: number;
-    priceFrom?: number;
-    priceTo?: number;
-  }>({});
-
-  const [randomBooks, setRandomBooks] = useState<ProductProjection[]>([]);
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
-  };
-
-  const handleSearchKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      void applySearchFilter();
-    }
-  };
-
-  const applySearchFilter = async () => {
-    setLoading(true);
-    try {
-      const searchParameters: SearchProductsParameters = {
-        limit: 50,
-        searchQuery: searchText.trim(),
-      };
-
-      const data = await searchProducts(searchParameters);
-
-      if (data && data.results) {
-        const filteredProducts = data.results.filter((product) => {
-          return product.name.en.toLowerCase().includes(searchText.toLowerCase());
-        });
-
-        setProducts(filteredProducts);
-      } else {
-        setProducts([]);
+      if (category.id === targetId) {
+        return currentPath;
       }
-    } finally {
-      setLoading(false);
+
+      if (category.children?.length) {
+        const foundPath = buildCategoryPath(category.children, targetId, currentPath);
+        if (foundPath) return foundPath;
+      }
     }
+    return null;
+  };
+
+  const handleCategorySelect = (id: string | null) => {
+    setCategoryId(id);
+
+    if (!id) {
+      setBreadcrumbs([{ id: 'root', name: 'Home' }]);
+      return;
+    }
+
+    const path = buildCategoryPath(categories, id);
+    if (path) {
+      setBreadcrumbs(path);
+    }
+  };
+
+  const handleBreadcrumbClick = async (id: string) => {
+    if (id === 'root') {
+      setCategoryId(null);
+      setBreadcrumbs([{ id: 'root', name: 'Books' }]);
+      const data = await searchProducts({
+        limit: 50,
+        offset: 0,
+        searchQuery: searchQuery,
+        sort: sortOption,
+        categoryId: null,
+        authors: filterOption.authors,
+        yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+        priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+      });
+      const products = data?.results;
+      if (products) setProducts(products);
+      return;
+    }
+
+    setCategoryId(id);
+    const data = await searchProducts({
+      limit: 50,
+      offset: 0,
+      searchQuery: searchQuery,
+      sort: sortOption,
+      categoryId: id,
+      authors: filterOption.authors,
+      yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+      priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+    });
+    const products = data?.results;
+    if (products) setProducts(products);
+
+    const path = buildCategoryPath(categories, id);
+    if (path) {
+      setBreadcrumbs(path);
+    }
+  };
+
+  const handleSortChange = async (event: SelectChangeEvent) => {
+    const data = await searchProducts({
+      limit: 50,
+      offset: 0,
+      sort: event.target.value,
+      searchQuery: searchQuery,
+      categoryId: categoryId,
+      authors: filterOption.authors,
+      yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+      priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+    });
+    const products = data?.results;
+    if (products) setProducts(products);
+
+    setSortOption(event.target.value);
+  };
+
+  const handleFilterApply = async (filters: FilterOption) => {
+    const data = await searchProducts({
+      limit: 50,
+      offset: 0,
+      sort: sortOption,
+      searchQuery: searchQuery,
+      categoryId: filters.categoryId,
+      authors: filters.authors,
+      yearOfPublication: { min: filters.yearOfPublication?.min, max: filters.yearOfPublication?.max },
+      priceRange: { min: filters.priceRange?.min, max: filters.priceRange?.max },
+    });
+    const products = data?.results;
+    if (products) setProducts(products);
   };
 
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
         const categoriesResponse = await getAllCategories();
-        if (categoriesResponse && categoriesResponse.results) {
-          const cats = categoriesResponse.results.map((cat) => ({
-            id: cat.id,
-            name: cat.name?.en || cat.id,
-          }));
-          setCategories(cats);
-        }
+        if (!categoriesResponse) return;
+        const allCategories = [...categoriesResponse.results];
 
-        const searchParameters: SearchParameters = { limit: 50 };
-        const data: ProductProjectionPagedSearchResponse | undefined = await searchProducts(searchParameters);
-        if (data) {
-          setProducts(data.results);
-        }
+        const buildTree = (categories: Category[]) => {
+          const map = new Map<string, Category & { children: Category[] }>();
+          const tree: Category[] = [];
+
+          categories.forEach((category) => {
+            map.set(category.id, { ...category, children: [] });
+          });
+
+          map.forEach((category) => {
+            const parentId = category.parent?.obj?.id || category.parent?.id;
+            if (parentId) {
+              map.get(parentId)?.children.push(category);
+            } else {
+              tree.push(category);
+            }
+          });
+
+          return tree;
+        };
+
+        const categoryTree = buildTree(allCategories);
+        setCategories(categoryTree);
+
+        const data = await searchProducts({
+          limit: 50,
+          offset: 0,
+          sort: sortOption,
+          searchQuery: searchQuery,
+          categoryId: categoryId,
+          authors: filterOption.authors,
+          yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
+          priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+        });
+        const products = data?.results;
+        if (products) setProducts(products);
       } finally {
         setLoading(false);
       }
@@ -112,385 +211,112 @@ export default function CatalogPage() {
     fetchInitialData().catch(() => {
       setLoading(false);
     });
-  }, []);
-
-  useEffect(() => {
-    const fetchFilteredProducts = async () => {
-      setLoading(true);
-      try {
-        const searchParameters: SearchParameters = {
-          limit: 50,
-          categoryId: selectedCategoryId || undefined,
-          authors: selectedAuthors.length > 0 ? selectedAuthors : undefined,
-        };
-
-        const data = await searchProducts(searchParameters);
-        if (data) {
-          let filtered = data.results;
-
-          if (appliedFilters.publicationYearFrom !== undefined) {
-            filtered = filtered.filter((product) => {
-              const pagesAttribute = product.masterVariant?.attributes?.find((a) => a.name === 'pages');
-              let pagesValue: number | undefined;
-
-              if (pagesAttribute) {
-                if (typeof pagesAttribute.value === 'number') {
-                  pagesValue = pagesAttribute.value;
-                } else if (typeof pagesAttribute.value === 'string') {
-                  const parsed = Number.parseInt(pagesAttribute.value, 10);
-                  pagesValue = Number.isNaN(parsed) ? undefined : parsed;
-                }
-              }
-
-              return pagesValue !== undefined && pagesValue >= appliedFilters.publicationYearFrom!;
-            });
-          }
-
-          if (appliedFilters.publicationYearTo !== undefined) {
-            const yearTo = appliedFilters.publicationYearTo;
-            filtered = filtered.filter((product) => {
-              const pagesAttribute = product.masterVariant?.attributes?.find((a) => a.name === 'pages');
-
-              let pagesValue: number | undefined;
-
-              if (pagesAttribute) {
-                if (typeof pagesAttribute.value === 'number') {
-                  pagesValue = pagesAttribute.value;
-                } else if (typeof pagesAttribute.value === 'string') {
-                  const parsed = Number.parseInt(pagesAttribute.value, 10);
-                  if (!Number.isNaN(parsed)) {
-                    pagesValue = parsed;
-                  }
-                }
-              }
-
-              return pagesValue !== undefined && pagesValue <= yearTo;
-            });
-          }
-
-          if (appliedFilters.priceFrom !== undefined) {
-            filtered = filtered.filter((product) => {
-              const priceCents = product.masterVariant?.prices?.[0]?.value?.centAmount;
-              return typeof priceCents === 'number' && priceCents >= appliedFilters.priceFrom! * 100;
-            });
-          }
-
-          if (appliedFilters.priceTo !== undefined) {
-            filtered = filtered.filter((product) => {
-              const priceCents = product.masterVariant?.prices?.[0]?.value?.centAmount;
-              return typeof priceCents === 'number' && priceCents <= appliedFilters.priceTo! * 100;
-            });
-          }
-
-          setProducts(filtered);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFilteredProducts().catch(() => setLoading(false));
-  }, [selectedAuthors, selectedCategoryId, appliedFilters]);
-
-  useEffect(() => {
-    const updateRandomBooks = () => {
-      if (popularOption === 'bestSellers' && randomBooks.length === 0) {
-        const newRandomBooks = products.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-        setRandomBooks(newRandomBooks);
-      }
-    };
-
-    updateRandomBooks();
-
-    const intervalId = setInterval(
-      () => {
-        if (popularOption === 'bestSellers') {
-          const newRandomBooks = products.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-          setRandomBooks(newRandomBooks);
-        }
-      },
-      60 * 60 * 1000,
-    );
-
-    return () => clearInterval(intervalId);
-  }, [popularOption, products, randomBooks.length]);
-
-  useEffect(() => {
-    const sortedProducts = [...products];
-
-    if (popularOption === 'highToLow') {
-      sortedProducts.sort((a, b) => {
-        const priceA = a.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-        const priceB = b.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-        return priceB - priceA;
-      });
-    }
-
-    if (popularOption === 'lowToHigh') {
-      sortedProducts.sort((a, b) => {
-        const priceA = a.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-        const priceB = b.masterVariant?.prices?.[0]?.value?.centAmount || 0;
-        return priceA - priceB;
-      });
-    }
-
-    if (popularOption === 'alphabetical') {
-      sortedProducts.sort((a, b) => {
-        const nameA = a.name?.en.toLowerCase() || '';
-        const nameB = b.name?.en.toLowerCase() || '';
-        return nameA.localeCompare(nameB);
-      });
-    }
-
-    if (popularOption === 'alphabeticalReverse') {
-      sortedProducts.sort((a, b) => {
-        const nameA = a.name?.en.toLowerCase() || '';
-        const nameB = b.name?.en.toLowerCase() || '';
-        return nameB.localeCompare(nameA);
-      });
-    }
-
-    if (JSON.stringify(sortedProducts) !== JSON.stringify(products)) {
-      setProducts(sortedProducts);
-    }
-  }, [popularOption, products]);
-
-  const handlePopularChange = (event: SelectChangeEvent) => {
-    setPopularOption(event.target.value);
-  };
-
-  const handleCategoryClick = (category: Category) => {
-    setSelectedCategoryId(category.id);
-
-    if (category.name === 'Fiction') {
-      setBreadcrumb(['Books', 'Fiction']);
-    } else {
-      setBreadcrumb(['Books', 'Fiction', category.name]);
-    }
-  };
-
-  const handleBreadcrumbClick = (index: number) => {
-    const newBreadcrumb = breadcrumb.slice(0, index + 1);
-
-    setBreadcrumb(newBreadcrumb);
-
-    if (newBreadcrumb.length === 1 && newBreadcrumb[0] === 'Books') {
-      setSelectedCategoryId(null);
-    } else if (newBreadcrumb.length === 2 && newBreadcrumb[1] === 'Fiction') {
-      const fictionCategory = categories.find((cat) => cat.name === 'Fiction');
-      setSelectedCategoryId(fictionCategory ? fictionCategory.id : null);
-    } else if (newBreadcrumb.length === 3) {
-      const subCategoryName = newBreadcrumb[2];
-      const subCategory = categories.find((cat) => cat.name === subCategoryName);
-      setSelectedCategoryId(subCategory ? subCategory.id : null);
-    } else {
-      setSelectedCategoryId(null);
-    }
-  };
-
-  const uniqueAuthors = [
-    ...new Set(
-      products
-        .map((product) => {
-          const authorAttribute = product.masterVariant?.attributes?.find((attribute) => attribute.name === 'author');
-          return typeof authorAttribute?.value === 'string' ? authorAttribute.value : '';
-        })
-        .filter((author) => author !== ''),
-    ),
-  ];
-
-  const applyFilters = () => {
-    setAppliedFilters({
-      publicationYearFrom: publicationYearFrom ? Number(publicationYearFrom) : undefined,
-      publicationYearTo: publicationYearTo ? Number(publicationYearTo) : undefined,
-      priceFrom: priceFrom ? Number(priceFrom) : undefined,
-      priceTo: priceTo ? Number(priceTo) : undefined,
-    });
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
-      applyFilters();
-    }
-  };
-
-  const handleResetFilters = () => {
-    setSelectedAuthors([]);
-    setSelectedCategoryId(null);
-    setPublicationYearFrom('');
-    setPublicationYearTo('');
-    setPriceFrom('');
-    setPriceTo('');
-    setAppliedFilters({});
-  };
+  }, [searchQuery]);
 
   if (loading) {
-    return (
-      <Box
-        sx={{
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            color: 'primary.main',
-          }}
-        >
-          Loading...
-        </Typography>
-      </Box>
-    );
+    return null;
+    // <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    //   <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', color: 'primary.main' }}>
+    //     Loading...
+    //   </Typography>
+    // </Box>
   }
 
   return (
-    <Box sx={{ p: 2, width: '100%', maxWidth: '100%', marginLeft: 0, marginRight: 0 }}>
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
-        <Box
+    <>
+      {searchQuery && (
+        <Typography sx={{ width: '100%', p: 2 }}>Search results for: &quot;{searchQuery}&quot;</Typography>
+      )}
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
+        <Drawer
+          anchor="left"
+          open={mobileFiltersOpen}
+          onClose={() => setMobileFiltersOpen(false)}
           sx={{
-            flex: '1 1 25%',
-            minWidth: 250,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            alignItems: 'center',
-            textAlign: 'center',
+            '& .MuiDrawer-paper': {
+              width: '100%',
+              p: 2,
+            },
+            display: { xs: 'flex', sm: 'none' },
+            position: 'relative',
           }}
         >
-          <Typography variant="h3">Books</Typography>
-
-          <Typography variant="h6" sx={{ mt: 3, alignSelf: 'flex-start', marginLeft: 5 }}>
-            Book Categories
-          </Typography>
-          <Box sx={{ maxWidth: 311 }}>
-            {categories.map((category) => (
-              <Typography
-                key={category.id}
-                sx={{
-                  cursor: 'pointer',
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  color: 'primary.main',
-                  '&:hover': {
-                    backgroundColor: '#f0f0f0',
-                    color: 'primary.dark',
-                  },
-                  marginBottom: '8px',
-                }}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category.name}
-              </Typography>
-            ))}
-          </Box>
-
-          <AuthorFilter
-            authors={uniqueAuthors}
-            selectedAuthors={selectedAuthors}
-            setSelectedAuthors={setSelectedAuthors}
-            authorsToShowCount={authorsToShowCount}
-            setAuthorsToShowCount={setAuthorsToShowCount}
-            authorsContainerReference={authorsContainerReference}
+          <IconButton sx={{ position: 'absolute', top: 8, right: 8 }} onClick={() => setMobileFiltersOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+          <FilterForm
+            products={products}
+            categories={categories}
+            categoryId={categoryId}
+            setCategoryId={handleCategorySelect}
+            setFilterOption={setFilterOption}
+            handleFilterApply={async (filters) => {
+              await handleFilterApply(filters);
+              setMobileFiltersOpen(false);
+            }}
           />
+        </Drawer>
 
-          <YearPriceFilters
-            publicationYearFrom={publicationYearFrom}
-            publicationYearTo={publicationYearTo}
-            setPublicationYearFrom={setPublicationYearFrom}
-            setPublicationYearTo={setPublicationYearTo}
-            priceFrom={priceFrom}
-            priceTo={priceTo}
-            setPriceFrom={setPriceFrom}
-            setPriceTo={setPriceTo}
-            handleKeyPress={handleKeyPress}
+        {!isMobile && (
+          <FilterForm
+            products={products}
+            categories={categories}
+            categoryId={categoryId}
+            setCategoryId={handleCategorySelect}
+            setFilterOption={setFilterOption}
+            handleFilterApply={handleFilterApply}
           />
-
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 3, width: 215, maxWidth: '100%' }}
-            onClick={applyFilters}
-          >
-            Apply
-          </Button>
-          <Button variant="text" sx={{ mt: 1, width: 215, maxWidth: '100%' }} onClick={handleResetFilters}>
-            Reset
-          </Button>
-        </Box>
+        )}
 
         <Box sx={{ flex: '1 1 75%', minWidth: 300, display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-            {breadcrumb.map((part, index) => (
-              <React.Fragment key={index}>
-                <Typography
-                  sx={{
-                    cursor: 'pointer',
-                    color: 'primary.main',
-                    fontSize: 14,
-                    '&:hover': {
-                      color: 'primary.dark',
-                    },
-                  }}
-                  onClick={() => handleBreadcrumbClick(index)}
-                >
-                  {part}
-                </Typography>
-                {index < breadcrumb.length - 1 && <Typography sx={{ fontSize: 14, mx: 0.5 }}>/</Typography>}
-              </React.Fragment>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link
+              underline="hover"
+              color={breadcrumbs.length === 1 ? 'text.primary' : 'inherit'}
+              sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => void handleBreadcrumbClick('root')}
+            >
+              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              All
+            </Link>
+            {breadcrumbs.slice(1).map((crumb, index) => (
+              <Link
+                key={crumb.id}
+                underline={index === breadcrumbs.length - 2 ? 'none' : 'hover'}
+                color={index === breadcrumbs.length - 2 ? 'text.primary' : 'inherit'}
+                sx={{ cursor: 'pointer' }}
+                onClick={() => void handleBreadcrumbClick(crumb.id)}
+              >
+                {crumb.name}
+              </Link>
             ))}
-          </Box>
+          </Breadcrumbs>
 
-          <SortSelect popularOption={popularOption} handlePopularChange={handlePopularChange} />
-
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Box
-              display="flex"
-              sx={{
-                gap: { xs: 1, md: 2 },
-                minWidth: { xs: '100%', sm: 'auto' },
-                order: { xs: 1, sm: 0 },
-              }}
+          <Stack direction="row" gap={2} sx={{ justifyContent: { xs: 'space-around', sm: 'start' } }}>
+            <SortSelect sortOption={sortOption} handleSortChange={handleSortChange} />
+            <Button
+              variant="outlined"
+              startIcon={<FilterListIcon />}
+              fullWidth
+              sx={{ flex: 1, maxWidth: 160, display: { xs: 'inline-flex', sm: 'none' } }}
+              onClick={() => setMobileFiltersOpen(true)}
             >
-              <TextField
-                variant="outlined"
-                size="small"
-                value={searchText}
-                onChange={handleSearchChange}
-                onKeyUp={handleSearchKeyPress}
-                placeholder="Enter the book title"
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Search />
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                sx={{ flexGrow: 1 }}
-              />
-            </Box>
-
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: { xs: 'center', sm: 'center', md: 'flex-start' },
-                gap: 2,
-              }}
-            >
-              <ProductsList products={popularOption === 'bestSellers' ? randomBooks : products} />
-            </Box>
+              Filters
+            </Button>
+          </Stack>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5 }}>
+            <ProductsList products={products} />
           </Box>
         </Box>
       </Box>
-    </Box>
+    </>
+  );
+}
+
+export default function CatalogPage() {
+  return (
+    <Suspense>
+      <Catalog />
+    </Suspense>
   );
 }

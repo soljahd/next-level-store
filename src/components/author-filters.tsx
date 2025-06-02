@@ -1,16 +1,10 @@
 import React from 'react';
-import { Box, Typography, FormControlLabel, Checkbox, IconButton } from '@mui/material';
-import {
-  KeyboardArrowDown as KeyboardArrowDownIcon,
-  KeyboardArrowUp as KeyboardArrowUpIcon,
-} from '@mui/icons-material';
+import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 
 type AuthorFilterProps = {
   authors: string[];
   selectedAuthors: string[];
   setSelectedAuthors: React.Dispatch<React.SetStateAction<string[]>>;
-  authorsToShowCount: number;
-  setAuthorsToShowCount: React.Dispatch<React.SetStateAction<number>>;
   authorsContainerReference: React.RefObject<HTMLDivElement | null>;
 };
 
@@ -18,28 +12,33 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
   authors,
   selectedAuthors,
   setSelectedAuthors,
-  authorsToShowCount,
-  setAuthorsToShowCount,
   authorsContainerReference,
 }) => {
   const uniqueAuthors = [...new Set(authors)];
-  const visibleAuthors = uniqueAuthors.slice(0, authorsToShowCount);
-  const allAuthorsShown = authorsToShowCount >= uniqueAuthors.length;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" sx={{ mt: 3, alignSelf: 'flex-start', marginLeft: 5 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxWidth: 230, width: '100%' }}>
+      <Typography variant="h6" sx={{ alignSelf: 'flex-start' }}>
         Authors
       </Typography>
       <Box
         ref={authorsContainerReference}
-        sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxWidth: 230, width: '100%' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: 230,
+          width: '100%',
+          maxHeight: 300,
+          overflowY: 'auto',
+          pl: 2,
+        }}
       >
-        {visibleAuthors.map((author, index) => (
+        {uniqueAuthors.map((author, index) => (
           <FormControlLabel
             key={index}
             control={
               <Checkbox
+                size="small"
                 checked={selectedAuthors.includes(author)}
                 onChange={(event) => {
                   const checked = event.target.checked;
@@ -53,27 +52,6 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
           />
         ))}
       </Box>
-
-      {uniqueAuthors.length > 6 && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-          <IconButton
-            aria-label={allAuthorsShown ? 'Hide authors' : 'Show more authors'}
-            onClick={() => {
-              if (allAuthorsShown) {
-                setAuthorsToShowCount(6);
-                if (authorsContainerReference.current) {
-                  authorsContainerReference.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              } else {
-                setAuthorsToShowCount((count) => count + 6);
-              }
-            }}
-            size="small"
-          >
-            {allAuthorsShown ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </Box>
-      )}
     </Box>
   );
 };
