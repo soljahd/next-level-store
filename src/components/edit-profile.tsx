@@ -7,17 +7,23 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import type { profileEditFormData } from '@/lib/validation';
 import { profileEditScheme } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { updateMyProfile } from '@/lib/commercetools/profile';
+import { useAuthStore } from '@/lib/store/auth-store';
+import type { Customer } from '@commercetools/platform-sdk';
+import type { Dispatch, SetStateAction } from 'react';
 
 type EditProfileProps = {
+  setProfileState: Dispatch<SetStateAction<Customer | null>>;
   setEditingMode: (mode: string | null) => void;
 };
 
 export default function EditProfile(props: EditProfileProps) {
-  const { setEditingMode } = props;
+  const { setProfileState, setEditingMode } = props;
+  const { setLoginState, user } = useAuthStore();
   const {
     control,
     register,
-    // handleSubmit,
+    handleSubmit,
     // watch,
     formState: { errors },
   } = useForm<profileEditFormData>({
@@ -25,15 +31,35 @@ export default function EditProfile(props: EditProfileProps) {
     shouldUnregister: true,
     mode: 'onSubmit',
   });
-  // const onSubmit = (data: any) => {
-  //   // Обработка
-  //   console.log(data);
-  // };
+  const onSubmit = async (data: profileEditFormData) => {
+    try {
+      const response = await updateMyProfile(data);
+      if (!response) {
+        throw new Error('Данные профиля не найдены');
+      }
+      setProfileState(response);
+      // updateProfileState({
+      //   email: data.email,
+      // });
+      if (!user) {
+        throw new Error('Данные профиля не найдены');
+      }
+      setLoginState({
+        email: data.email,
+        password: user.password,
+      });
+      setEditingMode(null);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Ошибка обновления профиля:', error.message);
+      }
+    }
+  };
 
   return (
     <Stack
       component="form"
-      // onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+      onSubmit={() => handleSubmit(onSubmit)}
       noValidate
       autoComplete="off"
       gap={3}

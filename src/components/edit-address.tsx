@@ -1,5 +1,8 @@
+'use client';
+import { addMyNewAddress, updateMyAddress } from '@/lib/commercetools/profile';
 import type { addressEditFormData } from '@/lib/validation';
 import { addressEditScheme } from '@/lib/validation';
+import type { Customer } from '@commercetools/platform-sdk';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { SelectChangeEvent } from '@mui/material';
 import {
@@ -18,19 +21,69 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 type EditAddressProps = {
-  isNewAddress?: boolean;
+  isNewAddress: boolean;
+  editModeWithAddressId?: string;
+  profileState?: Customer;
+  setProfileState: Dispatch<SetStateAction<Customer | null>>;
   setEditingMode: (mode: string | null) => void;
 };
 
 export default function EditAddress(props: EditAddressProps) {
-  const { setEditingMode, isNewAddress } = props;
+  const { setEditingMode, isNewAddress, setProfileState, editModeWithAddressId } = props;
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [isShippingDefault, setShippingDefault] = useState<boolean>(false);
   const [isBillingDefault, setBillingDefault] = useState<boolean>(false);
+
+  const {
+    control,
+    setValue,
+    // register,
+    handleSubmit,
+    // watch,
+    // reset,
+    formState: { errors },
+  } = useForm<addressEditFormData>({
+    resolver: zodResolver(addressEditScheme),
+    shouldUnregister: true,
+    mode: 'onSubmit',
+    defaultValues: {
+      //   country: '',
+      //   city: '',
+      //   streetName: '',
+      //   postalCode: '',
+      isShippingDefault: false,
+      isBillingDefault: false,
+    },
+  });
+
+  const onSubmit = async (data: addressEditFormData) => {
+    try {
+      if (isNewAddress === true) {
+        const response = await addMyNewAddress(data);
+        if (!response) {
+          throw new Error('Ошибка добавления адреса');
+        }
+        setProfileState(response);
+      } else {
+        const addressId = editModeWithAddressId!.split('---')[1].trim();
+        const response = await updateMyAddress(addressId, data);
+        if (!response) {
+          throw new Error('Ошибка обновления адреса');
+        }
+        setProfileState(response);
+      }
+      setEditingMode(null);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Ошибка формы адреса:', error.message);
+      }
+    }
+  };
 
   const handleAddressType = (event: SelectChangeEvent<typeof selectedValues>) => {
     const {
@@ -50,18 +103,6 @@ export default function EditAddress(props: EditAddressProps) {
     setSelectedValues(newValue);
   };
 
-  const {
-    control,
-    setValue,
-    // register,
-    // handleSubmit,
-    // watch,
-    formState: { errors },
-  } = useForm<addressEditFormData>({
-    resolver: zodResolver(addressEditScheme),
-    shouldUnregister: true,
-    mode: 'onSubmit',
-  });
   const handleDefaultChange = (value: string) => {
     const currentValues = selectedValues;
     if (value === 'shipping') {
@@ -78,10 +119,11 @@ export default function EditAddress(props: EditAddressProps) {
       setBillingDefault(!isBillingDefault);
     }
   };
+
   return (
     <Stack
       component="form"
-      //   onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+      onSubmit={() => handleSubmit(onSubmit)}
       noValidate
       autoComplete="off"
       gap={3}
@@ -147,12 +189,59 @@ export default function EditAddress(props: EditAddressProps) {
         helperText={errors.postalCode?.message}
         fullWidth
       />
-      <FormControlLabel
+      <Controller
+        control={control}
+        name="isShippingDefault"
+        render={({ field }) => (
+          <FormControlLabel
+            control={
+              <Switch
+                checked={field.value}
+                {...control.register('isShippingDefault')}
+                onChange={(event) => {
+                  field.onChange(event.target.checked);
+                  handleDefaultChange('shipping');
+                }}
+                required={false}
+              />
+            }
+            label="Use as shipping default"
+            labelPlacement="end"
+            sx={{ width: 'fit-content', m: 0 }}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="isBillingDefault"
+        render={({ field }) => (
+          <FormControlLabel
+            control={
+              <Switch
+                checked={field.value}
+                {...control.register('isBillingDefault')}
+                onChange={(event) => {
+                  field.onChange(event.target.checked);
+                  handleDefaultChange('billing');
+                }}
+                required={false}
+              />
+            }
+            label="Use as billing default"
+            labelPlacement="end"
+            sx={{ width: 'fit-content', m: 0 }}
+          />
+        )}
+      />
+
+      {/* <FormControlLabel
         control={
           <Switch
             checked={isShippingDefault}
+            // checked={addressTypeValues.includes('shipping')}
             {...control.register('isShippingDefault')}
             onChange={() => handleDefaultChange('shipping')}
+            required={false}
           />
         }
         label="Use as shipping default"
@@ -163,6 +252,7 @@ export default function EditAddress(props: EditAddressProps) {
         control={
           <Switch
             checked={isBillingDefault}
+            required={false}
             {...control.register('isBillingDefault')}
             onChange={() => handleDefaultChange('billing')}
           />
@@ -170,7 +260,7 @@ export default function EditAddress(props: EditAddressProps) {
         label="Use as billing default"
         labelPlacement="end"
         sx={{ width: 'fit-content', m: 0 }}
-      />
+      /> */}
       <Stack gap={2} alignItems="center">
         <Button type="submit" variant="contained" fullWidth sx={{ alignSelf: 'center', maxWidth: '396px' }}>
           Save changes
