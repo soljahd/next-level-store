@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import Profile from '@/components/profile';
 
 export const metadata: Metadata = {
   title: 'Profile | Next-Level Store',
@@ -11,18 +12,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Profile() {
+export default function ProfilePage() {
   return (
     <Container
       component="main"
       maxWidth="md"
       sx={{
+        // display: 'flex',
+        // justifyContent: 'center',
         flex: 1,
       }}
     >
-      <Typography component="h1" variant="h4" align="center">
-        Profile page
-      </Typography>
+      <Profile></Profile>
     </Container>
   );
 }

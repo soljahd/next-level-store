@@ -9,6 +9,7 @@ type AuthState = {
   user: null | LoginFormData;
   setLoginState: ({ email, password }: LoginFormData) => void;
   setLogoutState: () => void;
+  // updateProfileState: (newData: Partial<LoginFormData>) => void;
 };
 
 const authStateStorage = {
@@ -43,11 +44,19 @@ export const useAuthStore = create(
     (set) => ({
       isLoggedIn: false,
       user: null,
-      setLoginState: (data) => set({ isLoggedIn: true, user: data }),
+      setLoginState: (data: LoginFormData) => {
+        set({ isLoggedIn: true, user: data });
+      },
       setLogoutState: () => {
         set({ isLoggedIn: false });
         authStateStorage.removeItem('auth-storage');
       },
+      // updateProfileState: (newData: Partial<LoginFormData>) => {
+      //   set((prev) => ({
+      //     ...prev,
+      //     user: prev.user ? { ...prev.user, ...newData } : { ...(newData as LoginFormData) },
+      //   }));
+      // },
     }),
     {
       name: 'auth-storage',
