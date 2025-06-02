@@ -11,7 +11,6 @@ import {
   Chip,
   FormControl,
   FormControlLabel,
-  FormHelperText,
   InputLabel,
   MenuItem,
   OutlinedInput,
@@ -34,7 +33,7 @@ type EditAddressProps = {
 };
 
 export default function EditAddress(props: EditAddressProps) {
-  const { setEditingMode, isNewAddress, setProfileState, editModeWithAddressId } = props;
+  const { setEditingMode, isNewAddress, profileState, setProfileState, editModeWithAddressId } = props;
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [isShippingDefault, setShippingDefault] = useState<boolean>(false);
   const [isBillingDefault, setBillingDefault] = useState<boolean>(false);
@@ -54,8 +53,8 @@ export default function EditAddress(props: EditAddressProps) {
   const {
     control,
     setValue,
-    register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<addressEditFormData>({
     resolver: zodResolver(addressEditScheme),
@@ -103,14 +102,23 @@ export default function EditAddress(props: EditAddressProps) {
     const newValue = typeof value === 'string' ? value.split(',') : value;
     const isShippingNowSelected = newValue.includes('shipping');
     const isBillingNowSelected = newValue.includes('billing');
+    // console.log('новое',newValue)
+    setSelectedValues(newValue);
+    // console.log('после установки', selectedValues)
 
     if (!isShippingNowSelected) {
       setShippingDefault(false);
+      reset({
+        isShippingDefault: false,
+      });
     }
     if (!isBillingNowSelected) {
       setBillingDefault(false);
+      reset({
+        isBillingDefault: false,
+      });
     }
-    setSelectedValues(newValue);
+    // console.log('посл нов', newValue)
   };
 
   const handleDefaultChange = (value: string) => {
@@ -130,6 +138,31 @@ export default function EditAddress(props: EditAddressProps) {
     }
   };
 
+  useEffect(() => {
+    if (profileState) {
+      const addressId = editModeWithAddressId!.split('---')[1].trim();
+      const addressData = profileState.addresses.find((address) => address.id === addressId);
+      const isShippingDefault = profileState.shippingAddressIds?.includes(addressId) || false;
+      const isBillingDefault = profileState.billingAddressIds?.includes(addressId) || false;
+      const initialAddressTypes: string[] = [];
+      if (profileState.shippingAddressIds?.includes(addressId)) initialAddressTypes.push('shipping');
+      if (profileState.billingAddressIds?.includes(addressId)) initialAddressTypes.push('billing');
+      const country = addressData?.country.trim();
+
+      if (addressData) {
+        reset({
+          addressType: initialAddressTypes,
+          country: country || '',
+          city: addressData.city || '',
+          streetName: addressData.streetName || '',
+          postalCode: addressData.postalCode || '',
+          isShippingDefault,
+          isBillingDefault,
+        });
+      }
+    }
+  }, [profileState, editModeWithAddressId, reset]);
+
   return (
     <Stack
       component="form"
@@ -142,7 +175,46 @@ export default function EditAddress(props: EditAddressProps) {
       <Typography component="h1" variant="h4">
         {isNewAddress ? 'Add Address' : 'Edit Address'}
       </Typography>
-      <FormControl fullWidth>
+      <Controller
+        name="addressType"
+        control={control}
+        render={({ field }) => (
+          <FormControl fullWidth>
+            <InputLabel id="select-chips-label">Address option</InputLabel>
+            <Select
+              multiple
+              {...field}
+              value={field.value || []}
+              onChange={(event) => {
+                const value = event.target.value;
+                // console.log(value)
+                field.onChange(value);
+                if (Array.isArray(value)) {
+                  setSelectedValues(value);
+                  // console.log('средняя', value)
+                } else if (typeof value === 'string') {
+                  setSelectedValues([...selectedValues, value]);
+                  // console.log('последняя', value)
+                } // при необходимости, если нужны локальные состояния
+                handleAddressType(event);
+              }}
+              input={<OutlinedInput label="Address option" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+            >
+              <MenuItem value="shipping">Shipping</MenuItem>
+              <MenuItem value="billing">Billing</MenuItem>
+            </Select>
+          </FormControl>
+        )}
+      />
+
+      {/* <FormControl fullWidth>
         <InputLabel id="select-chips-label">Address option</InputLabel>
         <Select
           {...register('addressType')}
@@ -161,15 +233,31 @@ export default function EditAddress(props: EditAddressProps) {
           <MenuItem value="shipping">Shipping</MenuItem>
           <MenuItem value="billing">Billing</MenuItem>
         </Select>
-      </FormControl>
-      <FormControl fullWidth error={!!errors.country}>
+      </FormControl> */}
+
+      <Controller
+        name="country"
+        control={control}
+        render={({ field }) => (
+          <Select
+            {...field}
+            label="Country"
+            value={field.value || ''} // дефолтное значение
+            onChange={(event) => field.onChange(event.target.value)}
+          >
+            <MenuItem value="BY">Belarus</MenuItem>
+            <MenuItem value="RU">Russia</MenuItem>
+          </Select>
+        )}
+      />
+      {/* <FormControl fullWidth error={!!errors.country}>
         <InputLabel>Country</InputLabel>
-        <Select label="Country" {...control.register('country')} defaultValue="">
+        <Select label="Country" {...control.register('country')}>
           <MenuItem value="BY">Belarus</MenuItem>
           <MenuItem value="RU">Russia</MenuItem>
         </Select>
         {errors.country && <FormHelperText>{errors.country.message}</FormHelperText>}
-      </FormControl>
+      </FormControl> */}
       <TextField
         type="text"
         label="City*"
@@ -240,34 +328,6 @@ export default function EditAddress(props: EditAddressProps) {
           />
         )}
       />
-
-      {/* <FormControlLabel
-        control={
-          <Switch
-            checked={isShippingDefault}
-            // checked={addressTypeValues.includes('shipping')}
-            {...control.register('isShippingDefault')}
-            onChange={() => handleDefaultChange('shipping')}
-            required={false}
-          />
-        }
-        label="Use as shipping default"
-        labelPlacement="end"
-        sx={{ width: 'fit-content', m: 0 }}
-      />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={isBillingDefault}
-            required={false}
-            {...control.register('isBillingDefault')}
-            onChange={() => handleDefaultChange('billing')}
-          />
-        }
-        label="Use as billing default"
-        labelPlacement="end"
-        sx={{ width: 'fit-content', m: 0 }}
-      /> */}
       <Stack gap={2} alignItems="center">
         <Button type="submit" variant="contained" fullWidth sx={{ alignSelf: 'center', maxWidth: '396px' }}>
           Save changes
