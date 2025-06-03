@@ -216,7 +216,7 @@ export default function Profile() {
         ) : editingMode === 'editPassword' ? (
           <EditPassword setEditingMode={setEditingMode} setProfileState={setProfileState} />
         ) : editingMode === 'editProfile' ? (
-          <EditProfile setEditingMode={setEditingMode} setProfileState={setProfileState} />
+          <EditProfile profileState={profileState} setEditingMode={setEditingMode} setProfileState={setProfileState} />
         ) : editingMode.includes('editAddress') ? (
           <EditAddress
             setEditingMode={setEditingMode}
@@ -226,7 +226,12 @@ export default function Profile() {
             editModeWithAddressId={editingMode}
           />
         ) : (
-          <EditAddress setEditingMode={setEditingMode} isNewAddress={true} setProfileState={setProfileState} />
+          <EditAddress
+            profileState={profileState}
+            setEditingMode={setEditingMode}
+            isNewAddress={true}
+            setProfileState={setProfileState}
+          />
         )}
       </>
     );

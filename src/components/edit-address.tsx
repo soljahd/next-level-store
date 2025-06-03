@@ -4,7 +4,7 @@ import type { addressEditFormData } from '@/lib/validation';
 import { addressEditScheme } from '@/lib/validation';
 import type { Customer } from '@commercetools/platform-sdk';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { SelectChangeEvent } from '@mui/material';
+// import type { SelectChangeEvent } from '@mui/material';
 import {
   Box,
   Button,
@@ -27,7 +27,7 @@ import { enqueueSnackbar } from 'notistack';
 type EditAddressProps = {
   isNewAddress: boolean;
   editModeWithAddressId?: string;
-  profileState?: Customer;
+  profileState: Customer;
   setProfileState: Dispatch<SetStateAction<Customer | null>>;
   setEditingMode: (mode: string | null) => void;
 };
@@ -35,9 +35,8 @@ type EditAddressProps = {
 export default function EditAddress(props: EditAddressProps) {
   const { setEditingMode, isNewAddress, profileState, setProfileState, editModeWithAddressId } = props;
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const [isShippingDefault, setShippingDefault] = useState<boolean>(false);
-  const [isBillingDefault, setBillingDefault] = useState<boolean>(false);
-
+  // const [isShippingDefault, setShippingDefault] = useState<boolean>(false);
+  // const [isBillingDefault, setBillingDefault] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const handleCloseError = () => setErrorMessage(null);
 
@@ -50,23 +49,34 @@ export default function EditAddress(props: EditAddressProps) {
     }
   }, [errorMessage]);
 
+  const addressId = editModeWithAddressId?.split('---')[1].trim();
+  const addressData = profileState.addresses.find((address) => address.id === addressId);
+  const isShipping = addressId ? (profileState.shippingAddressIds?.includes(addressId) ?? false) : false;
+  const isBilling = addressId ? (profileState.billingAddressIds?.includes(addressId) ?? false) : false;
+  const addressTypes: string[] = [];
+  if (isShipping) addressTypes.push('shipping');
+  if (isBilling) addressTypes.push('billing');
+  const isShippingDefault = addressId ? profileState.defaultShippingAddressId === addressId : false;
+  const isBillingDefault = addressId ? profileState.defaultBillingAddressId === addressId : false;
+
   const {
     control,
-    setValue,
+    // setValue,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm<addressEditFormData>({
     resolver: zodResolver(addressEditScheme),
     shouldUnregister: true,
     mode: 'onSubmit',
     defaultValues: {
-      country: '',
-      city: '',
-      streetName: '',
-      postalCode: '',
-      isShippingDefault: false,
-      isBillingDefault: false,
+      addressType: editModeWithAddressId ? addressTypes : [],
+      country: editModeWithAddressId ? addressData?.country : '',
+      city: editModeWithAddressId ? addressData?.city : '',
+      streetName: editModeWithAddressId ? addressData?.streetName : '',
+      postalCode: editModeWithAddressId ? addressData?.postalCode : '',
+      isShippingDefault: editModeWithAddressId ? isShippingDefault : false,
+      isBillingDefault: editModeWithAddressId ? isBillingDefault : false,
     },
   });
 
@@ -87,6 +97,7 @@ export default function EditAddress(props: EditAddressProps) {
         setProfileState(response);
       }
       setEditingMode(null);
+      enqueueSnackbar('Addresses successfully updated', { variant: 'success' });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -94,74 +105,74 @@ export default function EditAddress(props: EditAddressProps) {
     }
   };
 
-  const handleAddressType = (event: SelectChangeEvent<typeof selectedValues>) => {
-    const {
-      target: { value },
-    } = event;
+  // const handleAddressType = (event: SelectChangeEvent<typeof selectedValues>) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
 
-    const newValue = typeof value === 'string' ? value.split(',') : value;
-    const isShippingNowSelected = newValue.includes('shipping');
-    const isBillingNowSelected = newValue.includes('billing');
-    // console.log('новое',newValue)
-    setSelectedValues(newValue);
-    // console.log('после установки', selectedValues)
+  //   const newValue = typeof value === 'string' ? value.split(',') : value;
+  //   const isShippingNowSelected = newValue.includes('shipping');
+  //   const isBillingNowSelected = newValue.includes('billing');
+  //   // console.log('новое',newValue)
+  //   setSelectedValues(newValue);
+  //   // console.log('после установки', selectedValues)
 
-    if (!isShippingNowSelected) {
-      setShippingDefault(false);
-      reset({
-        isShippingDefault: false,
-      });
-    }
-    if (!isBillingNowSelected) {
-      setBillingDefault(false);
-      reset({
-        isBillingDefault: false,
-      });
-    }
-    // console.log('посл нов', newValue)
-  };
+  //   if (!isShippingNowSelected) {
+  //     setShippingDefault(false);
+  //     reset({
+  //       isShippingDefault: false,
+  //     });
+  //   }
+  //   if (!isBillingNowSelected) {
+  //     setBillingDefault(false);
+  //     reset({
+  //       isBillingDefault: false,
+  //     });
+  //   }
+  //   // console.log('посл нов', newValue)
+  // };
 
-  const handleDefaultChange = (value: string) => {
-    const currentValues = selectedValues;
-    if (value === 'shipping') {
-      if (!currentValues.includes('shipping')) {
-        setSelectedValues([...currentValues, 'shipping']);
-        setValue('addressType', [...currentValues, 'shipping']);
-      }
-      setShippingDefault(!isShippingDefault);
-    } else if (value === 'billing') {
-      if (!currentValues.includes('billing')) {
-        setSelectedValues([...currentValues, 'billing']);
-        setValue('addressType', [...currentValues, 'billing']);
-      }
-      setBillingDefault(!isBillingDefault);
-    }
-  };
+  // const handleDefaultChange = (value: string) => {
+  //   const currentValues = selectedValues;
+  //   if (value === 'shipping') {
+  //     if (!currentValues.includes('shipping')) {
+  //       setSelectedValues([...currentValues, 'shipping']);
+  //       setValue('addressType', [...currentValues, 'shipping']);
+  //     }
+  //     setShippingDefault(!isShippingDefault);
+  //   } else if (value === 'billing') {
+  //     if (!currentValues.includes('billing')) {
+  //       setSelectedValues([...currentValues, 'billing']);
+  //       setValue('addressType', [...currentValues, 'billing']);
+  //     }
+  //     setBillingDefault(!isBillingDefault);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (profileState) {
-      const addressId = editModeWithAddressId!.split('---')[1].trim();
-      const addressData = profileState.addresses.find((address) => address.id === addressId);
-      const isShippingDefault = profileState.shippingAddressIds?.includes(addressId) || false;
-      const isBillingDefault = profileState.billingAddressIds?.includes(addressId) || false;
-      const initialAddressTypes: string[] = [];
-      if (profileState.shippingAddressIds?.includes(addressId)) initialAddressTypes.push('shipping');
-      if (profileState.billingAddressIds?.includes(addressId)) initialAddressTypes.push('billing');
-      const country = addressData?.country.trim();
+  // useEffect(() => {
+  //   if (profileState) {
+  //     const addressId = editModeWithAddressId!.split('---')[1].trim();
+  //     const addressData = profileState.addresses.find((address) => address.id === addressId);
+  //     const isShippingDefault = profileState.shippingAddressIds?.includes(addressId) || false;
+  //     const isBillingDefault = profileState.billingAddressIds?.includes(addressId) || false;
+  //     const initialAddressTypes: string[] = [];
+  //     if (profileState.shippingAddressIds?.includes(addressId)) initialAddressTypes.push('shipping');
+  //     if (profileState.billingAddressIds?.includes(addressId)) initialAddressTypes.push('billing');
+  //     const country = addressData?.country.trim();
 
-      if (addressData) {
-        reset({
-          addressType: initialAddressTypes,
-          country: country || '',
-          city: addressData.city || '',
-          streetName: addressData.streetName || '',
-          postalCode: addressData.postalCode || '',
-          isShippingDefault,
-          isBillingDefault,
-        });
-      }
-    }
-  }, [profileState, editModeWithAddressId, reset]);
+  //     if (addressData) {
+  //       reset({
+  //         addressType: initialAddressTypes,
+  //         country: country || '',
+  //         city: addressData.city || '',
+  //         streetName: addressData.streetName || '',
+  //         postalCode: addressData.postalCode || '',
+  //         isShippingDefault,
+  //         isBillingDefault,
+  //       });
+  //     }
+  //   }
+  // }, [profileState, editModeWithAddressId, reset]);
 
   return (
     <Stack
@@ -196,7 +207,7 @@ export default function EditAddress(props: EditAddressProps) {
                   setSelectedValues([...selectedValues, value]);
                   // console.log('последняя', value)
                 } // при необходимости, если нужны локальные состояния
-                handleAddressType(event);
+                // handleAddressType(event);
               }}
               input={<OutlinedInput label="Address option" />}
               renderValue={(selected) => (
@@ -239,15 +250,18 @@ export default function EditAddress(props: EditAddressProps) {
         name="country"
         control={control}
         render={({ field }) => (
-          <Select
-            {...field}
-            label="Country"
-            value={field.value || ''} // дефолтное значение
-            onChange={(event) => field.onChange(event.target.value)}
-          >
-            <MenuItem value="BY">Belarus</MenuItem>
-            <MenuItem value="RU">Russia</MenuItem>
-          </Select>
+          <FormControl>
+            <InputLabel>Country</InputLabel>
+            <Select
+              label="Country"
+              {...field}
+              value={field.value || ''}
+              onChange={(event) => field.onChange(event.target.value)}
+            >
+              <MenuItem value="BY">Belarus</MenuItem>
+              <MenuItem value="RU">Russia</MenuItem>
+            </Select>
+          </FormControl>
         )}
       />
       {/* <FormControl fullWidth error={!!errors.country}>
@@ -298,7 +312,7 @@ export default function EditAddress(props: EditAddressProps) {
                 checked={field.value || false}
                 onChange={(event) => {
                   field.onChange(event.target.checked);
-                  handleDefaultChange('shipping');
+                  // handleDefaultChange('shipping');
                 }}
               />
             }
@@ -318,7 +332,7 @@ export default function EditAddress(props: EditAddressProps) {
                 checked={field.value || false}
                 onChange={(event) => {
                   field.onChange(event.target.checked);
-                  handleDefaultChange('billing');
+                  // handleDefaultChange('billing');
                 }}
               />
             }

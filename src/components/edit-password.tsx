@@ -56,6 +56,7 @@ export default function EditPassword(props: EditPasswordProps) {
       logoutCustomer();
       await loginCustomer({ ...user, password: data.newPassword });
       setEditingMode(null);
+      enqueueSnackbar('Password successfully updated', { variant: 'success' });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);

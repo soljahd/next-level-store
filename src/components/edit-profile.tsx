@@ -4,8 +4,7 @@ import { DateField, LocalizationProvider } from '@mui/x-date-pickers';
 import { Controller, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import type { profileEditFormData } from '@/lib/validation';
-import { profileEditScheme } from '@/lib/validation';
+import { type profileEditFormData, profileEditScheme } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { updateMyProfile } from '@/lib/commercetools/profile';
 import { useAuthStore } from '@/lib/store/auth-store';
@@ -14,12 +13,13 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 
 type EditProfileProps = {
+  profileState: Customer | null;
   setProfileState: Dispatch<SetStateAction<Customer | null>>;
   setEditingMode: (mode: string | null) => void;
 };
 
 export default function EditProfile(props: EditProfileProps) {
-  const { setProfileState, setEditingMode } = props;
+  const { profileState, setProfileState, setEditingMode } = props;
   const { setLoginState, user } = useAuthStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const handleCloseError = () => setErrorMessage(null);
@@ -42,6 +42,12 @@ export default function EditProfile(props: EditProfileProps) {
     resolver: zodResolver(profileEditScheme),
     shouldUnregister: true,
     mode: 'onSubmit',
+    defaultValues: {
+      email: profileState?.email,
+      firstName: profileState?.firstName,
+      lastName: profileState?.lastName,
+      dateOfBirth: dayjs(profileState?.dateOfBirth, 'YYYY-MM-DD'),
+    },
   });
   const onSubmit = async (data: profileEditFormData) => {
     try {
@@ -61,6 +67,7 @@ export default function EditProfile(props: EditProfileProps) {
         password: user.password,
       });
       setEditingMode(null);
+      enqueueSnackbar('Profile successfully updated', { variant: 'success' });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
