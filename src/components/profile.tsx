@@ -39,6 +39,7 @@ export default function Profile() {
   }, [isLoggedIn, router]);
 
   useEffect(() => {
+    if (!isLoggedIn) return;
     const fetchProfile = async () => {
       try {
         const data = await getMyProfile();
@@ -57,7 +58,7 @@ export default function Profile() {
     fetchProfile().catch(() => {
       setLoading(false);
     });
-  }, []);
+  }, [isLoggedIn]);
 
   if (!isLoggedIn) {
     return null;
