@@ -39,6 +39,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!isLoggedIn) return;
+
     const fetchProfile = async () => {
       try {
         const data = await getMyProfile();
