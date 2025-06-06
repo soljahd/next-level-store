@@ -22,14 +22,14 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const { isLoggedIn, setLoginState } = useAuthStore();
+  const { isLoggedIn, isLoading, setLoginState } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoading && isLoggedIn) {
       router.replace('/main');
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, isLoading, router]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -81,7 +81,7 @@ export default function LoginForm() {
     }
   };
 
-  if (isLoggedIn) {
+  if (isLoading || isLoggedIn) {
     return null;
   }
 
