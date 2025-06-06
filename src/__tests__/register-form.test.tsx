@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import RegisterForm from '../components/register-form';
+import RegisterForm from '../components/register/register-form';
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: jest.fn() }),

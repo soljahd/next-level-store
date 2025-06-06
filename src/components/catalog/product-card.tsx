@@ -1,8 +1,12 @@
-import React from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Card, CardMedia, Typography, Button, Stack } from '@mui/material';
+import { addToCart } from '@/lib/commercetools/cart';
+import { enqueueSnackbar } from 'notistack';
 
 type ProductCardProps = {
+  inCart: boolean;
+  productId: string;
   slug: string;
   image: string;
   title: string;
@@ -10,9 +14,45 @@ type ProductCardProps = {
   year: number;
   price: string;
   oldPrice: string;
+  onAddToCart: () => Promise<void>;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ slug, image, title, author, year, price, oldPrice }) => {
+export default function ProductCard({
+  inCart,
+  productId,
+  slug,
+  image,
+  title,
+  author,
+  year,
+  price,
+  oldPrice,
+  onAddToCart,
+}: ProductCardProps) {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  const handleAddToCart = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    try {
+      await addToCart(productId);
+      await onAddToCart();
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
   return (
     <Card
       component={Link}
@@ -57,11 +97,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ slug, image, title, author, y
           {author}, {year}
         </Typography>
       </Stack>
-      <Button variant="contained" sx={{ width: '60%' }}>
+      <Button
+        disabled={inCart}
+        onClick={(event) => void handleAddToCart(event)}
+        variant="contained"
+        sx={{ width: '60%' }}
+      >
         Add to Cart
       </Button>
     </Card>
   );
-};
-
-export default ProductCard;
+}

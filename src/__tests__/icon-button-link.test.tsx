@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import IconButtonLink from '@/components/icon-button-link';
+import IconButtonLink from '@/components/header/icon-button-link';
 import '@testing-library/jest-dom';
 
 describe('IconButtonLink', () => {

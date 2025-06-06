@@ -25,8 +25,8 @@ import {
   AppRegistration,
 } from '@mui/icons-material';
 import Link from 'next/link';
-import IconButtonLink from '@/components/icon-button-link';
-import MenuLink from '@/components/menu-link';
+import IconButtonLink from '@/components/header/icon-button-link';
+import MenuLink from '@/components/header/menu-link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';

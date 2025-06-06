@@ -17,9 +17,9 @@ import { Home as HomeIcon, Close as CloseIcon, FilterList as FilterListIcon } fr
 import { useSearchParams } from 'next/navigation';
 import { type ProductProjection, type Category } from '@commercetools/platform-sdk';
 import { searchProducts, getAllCategories } from '@/lib/commercetools/catalog';
-import ProductsList from '@/components/product-list';
-import SortSelect from '@/components/sort-select';
-import FilterForm from '@/components/filters-form';
+import ProductsList from '@/components/catalog/product-list';
+import SortSelect from '@/components/catalog/sort-select';
+import FilterForm from '@/components/catalog/filters-form';
 
 export type CategoryWithChildren = {
   children?: CategoryWithChildren[];

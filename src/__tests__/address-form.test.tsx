@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useForm, FormProvider } from 'react-hook-form';
-import AddressForm from '../components/address-form';
+import AddressForm from '../components/register-form/address-form';
 import type { RegisterFormData } from '@/lib/validation';
 
 type Props = {
@@ -14,15 +14,15 @@ const Wrapper = ({ prefix, errors = {} }: Props) => {
       shippingAddress: {
         country: '',
         city: '',
-        street: '',
-        postcode: '',
+        streetName: '',
+        postalCode: '',
         isDefault: false,
       },
       billingAddress: {
         country: '',
         city: '',
-        street: '',
-        postcode: '',
+        streetName: '',
+        postalCode: '',
         isDefault: false,
       },
     },
@@ -72,15 +72,15 @@ describe('AddressForm component', () => {
           shippingAddress: {
             country: '',
             city: '',
-            street: '',
-            postcode: '',
+            streetName: '',
+            postalCode: '',
             isDefault: true,
           },
           billingAddress: {
             country: '',
             city: '',
-            street: '',
-            postcode: '',
+            streetName: '',
+            postalCode: '',
             isDefault: false,
           },
         },
