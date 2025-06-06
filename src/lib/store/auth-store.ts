@@ -5,11 +5,19 @@ import { loginCustomer, logoutCustomer } from '@/lib/commercetools/auth';
 import { type LoginFormData, authStateScheme } from '@/lib/validation';
 
 type AuthState = {
+  isLoading: boolean;
   isLoggedIn: boolean;
   user: null | LoginFormData;
   setLoginState: ({ email, password }: LoginFormData) => void;
   setLogoutState: () => void;
-  // updateProfileState: (newData: Partial<LoginFormData>) => void;
+  setLoadingState: (isLoading: boolean) => void;
+  updateProfileState: (newData: Partial<LoginFormData>) => void;
+};
+
+const handleRehydrateStorage = (state: AuthState | undefined) => {
+  if (state) {
+    state.setLoadingState(false);
+  }
 };
 
 const authStateStorage = {
@@ -42,25 +50,30 @@ const authStateStorage = {
 export const useAuthStore = create(
   persist<AuthState>(
     (set) => ({
+      isLoading: true,
       isLoggedIn: false,
       user: null,
       setLoginState: (data: LoginFormData) => {
-        set({ isLoggedIn: true, user: data });
+        set({ isLoggedIn: true, user: data, isLoading: false });
       },
       setLogoutState: () => {
-        set({ isLoggedIn: false });
+        set({ isLoggedIn: false, user: null, isLoading: false });
         authStateStorage.removeItem('auth-storage');
       },
-      // updateProfileState: (newData: Partial<LoginFormData>) => {
-      //   set((prev) => ({
-      //     ...prev,
-      //     user: prev.user ? { ...prev.user, ...newData } : { ...(newData as LoginFormData) },
-      //   }));
-      // },
+      setLoadingState: (isLoading: boolean) => {
+        set({ isLoading });
+      },
+      updateProfileState: (newData: Partial<LoginFormData>) => {
+        set((previous) => {
+          if (!previous.user) return previous;
+          return { ...previous, user: { ...previous.user, ...newData } };
+        });
+      },
     }),
     {
       name: 'auth-storage',
       storage: createJSONStorage(() => authStateStorage),
+      onRehydrateStorage: () => handleRehydrateStorage,
     },
   ),
 );
