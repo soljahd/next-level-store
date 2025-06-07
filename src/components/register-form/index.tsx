@@ -27,7 +27,7 @@ import { registerScheme, type RegisterFormData } from '@/lib/validation';
 import { loginCustomer, registerCustomer } from '@/lib/commercetools/auth';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { enqueueSnackbar } from 'notistack';
-import AddressForm from '@/components/address-form';
+import AddressForm from '@/components/register-form/address-form';
 
 export default function RegisterForm() {
   const [isBillingSameAsDelivery, setIsBillingSameAsDelivery] = useState(true);

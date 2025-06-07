@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllProducts } from '@/lib/commercetools/catalog';
-import ProductDetails from '@/components/product-details';
+import ProductDetails from '@/components/catalog/product-details';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import { Container } from '@mui/material';
 
