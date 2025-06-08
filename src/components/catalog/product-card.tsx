@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Card, CardMedia, Typography, Button, Stack } from '@mui/material';
 import { addToCart } from '@/lib/commercetools/cart';
 import { enqueueSnackbar } from 'notistack';
+import { useCartStore } from '@/lib/store/cart-store';
 
 type ProductCardProps = {
   inCart: boolean;
@@ -29,9 +30,11 @@ export default function ProductCard({
   oldPrice,
   onAddToCart,
 }: ProductCardProps) {
+  const [adding, setAdding] = useState(false);
+  const [buttonText, setButtonText] = useState<string>('Add to Cart');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const handleCloseError = () => setErrorMessage(null);
-
+  const { updateCartCount } = useCartStore();
   useEffect(() => {
     if (errorMessage) {
       enqueueSnackbar(errorMessage, {
@@ -44,13 +47,22 @@ export default function ProductCard({
   const handleAddToCart = async (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    setAdding(true);
+    setButtonText('Adding...');
     try {
-      await addToCart(productId);
+      const cart = await addToCart(productId);
       await onAddToCart();
+      if (!cart) {
+        throw new Error('No active cart');
+      }
+      updateCartCount(cart.lineItems.length);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }
+    } finally {
+      setButtonText('Add to Cart');
+      setAdding(false);
     }
   };
   return (
@@ -66,11 +78,11 @@ export default function ProductCard({
         padding: 2,
         transition: 'transform 0.3s, box-shadow 0.3s',
         '&:hover': {
-          transform: 'scale(1.05)',
+          // transform: 'scale(1.05)',
           boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
         },
         '&:active': {
-          transform: 'scale(1)',
+          // transform: 'scale(1)',
         },
       }}
     >
@@ -98,12 +110,12 @@ export default function ProductCard({
         </Typography>
       </Stack>
       <Button
-        disabled={inCart}
+        disabled={inCart || adding}
         onClick={(event) => void handleAddToCart(event)}
         variant="contained"
         sx={{ width: '60%' }}
       >
-        Add to Cart
+        {buttonText}
       </Button>
     </Card>
   );

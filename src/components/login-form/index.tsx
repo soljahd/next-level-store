@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginScheme, type LoginFormData } from '@/lib/validation';
 import { loginCustomer } from '@/lib/commercetools/auth';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useCartStore } from '@/lib/store/cart-store';
 import { enqueueSnackbar } from 'notistack';
 
 export default function LoginForm() {
@@ -22,6 +23,7 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
+  const { initializeCart } = useCartStore();
   const { isLoggedIn, isLoading, setLoginState } = useAuthStore();
   const router = useRouter();
 
@@ -64,6 +66,7 @@ export default function LoginForm() {
     try {
       await loginCustomer(data);
       setLoginState(data);
+      await initializeCart();
       router.replace('/main');
     } catch (error) {
       if (error instanceof Error) {

@@ -1,15 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getActiveCart, addToCart } from '@/lib/commercetools/cart';
+import { getActiveCart, addToCart, removeFromCart } from '@/lib/commercetools/cart';
 import Button from '@mui/material/Button';
 import { enqueueSnackbar } from 'notistack';
+import { Stack } from '@mui/material';
+import { useCartStore } from '@/lib/store/cart-store';
 
 export default function AddToCartButton({ productId }: { productId: string }) {
+  const [buttonAddText, setButtonAddText] = useState<string>('Add to Cart');
+  const [buttonRemoveText, setButtonRemoveText] = useState<string>('Remove from Cart');
   const [isInCart, setIsInCart] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const handleCloseError = () => setErrorMessage(null);
+  const { updateCartCount } = useCartStore();
 
   useEffect(() => {
     if (errorMessage) {
@@ -40,15 +45,73 @@ export default function AddToCartButton({ productId }: { productId: string }) {
     });
   }, [productId]);
 
-  const handleClick = async () => {
-    await addToCart(productId);
+  const handleAddClick = async () => {
+    setLoading(true);
+    setButtonAddText('Adding...');
+    try {
+      const cart = await addToCart(productId);
+      if (!cart) {
+        throw new Error('No active cart');
+      }
+      updateCartCount(cart.lineItems.length);
+      setIsInCart(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    } finally {
+      setLoading(false);
+      setButtonAddText('Add to Cart');
+    }
   };
 
-  if (loading) return <Button disabled>Add to Cart</Button>;
+  const handleRemoveClick = async () => {
+    setLoading(true);
+    setButtonRemoveText('Removing...');
+    try {
+      const cart = await removeFromCart(productId);
+      if (!cart) {
+        throw new Error('No active cart');
+      }
+      updateCartCount(cart.lineItems.length);
+      setIsInCart(false);
+      enqueueSnackbar('Product successfully removed', { variant: 'success' });
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    } finally {
+      setLoading(false);
+      setButtonRemoveText('Remove from Cart');
+    }
+  };
+
+  if (loading)
+    return (
+      <Stack gap={2}>
+        <Button disabled size="large" variant="contained">
+          {buttonAddText}
+        </Button>
+        <Button disabled size="large" variant="contained">
+          {buttonRemoveText}
+        </Button>
+      </Stack>
+    );
 
   return (
-    <Button disabled={isInCart} variant="contained" onClick={() => handleClick}>
-      Add to Cart
-    </Button>
+    <Stack gap={2}>
+      <Button disabled={isInCart || loading} size="large" variant="contained" onClick={() => void handleAddClick()}>
+        {buttonAddText}
+      </Button>
+      <Button
+        disabled={!isInCart || loading}
+        size="large"
+        variant="contained"
+        color="error"
+        onClick={() => void handleRemoveClick()}
+      >
+        {buttonRemoveText}
+      </Button>
+    </Stack>
   );
 }

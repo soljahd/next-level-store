@@ -58,11 +58,16 @@ export async function addToCart(productId: string, quantity: number = 1) {
   }
 }
 
-export async function removeFromCart(lineItemId: string, quantity?: number) {
+export async function removeFromCart(productId: string, quantity?: number) {
   try {
     const cart = await getActiveCart();
     if (!cart) throw new TypeError('No Active Cart');
     const version = cart.version;
+
+    const lineItem = cart.lineItems.find((item) => item.productId === productId);
+
+    if (!lineItem) throw new TypeError('Product not find');
+    const lineItemId = lineItem.id;
 
     const response = await apiRoot
       .me()

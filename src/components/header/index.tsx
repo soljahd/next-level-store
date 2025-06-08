@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Badge,
   IconButton,
   AppBar,
   Toolbar,
@@ -27,9 +28,10 @@ import {
 import Link from 'next/link';
 import IconButtonLink from '@/components/header/icon-button-link';
 import MenuLink from '@/components/header/menu-link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useCartStore } from '@/lib/store/cart-store';
 
 const CustomMenuItem = styled(MenuItem)({
   '&:hover': {
@@ -48,6 +50,8 @@ export default function Header() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
+  const { cartCount, initializeCart } = useCartStore();
+
   const handleSearch = (event: React.FormEvent) => {
     event.preventDefault();
     if (searchQuery.trim()) {
@@ -63,6 +67,16 @@ export default function Header() {
     setAnchorElement(null);
   };
   const { isLoggedIn, setLogoutState } = useAuthStore();
+  const handleLogoutButton = async () => {
+    setLogoutState();
+    handleCloseMenu();
+    await initializeCart();
+  };
+
+  useEffect(() => {
+    initializeCart().catch(() => {});
+  }, [initializeCart]);
+
   return (
     <AppBar elevation={0} color="transparent" position="static">
       <Toolbar
@@ -153,13 +167,7 @@ export default function Header() {
                       </MenuLink>
                     </CustomMenuItem>,
                     <CustomMenuItem key="signOut" disableRipple>
-                      <MenuLink
-                        href="/main"
-                        handler={() => {
-                          setLogoutState();
-                          handleCloseMenu();
-                        }}
-                      >
+                      <MenuLink href="/main" handler={() => void handleLogoutButton()}>
                         <>
                           <ExitToApp />
                           <Typography>Sign Out</Typography>
@@ -188,7 +196,15 @@ export default function Header() {
             </Menu>
           </div>
 
-          <IconButtonLink href="/cart" icon={<ShoppingCart sx={{ width: 28, height: 28 }} />} text="Cart" />
+          <IconButtonLink
+            href="/cart"
+            icon={
+              <Badge badgeContent={cartCount} color="secondary">
+                <ShoppingCart sx={{ width: 28, height: 28 }} />
+              </Badge>
+            }
+            text="Cart"
+          />
         </Box>
       </Toolbar>
     </AppBar>
