@@ -25,7 +25,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerScheme, type RegisterFormData } from '@/lib/validation';
 import { loginCustomer, registerCustomer } from '@/lib/commercetools/auth';
+import { createMyCart } from '@/lib/commercetools/cart';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useCartStore } from '@/lib/store/cart-store';
 import { enqueueSnackbar } from 'notistack';
 import AddressForm from '@/components/register-form/address-form';
 
@@ -40,6 +42,7 @@ export default function RegisterForm() {
     setShowPassword(!showPassword);
   };
 
+  const { initializeCart } = useCartStore();
   const { isLoggedIn, setLoginState } = useAuthStore();
   const router = useRouter();
 
@@ -75,7 +78,9 @@ export default function RegisterForm() {
       const { email, password } = data;
       await registerCustomer(data);
       await loginCustomer({ email, password });
+      await createMyCart();
       setLoginState({ email, password });
+      await initializeCart();
       enqueueSnackbar('Account successfully created', { variant: 'success' });
       router.replace('/main');
     } catch (error) {

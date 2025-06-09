@@ -3,6 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import Cookies from 'js-cookie';
 import { loginCustomer, logoutCustomer } from '@/lib/commercetools/auth';
 import { type LoginFormData, authStateScheme } from '@/lib/validation';
+import { useCartStore } from '@/lib/store/cart-store';
 
 type AuthState = {
   isLoading: boolean;
@@ -20,14 +21,19 @@ const handleRehydrateStorage = (state: AuthState | undefined) => {
   }
 };
 
+const initializeCartForUser = async (user: LoginFormData) => {
+  await loginCustomer(user);
+  const cartStore = useCartStore.getState();
+  await cartStore.initializeCart();
+};
+
 const authStateStorage = {
   getItem: async (name: string) => {
     const localValue = Cookies.get(name);
     if (localValue) {
       const { state } = authStateScheme.parse(JSON.parse(localValue));
       if (state.user) {
-        const { email, password } = state.user;
-        await loginCustomer({ email, password });
+        await initializeCartForUser(state.user);
       }
       return localValue;
     } else {
