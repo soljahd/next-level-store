@@ -1,14 +1,54 @@
+'use client';
+import { useState, useEffect } from 'react';
 import { Box, Button, IconButton, List, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import Link from 'next/link';
-import CartItem from './cart-item';
+import { type Cart } from '@commercetools/platform-sdk';
+import { getActiveCart } from '@/lib/commercetools/cart';
+import CartItem from '@/components/cart/cart-item';
+import { enqueueSnackbar } from 'notistack';
 
 export default function ShoppingCart() {
-  const cart = true; // в корзине есть товары?
-  const itemsInCart = 1;
-  const totalPrice = 10;
+  const [cart, setCart] = useState<Cart | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
 
-  if (cart) {
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const cart = await getActiveCart();
+        if (!cart) {
+          throw new Error('No cart');
+        }
+        setCart(cart);
+      } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCart().catch(() => {
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
+  if (cart?.lineItems && cart?.lineItems.length > 0) {
     return (
       <Stack flexDirection={{ xs: 'column', sm: 'row' }} sx={{ gap: { xs: 1, sm: 2 } }}>
         <Stack flexGrow={{ xs: 1, sm: 5 }}>
@@ -24,26 +64,9 @@ export default function ShoppingCart() {
             </Tooltip>
           </Stack>
           <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <CartItem
-              product={{
-                id: 1,
-                name: 'English',
-                image:
-                  'https://s1-goods.ozstatic.by/480/20/914/10/10914020_0_Angliyskiy_yazik_6_klass_Praktikum-2_povishenniy_uroven.jpg',
-                price: 10,
-                quantity: 1,
-              }}
-            ></CartItem>
-            <CartItem
-              product={{
-                id: 1,
-                name: 'English',
-                image:
-                  'https://s1-goods.ozstatic.by/480/20/914/10/10914020_0_Angliyskiy_yazik_6_klass_Praktikum-2_povishenniy_uroven.jpg',
-                price: 10,
-                quantity: 1,
-              }}
-            ></CartItem>
+            {cart.lineItems.map((item) => (
+              <CartItem key={item.id} item={item} setCart={setCart} />
+            ))}
           </List>
         </Stack>
         <Paper
@@ -54,7 +77,7 @@ export default function ShoppingCart() {
           }}
         >
           <Typography sx={{ p: 1, textAlign: 'center', border: '1px solid grey' }}>
-            Total items in cart: {itemsInCart}
+            Total items in cart: {cart.lineItems.length}
           </Typography>
           <Stack component="form">
             <TextField
@@ -69,7 +92,9 @@ export default function ShoppingCart() {
             ></TextField>
             <Button variant="contained">apply promo code</Button>
           </Stack>
-          <Typography sx={{ p: 1, textAlign: 'center', border: '1px solid grey' }}>Total price {totalPrice}</Typography>
+          <Typography sx={{ p: 1, textAlign: 'center', border: '1px solid grey' }}>
+            Total price {cart.totalPrice.centAmount / 100}
+          </Typography>
         </Paper>
       </Stack>
     );
