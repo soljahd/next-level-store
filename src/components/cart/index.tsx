@@ -20,7 +20,7 @@ import Link from 'next/link';
 import { type Cart } from '@commercetools/platform-sdk';
 import { getActiveCart } from '@/lib/commercetools/cart';
 import CartItem from '@/components/cart/cart-item';
-import { clearCart } from '@/lib/commercetools/cart';
+import { clearCart, applyDiscountCode } from '@/lib/commercetools/cart';
 import { useCartStore } from '@/lib/store/cart-store';
 import { enqueueSnackbar } from 'notistack';
 
@@ -80,33 +80,7 @@ export default function ShoppingCart() {
             ))}
           </List>
         </Stack>
-        <Paper
-          variant="outlined"
-          sx={{
-            flexGrow: { xs: 1 },
-            maxHeight: 'min-content',
-          }}
-        >
-          <Typography sx={{ p: 1, textAlign: 'center', border: '1px solid grey' }}>
-            Total items in cart: {cart.lineItems.length}
-          </Typography>
-          <Stack component="form">
-            <TextField
-              variant="outlined"
-              type="text"
-              size="small"
-              placeholder="Enter your promo code"
-              sx={{
-                textAlign: 'center',
-                border: '1px solid grey',
-              }}
-            ></TextField>
-            <Button variant="contained">apply promo code</Button>
-          </Stack>
-          <Typography sx={{ p: 1, textAlign: 'center', border: '1px solid grey' }}>
-            Total price {cart.totalPrice.centAmount / 100}
-          </Typography>
-        </Paper>
+        <CartApplyPromoButton cart={cart} setCart={setCart} />
       </Stack>
     );
   } else {
@@ -197,5 +171,92 @@ function CartClearButton({ setCart }: CartClearButtonProps) {
         </DialogActions>
       </Dialog>
     </>
+  );
+}
+
+type CartApplyPromoButtonProps = {
+  cart: Cart;
+  setCart: Dispatch<SetStateAction<Cart | null>>;
+};
+
+function CartApplyPromoButton({ cart, setCart }: CartApplyPromoButtonProps) {
+  const [discountCode, setDiscountCode] = useState('');
+  const { initializeCart } = useCartStore();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  const handleApplyPromo = async () => {
+    setLoading(true);
+    try {
+      const cart = await applyDiscountCode(discountCode);
+      if (!cart) {
+        throw new Error('No cart');
+      }
+      setCart(cart);
+      await initializeCart();
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Paper
+      variant="outlined"
+      sx={{
+        flexGrow: { xs: 1 },
+        maxHeight: 'min-content',
+      }}
+    >
+      <Stack component="form">
+        <TextField
+          value={discountCode}
+          onChange={(event) => setDiscountCode(event.target.value)}
+          variant="outlined"
+          type="text"
+          size="small"
+          placeholder="Enter your promo code"
+          sx={{ textAlign: 'center' }}
+        />
+        <Button disabled={loading} variant="contained" onClick={() => void handleApplyPromo()}>
+          apply promo code
+        </Button>
+      </Stack>
+
+      <Typography sx={{ p: 1, textAlign: 'center' }}>Total items in cart: {cart.lineItems.length}</Typography>
+
+      <Typography sx={{ p: 1, textAlign: 'center' }}>
+        Total price:{' '}
+        {cart.discountCodes.length > 0 ? (
+          <>
+            <Box component="span" sx={{ color: 'red', fontWeight: 'bold', mr: 1 }}>
+              €
+              {(
+                (cart.totalPrice.centAmount - (cart.discountOnTotalPrice?.discountedAmount.centAmount || 0)) /
+                100
+              ).toFixed(2)}
+            </Box>
+            <Box component="span" sx={{ textDecoration: 'line-through' }}>
+              €{(cart.totalPrice.centAmount / 100).toFixed(2)}
+            </Box>
+          </>
+        ) : (
+          <Box component="span">{(cart.totalPrice.centAmount / 100).toFixed(2)}</Box>
+        )}
+      </Typography>
+    </Paper>
   );
 }
