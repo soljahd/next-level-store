@@ -1,6 +1,16 @@
 'use client';
 import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
-import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, TextField, Typography, Box } from '@mui/material';
+import {
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  IconButton,
+  TextField,
+  Typography,
+  Box,
+  Stack,
+} from '@mui/material';
 import { AddCircleOutline, RemoveCircleOutline, Delete } from '@mui/icons-material';
 import Image from 'next/image';
 import { type Cart, type LineItem } from '@commercetools/platform-sdk';
@@ -17,7 +27,7 @@ export default function CartItem({ item, setCart }: CartItemProps) {
   const imageUrl = item.variant?.images?.[0]?.url;
 
   return (
-    <ListItem alignItems="center" sx={{ gap: 2, border: '1px solid grey', borderRadius: 2 }}>
+    <ListItem alignItems="center" sx={{ flexWrap: 'wrap', gap: 2, border: '1px solid grey', borderRadius: 2 }}>
       {imageUrl && (
         <ListItemAvatar>
           <Avatar variant="rounded" sx={{ width: 80, height: 100 }}>
@@ -112,36 +122,49 @@ function CartItemEdit({ item, setCart }: CartItemProps) {
   const totalPrice = price * item.quantity;
 
   return (
-    <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} alignItems="center" gap={{ xs: 1, sm: 2 }}>
-      <Box display="flex" alignItems="center" gap={1}>
-        <IconButton disabled={loading} color="primary" onClick={() => void handleCartOperation('subtract')}>
-          <RemoveCircleOutline sx={{ width: 28, height: 28 }} />
-        </IconButton>
-        <TextField
-          value={item.quantity}
-          size="small"
-          type="number"
-          sx={{
-            '& .MuiInputBase-input': {
-              textAlign: 'center',
-            },
-            width: 50,
-            '& input[type=number]': {
-              MozAppearance: 'textfield',
-              WebkitAppearance: 'none',
-              appearance: 'none',
-              margin: 0,
-            },
-            '& input[type=number]::-webkit-inner-spin-button, & input[type=number]::-webkit-outer-spin-button': {
-              WebkitAppearance: 'none',
-              margin: 0,
-            },
-          }}
-        />
-        <IconButton disabled={loading} color="primary" onClick={() => void handleCartOperation('add')}>
-          <AddCircleOutline sx={{ width: 28, height: 28 }} />
-        </IconButton>
-      </Box>
+    <Box
+      display="flex"
+      alignItems="center"
+      gap={{ xs: 1, sm: 2 }}
+      sx={{ justifyContent: 'space-between', minWidth: { xs: '100%', lg: 'auto' } }}
+    >
+      <Stack alignItems="center">
+        <Box display="flex" alignItems="center" gap={1}>
+          <IconButton disabled={loading} color="primary" onClick={() => void handleCartOperation('subtract')}>
+            <RemoveCircleOutline sx={{ width: 28, height: 28 }} />
+          </IconButton>
+          <TextField
+            value={item.quantity}
+            size="small"
+            type="number"
+            slotProps={{
+              input: {
+                readOnly: true,
+              },
+            }}
+            sx={{
+              '& .MuiInputBase-input': {
+                textAlign: 'center',
+              },
+              width: 50,
+              '& input[type=number]': {
+                MozAppearance: 'textfield',
+                WebkitAppearance: 'none',
+                appearance: 'none',
+                margin: 0,
+              },
+              '& input[type=number]::-webkit-inner-spin-button, & input[type=number]::-webkit-outer-spin-button': {
+                WebkitAppearance: 'none',
+                margin: 0,
+              },
+            }}
+          />
+          <IconButton disabled={loading} color="primary" onClick={() => void handleCartOperation('add')}>
+            <AddCircleOutline sx={{ width: 28, height: 28 }} />
+          </IconButton>
+        </Box>
+        <Typography>€{price} / pcs</Typography>
+      </Stack>
       <Typography variant="h6" sx={{ minWidth: 80, textAlign: 'center' }}>
         {item.price?.discounted ? (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
