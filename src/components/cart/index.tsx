@@ -1,11 +1,27 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { Box, Button, IconButton, List, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Box,
+  Button,
+  IconButton,
+  List,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import Link from 'next/link';
 import { type Cart } from '@commercetools/platform-sdk';
 import { getActiveCart } from '@/lib/commercetools/cart';
 import CartItem from '@/components/cart/cart-item';
+import { clearCart } from '@/lib/commercetools/cart';
+import { useCartStore } from '@/lib/store/cart-store';
 import { enqueueSnackbar } from 'notistack';
 
 export default function ShoppingCart() {
@@ -56,12 +72,7 @@ export default function ShoppingCart() {
             <Typography component="h1" variant="h4">
               Shopping Cart
             </Typography>
-            {/* кнопка очистки корзины */}
-            <Tooltip title="Clear cart" arrow>
-              <IconButton color="primary" aria-label="Remove all items from cart">
-                <RemoveShoppingCartIcon></RemoveShoppingCartIcon>
-              </IconButton>
-            </Tooltip>
+            <CartClearButton setCart={setCart} />
           </Stack>
           <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             {cart.lineItems.map((item) => (
@@ -110,4 +121,81 @@ export default function ShoppingCart() {
       </Box>
     );
   }
+}
+
+type CartClearButtonProps = {
+  setCart: Dispatch<SetStateAction<Cart | null>>;
+};
+
+function CartClearButton({ setCart }: CartClearButtonProps) {
+  const { initializeCart } = useCartStore();
+  const [loading, setLoading] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  const handleClearCart = async () => {
+    setLoading(true);
+    try {
+      const cart = await clearCart();
+      if (!cart) {
+        throw new Error('No cart');
+      }
+      setCart(cart);
+      await initializeCart();
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  };
+
+  return (
+    <>
+      <IconButton disabled={loading} color="primary" aria-label="Clear shopping cart" onClick={handleOpenConfirm}>
+        <RemoveShoppingCartIcon />
+      </IconButton>
+
+      <Dialog
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Clear Shopping Cart</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to remove all items from your shopping cart?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseConfirm} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={() => void handleClearCart()} color="error" autoFocus disabled={loading}>
+            {loading ? 'Clearing...' : 'Clear Cart'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 }
