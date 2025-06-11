@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import ShoppingCart from '@/components/cart/index';
 
 export const metadata: Metadata = {
   title: 'Shopping Cart | Next-Level Store',
@@ -24,18 +25,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ShoppingCart() {
+export default function ShoppingCartPage() {
   return (
     <Container
       component="main"
       maxWidth={false}
       sx={{
         flex: 1,
+        paddingX: { xs: 2, md: 8, xl: 20 },
+        paddingY: 2,
       }}
     >
-      <Typography component="h1" variant="h4" align="center">
-        Shopping cart page
-      </Typography>
+      <ShoppingCart></ShoppingCart>
     </Container>
   );
 }
