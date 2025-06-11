@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Stack, Link as MuiLink } from '@mui/material';
 import Link from 'next/link';
+import ImageSlider from '@/components/main/image-slider';
 
 export const metadata: Metadata = {
   title: 'Home | Next-Level Store',
@@ -44,6 +45,7 @@ export default function Home() {
           Cart
         </MuiLink>
       </Stack>
+      <ImageSlider />
     </Container>
   );
 }
