@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Box, IconButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
@@ -33,11 +33,14 @@ const slides: Slide[] = [
 
 export default function ImageSlider() {
   const router = useRouter();
-
   const extendedSlides = [slides.at(-1)!, ...slides, slides[0]];
   const [current, setCurrent] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const containerReference = useRef<HTMLDivElement>(null);
+
+  const slideWidthPercent = 100 / extendedSlides.length;
+  const transitionStyle = isTransitioning ? 'transform 0.5s ease-in-out' : 'none';
 
   const handleTransitionEnd = () => {
     setIsTransitioning(false);
@@ -45,24 +48,33 @@ export default function ImageSlider() {
     if (current === extendedSlides.length - 1) setCurrent(1);
   };
 
-  const previousSlide = () => {
+  const previousSlide = useCallback(() => {
     if (isTransitioning) return;
     setCurrent((index) => index - 1);
     setIsTransitioning(true);
-  };
+  }, [isTransitioning]);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (isTransitioning) return;
     setCurrent((index) => index + 1);
     setIsTransitioning(true);
-  };
+  }, [isTransitioning]);
 
   const handleClick = (href: string) => {
     router.push(href);
   };
 
-  const slideWidthPercent = 100 / extendedSlides.length;
-  const transitionStyle = isTransitioning ? 'transform 0.5s ease-in-out' : 'none';
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [nextSlide, isPaused]);
+
+  const visibleIndex = current === 0 ? slides.length - 1 : current === extendedSlides.length - 1 ? 0 : current - 1;
 
   return (
     <Box
@@ -74,15 +86,10 @@ export default function ImageSlider() {
         py: 4,
       }}
     >
-      <Box
-        sx={{
-          width: '100%',
-          px: { xs: 2, md: 8, xl: 20 },
-          boxSizing: 'border-box',
-          position: 'relative',
-        }}
-      >
+      <Box sx={{ width: '100%', px: { xs: 2, md: 8, xl: 20 }, boxSizing: 'border-box', position: 'relative' }}>
         <Box
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           sx={{
             width: '100%',
             borderRadius: 2,
@@ -147,14 +154,13 @@ export default function ImageSlider() {
               left: 8,
               transform: 'translateY(-50%)',
               backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              color: 'rgb(255, 255, 255)',
+              color: '#fff',
               '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
               borderRadius: 1,
               height: 48,
               width: 48,
               zIndex: 2,
             }}
-            aria-label="previous slide"
           >
             <ChevronLeft />
           </IconButton>
@@ -167,17 +173,43 @@ export default function ImageSlider() {
               right: 8,
               transform: 'translateY(-50%)',
               backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              color: 'rgb(255, 255, 255)',
+              color: '#fff',
               '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
               borderRadius: 1,
               height: 48,
               width: 48,
               zIndex: 2,
             }}
-            aria-label="next slide"
           >
             <ChevronRight />
           </IconButton>
+        </Box>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, gap: 1 }}>
+          {slides.map((_, index) => {
+            const isActive = visibleIndex === index;
+            return (
+              <Box
+                key={index}
+                onClick={() => {
+                  if (!isTransitioning) {
+                    setCurrent(index + 1);
+                    setIsTransitioning(true);
+                  }
+                }}
+                sx={{
+                  width: isActive ? 16 : 10,
+                  height: isActive ? 16 : 10,
+                  borderRadius: '50%',
+                  backgroundColor: isActive ? 'primary.main' : 'grey.400',
+                  transform: isActive ? 'scale(1.2)' : 'scale(1)',
+                  opacity: isActive ? 1 : 0.6,
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                }}
+              />
+            );
+          })}
         </Box>
       </Box>
     </Box>
