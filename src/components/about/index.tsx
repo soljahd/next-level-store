@@ -8,7 +8,7 @@ const teamMembers = [
     name: 'Dmitriy Radovnya',
     role: 'Frontend Developer',
     github: 'https://github.com/DmitriyRadovnya',
-    photo: '/bill_gates.jpg',
+    photo: '/radovnya.jpg',
     bio: `Dmitriy is a  frontend developer from Mozyr, Belarus...`,
     contributions: [
       'Designed and implemented key components using HTML & CSS.',
@@ -20,7 +20,7 @@ const teamMembers = [
     name: 'Dzmitry Solahub',
     role: 'Team Lead & Developer',
     github: 'https://github.com/soljahd',
-    photo: '/steve_jobs.jpg',
+    photo: '/soljahd.jpg',
     bio: `Dzmitry is a frontend developer and team lead from Mogilev, Belarus...`,
     contributions: [
       'Led the team, planned architecture, and coordinated development.',

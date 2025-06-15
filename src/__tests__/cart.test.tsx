@@ -1,9 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import ShoppingCart from '../app/cart/page';
+import { createMyCart } from '@/lib/commercetools/cart';
 
-describe('ShoppingCart page', () => {
-  it('renders the page with correct title', () => {
-    render(<ShoppingCart />);
-    expect(screen.getByText('Shopping cart page')).toBeInTheDocument();
+describe('createMyCart without mocking', () => {
+  it('throws TypeError if apiRoot is misconfigured', async () => {
+    await expect(createMyCart()).rejects.toThrow(TypeError);
   });
 });
