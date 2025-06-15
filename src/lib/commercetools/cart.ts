@@ -234,3 +234,25 @@ export async function getActiveCart() {
     throw error;
   }
 }
+
+export async function clearCart() {
+  try {
+    const cart = await getActiveCart();
+    if (!cart) throw new TypeError('No Active Cart');
+
+    const newCart = await createMyCart();
+
+    await apiRoot
+      .me()
+      .carts()
+      .withId({ ID: cart.id })
+      .delete({ queryArgs: { version: cart.version } })
+      .execute();
+
+    return newCart;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(error.message);
+    }
+  }
+}

@@ -65,6 +65,9 @@ export default function ProductCard({
       setAdding(false);
     }
   };
+
+  const showOnlyOldPrice = price === '0.00';
+
   return (
     <Card
       component={Link}
@@ -78,7 +81,6 @@ export default function ProductCard({
         padding: 2,
         transition: 'transform 0.3s, box-shadow 0.3s',
         '&:hover': {
-          // transform: 'scale(1.05)',
           boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
         },
         '&:active': {
@@ -97,10 +99,19 @@ export default function ProductCard({
       </Stack>
       <Stack paddingY={1}>
         <Stack direction="row" gap={1}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'red' }}>
-            €{price}
-          </Typography>
-          <Typography variant="h6" sx={{ textDecoration: 'line-through', color: 'text.secondary' }}>
+          {!showOnlyOldPrice && (
+            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'red' }}>
+              €{price}
+            </Typography>
+          )}
+          <Typography
+            variant="h6"
+            sx={{
+              textDecoration: showOnlyOldPrice ? 'none' : 'line-through',
+              color: showOnlyOldPrice ? 'text.primary' : 'text.secondary',
+              fontWeight: showOnlyOldPrice ? 'bold' : 'normal',
+            }}
+          >
             €{oldPrice}
           </Typography>
         </Stack>

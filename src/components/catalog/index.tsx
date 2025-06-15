@@ -74,7 +74,7 @@ function Catalog() {
       const data = await searchProducts({
         limit: pagination.limit,
         offset: offset,
-        sort: filters.sort,
+        sort: filters.sort || sortOption,
         searchQuery: searchQuery,
         categoryId: categoryIdToUse,
         authors: filters.authors,
