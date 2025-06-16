@@ -20,6 +20,7 @@ const gradients = [
 ];
 
 const slides: Slide[] = [
+  { title: 'Get €5 Off with Code sale5', href: '/cart', background: gradients[3] },
   { title: 'BOOK CATALOG', subtitle: 'Browse all titles available', href: '/catalog', background: gradients[0] },
   { title: 'SIGN UP', subtitle: 'Create an account', href: '/register', background: gradients[1] },
   {
@@ -28,7 +29,6 @@ const slides: Slide[] = [
     href: '/about',
     background: gradients[2],
   },
-  { title: 'Get €5 Off with Code sale5', href: '/cart', background: gradients[3] },
 ];
 
 export default function ImageSlider() {
