@@ -32,7 +32,7 @@ const teamMembers = [
     name: 'Sergey Kudrin',
     role: 'Frontend Developer',
     github: 'https://github.com/Kenny-alive/',
-    photo: '/berners_lee.jpg',
+    photo: '/kudrin.jpg',
     bio: `Sergey is a frontend developer from Zelenograd, Russia...`,
     contributions: [
       'Created the team presentation and structured the About Us section.',
