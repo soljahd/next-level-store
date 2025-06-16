@@ -14,6 +14,7 @@ import {
   Stack,
   TextField,
   Typography,
+  CardMedia,
 } from '@mui/material';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import Link from 'next/link';
@@ -85,11 +86,20 @@ export default function ShoppingCart() {
     );
   } else {
     return (
-      <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
-        <Typography color="primary">
-          Your cart is empty. To find the product you are interested in, use the search or go to the catalog page
+      <Box display="flex" flexDirection="column" alignItems="center" gap={2} padding={2}>
+        <CardMedia
+          component="img"
+          src="/empty-cart.png"
+          alt="Empty shopping cart"
+          sx={{ width: 200, height: 'auto' }}
+        />
+        <Typography variant="h2" color="textPrimary" align="center" gutterBottom>
+          Your cart is empty
         </Typography>
-        <Button>
+        <Typography variant="body1" color="textSecondary" align="center" gutterBottom>
+          To find the product you are interested in, use the search or go to the catalog page
+        </Typography>
+        <Button variant="contained">
           <Link href={'/catalog'}>catalog</Link>
         </Button>
       </Box>
