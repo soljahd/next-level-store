@@ -8,7 +8,6 @@ import {
   DialogActions,
   Box,
   Button,
-  IconButton,
   List,
   Paper,
   Stack,
@@ -155,9 +154,15 @@ function CartClearButton({ setCart }: CartClearButtonProps) {
 
   return (
     <>
-      <IconButton disabled={loading} color="primary" aria-label="Clear shopping cart" onClick={handleOpenConfirm}>
-        <RemoveShoppingCartIcon />
-      </IconButton>
+      <Button
+        disabled={loading}
+        color="primary"
+        aria-label="Clear shopping cart"
+        onClick={handleOpenConfirm}
+        startIcon={<RemoveShoppingCartIcon />}
+      >
+        Clear cart
+      </Button>
 
       <Dialog
         open={openConfirm}
@@ -254,14 +259,14 @@ function CartApplyPromoButton({ cart, setCart }: CartApplyPromoButtonProps) {
         {cart.discountCodes.length > 0 ? (
           <>
             <Box component="span" sx={{ color: 'red', fontWeight: 'bold', mr: 1 }}>
-              €
-              {(
-                (cart.totalPrice.centAmount - (cart.discountOnTotalPrice?.discountedAmount.centAmount || 0)) /
-                100
-              ).toFixed(2)}
+              €{(cart.totalPrice.centAmount / 100).toFixed(2)}
             </Box>
             <Box component="span" sx={{ textDecoration: 'line-through' }}>
-              €{(cart.totalPrice.centAmount / 100).toFixed(2)}
+              €
+              {(
+                (cart.totalPrice.centAmount + (cart.discountOnTotalPrice?.discountedAmount.centAmount || 0)) /
+                100
+              ).toFixed(2)}
             </Box>
           </>
         ) : (
