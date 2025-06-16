@@ -1,0 +1,8 @@
+#!/bin/sh
+
+current_branch=$(git branch --show-current)
+
+if [ "$current_branch" = "main" ] || [ "$current_branch" = "develop" ]; then
+  echo "Error: Direct push to '$current_branch' is not allowed! Please use a Pull Request (PR)"
+  exit 1
+fi
