@@ -1,9 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import Catalog from '../app/catalog/page';
+import Catalog from '@/app/catalog/page';
 
-describe('Catalog page', () => {
-  it('renders the page with correct title', () => {
+jest.mock('@/components/catalog', () => {
+  const MockCatalogPage = () => <div>Mocked Catalog Page</div>;
+  MockCatalogPage.displayName = 'MockCatalogPage';
+  return MockCatalogPage;
+});
+
+describe('Catalog Page', () => {
+  it('renders without crashing and shows the catalog content', () => {
     render(<Catalog />);
-    expect(screen.getByText('Catalog page')).toBeInTheDocument();
+    expect(screen.getByText('Mocked Catalog Page')).toBeInTheDocument();
   });
 });

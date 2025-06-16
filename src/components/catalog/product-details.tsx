@@ -1,9 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Box, Typography, Button, IconButton, Dialog, DialogContent, Container } from '@mui/material';
+import { Box, Typography, IconButton, Dialog, DialogContent, Container } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos, Close } from '@mui/icons-material';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import Image from 'next/image';
+import AddToCartButton from '@/components/catalog/add-to-cart-button';
 
 type ProductDetailsProps = {
   product: ProductProjection;
@@ -170,6 +171,7 @@ export default function ProductDetails({ product, breadcrumb }: ProductDetailsPr
 
           <Box
             sx={{
+              p: 2,
               width: { xs: '100%', md: `${sliderWidth}px` },
               display: 'flex',
               flexDirection: 'column',
@@ -206,14 +208,15 @@ export default function ProductDetails({ product, breadcrumb }: ProductDetailsPr
                 )}
               </Box>
             </Box>
-
-            <Button
+            {/* <Button
+              disabled={isInCart}
               variant="contained"
               color="primary"
               sx={{ textTransform: 'none', fontSize: '1.1rem', px: 3, py: 1.2 }}
             >
               Add to Cart
-            </Button>
+            </Button> */}
+            <AddToCartButton productId={product.id} />
           </Box>
         </Box>
 

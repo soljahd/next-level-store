@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
 import {
+  Pagination,
   IconButton,
   Drawer,
   Stack,
@@ -17,9 +18,9 @@ import { Home as HomeIcon, Close as CloseIcon, FilterList as FilterListIcon } fr
 import { useSearchParams } from 'next/navigation';
 import { type ProductProjection, type Category } from '@commercetools/platform-sdk';
 import { searchProducts, getAllCategories } from '@/lib/commercetools/catalog';
-import ProductsList from '@/components/product-list';
-import SortSelect from '@/components/sort-select';
-import FilterForm from '@/components/filters-form';
+import ProductsList from '@/components/catalog/product-list';
+import SortSelect from '@/components/catalog/sort-select';
+import FilterForm from '@/components/catalog/filters-form';
 
 export type CategoryWithChildren = {
   children?: CategoryWithChildren[];
@@ -31,6 +32,7 @@ type BreadcrumbItem = {
 };
 
 export type FilterOption = {
+  sort?: string;
   categoryId?: string | null;
   authors?: string[];
   yearOfPublication?: {
@@ -56,6 +58,49 @@ function Catalog() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    limit: 8,
+    totalResults: 0,
+  });
+
+  const fetchProducts = async (page = 1, filters = filterOption) => {
+    try {
+      // setLoading(true);
+      const categoryIdToUse = filters.categoryId === undefined ? categoryId : filters.categoryId;
+      const offset = (page - 1) * pagination.limit;
+
+      const data = await searchProducts({
+        limit: pagination.limit,
+        offset: offset,
+        sort: filters.sort || sortOption,
+        searchQuery: searchQuery,
+        categoryId: categoryIdToUse,
+        authors: filters.authors,
+        yearOfPublication: {
+          min: filters.yearOfPublication?.min,
+          max: filters.yearOfPublication?.max,
+        },
+        priceRange: {
+          min: filters.priceRange?.min,
+          max: filters.priceRange?.max,
+        },
+      });
+
+      if (data) {
+        setProducts(data.results);
+        setPagination((previous) => ({
+          ...previous,
+          currentPage: page,
+          totalResults: data.total || 0,
+          totalPages: Math.ceil((data.total || 0) / pagination.limit),
+        }));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const buildCategoryPath = (
     categories: CategoryWithChildren[],
@@ -95,35 +140,12 @@ function Catalog() {
     if (id === 'root') {
       setCategoryId(null);
       setBreadcrumbs([{ id: 'root', name: 'Books' }]);
-      const data = await searchProducts({
-        limit: 50,
-        offset: 0,
-        searchQuery: searchQuery,
-        sort: sortOption,
-        categoryId: null,
-        authors: filterOption.authors,
-        yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
-        priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
-      });
-      const products = data?.results;
-      if (products) setProducts(products);
+      await fetchProducts(1, { ...filterOption, categoryId: null });
       return;
     }
 
     setCategoryId(id);
-    const data = await searchProducts({
-      limit: 50,
-      offset: 0,
-      searchQuery: searchQuery,
-      sort: sortOption,
-      categoryId: id,
-      authors: filterOption.authors,
-      yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
-      priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
-    });
-    const products = data?.results;
-    if (products) setProducts(products);
-
+    await fetchProducts(1, { ...filterOption, categoryId: id });
     const path = buildCategoryPath(categories, id);
     if (path) {
       setBreadcrumbs(path);
@@ -131,35 +153,24 @@ function Catalog() {
   };
 
   const handleSortChange = async (event: SelectChangeEvent) => {
-    const data = await searchProducts({
-      limit: 50,
-      offset: 0,
-      sort: event.target.value,
-      searchQuery: searchQuery,
-      categoryId: categoryId,
-      authors: filterOption.authors,
-      yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
-      priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
+    const newSortOption = event.target.value;
+    setSortOption(newSortOption);
+    await fetchProducts(1, {
+      ...filterOption,
+      sort: newSortOption,
     });
-    const products = data?.results;
-    if (products) setProducts(products);
-
-    setSortOption(event.target.value);
   };
 
   const handleFilterApply = async (filters: FilterOption) => {
-    const data = await searchProducts({
-      limit: 50,
-      offset: 0,
-      sort: sortOption,
-      searchQuery: searchQuery,
-      categoryId: filters.categoryId,
-      authors: filters.authors,
-      yearOfPublication: { min: filters.yearOfPublication?.min, max: filters.yearOfPublication?.max },
-      priceRange: { min: filters.priceRange?.min, max: filters.priceRange?.max },
+    setFilterOption(filters);
+    await fetchProducts(1, {
+      ...filters,
+      sort: filterOption.sort,
     });
-    const products = data?.results;
-    if (products) setProducts(products);
+  };
+
+  const handlePaginationChange = async (page: number) => {
+    await fetchProducts(page);
   };
 
   useEffect(() => {
@@ -192,18 +203,7 @@ function Catalog() {
         const categoryTree = buildTree(allCategories);
         setCategories(categoryTree);
 
-        const data = await searchProducts({
-          limit: 50,
-          offset: 0,
-          sort: sortOption,
-          searchQuery: searchQuery,
-          categoryId: categoryId,
-          authors: filterOption.authors,
-          yearOfPublication: { min: filterOption.yearOfPublication?.min, max: filterOption.yearOfPublication?.max },
-          priceRange: { min: filterOption.priceRange?.min, max: filterOption.priceRange?.max },
-        });
-        const products = data?.results;
-        if (products) setProducts(products);
+        await fetchProducts(1);
       } finally {
         setLoading(false);
       }
@@ -304,9 +304,31 @@ function Catalog() {
               Filters
             </Button>
           </Stack>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5 }}>
-            <ProductsList products={products} />
-          </Box>
+          <Stack justifyContent={'space-between'} gap={2} sx={{ flex: 1 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5 }}>
+              <ProductsList products={products} />
+            </Box>
+            {products.length > 0 && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Pagination
+                  count={pagination.totalPages}
+                  page={pagination.currentPage}
+                  onChange={(_, page) => void handlePaginationChange(page)}
+                  color="primary"
+                  shape="rounded"
+                  siblingCount={isMobile ? 0 : 1}
+                  boundaryCount={isMobile ? 1 : 2}
+                  sx={{
+                    '& .MuiPaginationItem-root': {
+                      fontSize: isMobile ? '0.875rem' : '1rem',
+                      minWidth: isMobile ? 32 : 40,
+                      height: isMobile ? 32 : 40,
+                    },
+                  }}
+                />
+              </Box>
+            )}
+          </Stack>
         </Box>
       </Box>
     </>

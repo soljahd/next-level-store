@@ -1,6 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import Header from '@/components/header';
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import Header from '@/components/header/index';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useCartStore } from '@/lib/store/cart-store';
 import { useRouter } from 'next/navigation';
 import { mocked } from 'jest-mock';
 import '@testing-library/jest-dom';
@@ -13,9 +14,14 @@ jest.mock('@/lib/store/auth-store', () => ({
   useAuthStore: jest.fn(),
 }));
 
+jest.mock('@/lib/store/cart-store', () => ({
+  useCartStore: jest.fn(),
+}));
+
 describe('Header', () => {
   const mockLogout = jest.fn();
   const mockPush = jest.fn();
+  const mockInitializeCart = jest.fn(async () => {});
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -33,6 +39,12 @@ describe('Header', () => {
       isLoggedIn: false,
       setLogoutState: mockLogout,
     });
+
+    mocked(useCartStore).mockReturnValue({
+      cartCount: 0,
+      initializeCart: mockInitializeCart,
+      updateCartCount: jest.fn(),
+    });
   });
 
   it('renders the logo and main elements', () => {
@@ -46,7 +58,9 @@ describe('Header', () => {
 
   it('shows Sign In / Sign Up if not logged in', () => {
     render(<Header />);
-    fireEvent.click(screen.getByText(/account/i));
+    act(() => {
+      fireEvent.click(screen.getByText(/account/i));
+    });
     expect(screen.getByText(/sign in/i)).toBeInTheDocument();
     expect(screen.getByText(/sign up/i)).toBeInTheDocument();
   });
@@ -57,8 +71,16 @@ describe('Header', () => {
       setLogoutState: mockLogout,
     });
 
+    mocked(useCartStore).mockReturnValue({
+      cartCount: 3,
+      initializeCart: mockInitializeCart,
+      updateCartCount: jest.fn(),
+    });
+
     render(<Header />);
-    fireEvent.click(screen.getByText(/account/i));
+    act(() => {
+      fireEvent.click(screen.getByText(/account/i));
+    });
     expect(screen.getByText(/my profile/i)).toBeInTheDocument();
     expect(screen.getByText(/sign out/i)).toBeInTheDocument();
   });
@@ -69,15 +91,24 @@ describe('Header', () => {
       setLogoutState: mockLogout,
     });
 
+    mocked(useCartStore).mockReturnValue({
+      cartCount: 3,
+      initializeCart: mockInitializeCart,
+      updateCartCount: jest.fn(),
+    });
+
     render(<Header />);
-    fireEvent.click(screen.getByText(/account/i));
-    fireEvent.click(screen.getByText(/sign out/i));
+    act(() => {
+      fireEvent.click(screen.getByText(/account/i));
+    });
+    act(() => {
+      fireEvent.click(screen.getByText(/sign out/i));
+    });
     expect(mockLogout).toHaveBeenCalled();
   });
 
   it('contains correct links for navigation', () => {
     render(<Header />);
-
     expect(screen.getByRole('link', { name: /logo/i })).toHaveAttribute('href', '/main');
     expect(screen.getByRole('link', { name: /catalog/i })).toHaveAttribute('href', '/catalog');
     expect(screen.getByRole('link', { name: /authors/i })).toHaveAttribute('href', '/about');

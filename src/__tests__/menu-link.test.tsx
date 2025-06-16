@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import MenuLink from '../components/menu-link';
+import MenuLink from '../components/header/menu-link';
 
 type RouterMock = {
   push: jest.Mock;

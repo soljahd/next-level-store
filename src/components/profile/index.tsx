@@ -1,32 +1,45 @@
 'use client';
-import { Button, IconButton, Paper, Stack, Typography } from '@mui/material';
-import UserField from './user-field';
-import { Add, Edit } from '@mui/icons-material';
-import UserAddress from './user-address';
-import type { Customer } from '@commercetools/platform-sdk';
 import { useEffect, useState } from 'react';
-import { getMyProfile } from '@/lib/commercetools/profile';
-import EditPassword from './edit-password';
-import EditProfile from './edit-profile';
-import EditAddress from './edit-address';
-import { useAuthStore } from '@/lib/store/auth-store';
 import { useRouter } from 'next/navigation';
+import { Button, IconButton, Paper, Stack, Typography } from '@mui/material';
+import { Add, Edit } from '@mui/icons-material';
+import type { Customer } from '@commercetools/platform-sdk';
+import UserAddress from '@/components/profile/user-address';
+import EditPassword from '@/components/profile/edit-password';
+import EditProfile from '@/components/profile/edit-profile';
+import EditAddress from '@/components/profile/edit-address';
+import { getMyProfile } from '@/lib/commercetools/profile';
+import { useAuthStore } from '@/lib/store/auth-store';
+import { enqueueSnackbar } from 'notistack';
 
 export default function Profile() {
   const [editingMode, setEditingMode] = useState<string | null>(null);
   const [profileState, setProfileState] = useState<Customer | null>(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState<string | null>(null);
-  const { isLoggedIn } = useAuthStore();
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
+
+  const { isLoggedIn, isLoading } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      router.replace('/main');
+    if (!isLoading && !isLoggedIn) {
+      router.replace('/login');
     }
-  }, [isLoggedIn, router]);
+  }, [isLoading, isLoggedIn, router]);
 
   useEffect(() => {
+    if (!isLoggedIn) return;
+
     const fetchProfile = async () => {
       try {
         const data = await getMyProfile();
@@ -36,28 +49,22 @@ export default function Profile() {
         setProfileState(data);
       } catch (error) {
         if (error instanceof Error) {
-          // setError(err.message);
-        } else {
-          // setError('Ошибка загрузки данных');
+          setErrorMessage(error.message);
         }
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     };
+    fetchProfile().catch(() => {
+      setLoading(false);
+    });
+  }, [isLoggedIn]);
 
-    void fetchProfile();
-  }, []);
-
-  if (
-    !profileState ||
-    !profileState.addresses ||
-    !profileState.firstName ||
-    !profileState.lastName ||
-    !profileState.email ||
-    !profileState.dateOfBirth
-  ) {
+  if (!isLoggedIn || loading || isLoading) {
     return null;
-  } else {
+  }
+
+  if (profileState) {
     return (
       <>
         {editingMode === null ? (
@@ -82,10 +89,10 @@ export default function Profile() {
                   p: 3 / 2,
                 }}
               >
-                <UserField label="First Name: " value={profileState.firstName || ''}></UserField>
-                <UserField label="Last Name: " value={profileState.lastName || ''}></UserField>
-                <UserField label="Date of Birth: " value={profileState.dateOfBirth || ''}></UserField>
-                <UserField label="Email: " value={profileState.email}></UserField>
+                <UserField label="First Name: " value={profileState.firstName || ''} />
+                <UserField label="Last Name: " value={profileState.lastName || ''} />
+                <UserField label="Date of Birth: " value={profileState.dateOfBirth || ''} />
+                <UserField label="Email: " value={profileState.email || ''} />
                 <IconButton
                   onClick={() => setEditingMode('editProfile')}
                   color="primary"
@@ -138,9 +145,6 @@ export default function Profile() {
               </Typography>
               <Stack spacing={1}>
                 {profileState.addresses.map((address) => {
-                  // const addressId = address.id ? address.id : '';
-                  // const shippingAddressIds = profileState.shippingAddressIds ? profileState.shippingAddressIds : [];
-                  // const billingAddressesIds = profileState.billingAddressIds ? profileState.billingAddressIds : [];
                   let addressId = '';
                   if (address.id) {
                     addressId = address.id;
@@ -197,7 +201,7 @@ export default function Profile() {
         ) : editingMode === 'editPassword' ? (
           <EditPassword setEditingMode={setEditingMode} setProfileState={setProfileState} />
         ) : editingMode === 'editProfile' ? (
-          <EditProfile setEditingMode={setEditingMode} setProfileState={setProfileState} />
+          <EditProfile profileState={profileState} setEditingMode={setEditingMode} setProfileState={setProfileState} />
         ) : editingMode.includes('editAddress') ? (
           <EditAddress
             setEditingMode={setEditingMode}
@@ -207,9 +211,36 @@ export default function Profile() {
             editModeWithAddressId={editingMode}
           />
         ) : (
-          <EditAddress setEditingMode={setEditingMode} isNewAddress={true} setProfileState={setProfileState} />
+          <EditAddress
+            profileState={profileState}
+            setEditingMode={setEditingMode}
+            isNewAddress={true}
+            setProfileState={setProfileState}
+          />
         )}
       </>
     );
+  } else {
+    return null;
   }
+}
+
+type FieldProps = {
+  label: string;
+  value: string;
+};
+
+function UserField(props: FieldProps) {
+  const { label, value } = props;
+
+  return (
+    <Stack direction="row" spacing={2}>
+      <Typography component="p" variant="body2" sx={{ minWidth: '80px' }}>
+        {label}
+      </Typography>
+      <Typography component="p" variant="body2" color="text.secondary">
+        {value}
+      </Typography>
+    </Stack>
+  );
 }

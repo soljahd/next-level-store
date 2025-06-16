@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import RegisterForm from '../components/register-form';
 
 jest.mock('next/navigation', () => ({
@@ -16,7 +16,7 @@ jest.mock('notistack', () => ({
 }));
 
 describe('RegisterForm', () => {
-  test('renders form elements and submits', () => {
+  test('renders form elements and submits', async () => {
     render(<RegisterForm />);
 
     expect(screen.getByLabelText(/First name\*/i)).toBeInTheDocument();
@@ -27,6 +27,9 @@ describe('RegisterForm', () => {
     const submitButton = screen.getByRole('button', { name: /Register/i });
     expect(submitButton).toBeInTheDocument();
 
-    fireEvent.click(submitButton);
+    await act(async () => {
+      fireEvent.click(submitButton);
+      await Promise.resolve();
+    });
   });
 });

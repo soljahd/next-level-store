@@ -6,11 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Button, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '@/lib/store/auth-store';
 import type { Customer } from '@commercetools/platform-sdk';
 import { loginCustomer, logoutCustomer } from '@/lib/commercetools/auth';
+import { enqueueSnackbar } from 'notistack';
 
 type EditPasswordProps = {
   setProfileState: Dispatch<SetStateAction<Customer | null>>;
@@ -18,6 +19,17 @@ type EditPasswordProps = {
 };
 
 export default function EditPassword(props: EditPasswordProps) {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const handleCloseError = () => setErrorMessage(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, {
+        variant: 'error',
+        onClose: handleCloseError,
+      });
+    }
+  }, [errorMessage]);
   const { setProfileState, setEditingMode } = props;
   const { setLoginState, user } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
@@ -44,9 +56,10 @@ export default function EditPassword(props: EditPasswordProps) {
       logoutCustomer();
       await loginCustomer({ ...user, password: data.newPassword });
       setEditingMode(null);
+      enqueueSnackbar('Password successfully updated', { variant: 'success' });
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Ошибка изменения пароля:', error.message);
+        setErrorMessage(error.message);
       }
     }
   };
@@ -64,7 +77,7 @@ export default function EditPassword(props: EditPasswordProps) {
   return (
     <Stack
       component="form"
-      onSubmit={() => handleSubmit(onSubmit)}
+      onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       noValidate
       autoComplete="off"
       gap={3}

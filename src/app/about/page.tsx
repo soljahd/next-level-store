@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Container, Typography } from '@mui/material';
+import AboutUs from '@/components/about';
 
 export const metadata: Metadata = {
   title: 'About Us | Next-Level Store',
@@ -34,6 +35,7 @@ export default function About() {
       <Typography component="h1" variant="h4" align="center">
         Authors page
       </Typography>
+      <AboutUs />
     </Container>
   );
 }

@@ -3,9 +3,9 @@ import { useState, useRef, type Dispatch, type SetStateAction } from 'react';
 import { Divider, Box, Button } from '@mui/material';
 import { type ProductProjection } from '@commercetools/platform-sdk';
 import { useRouter } from 'next/navigation';
-import YearPriceFilters from '@/components/years-price-filter';
-import AuthorFilter from '@/components/author-filters';
-import CategoryList from '@/components/categories-list';
+import YearPriceFilters from '@/components/catalog/years-price-filter';
+import AuthorFilter from '@/components/catalog/author-filters';
+import CategoryList from '@/components/catalog/categories-list';
 import { type FilterOption, type CategoryWithChildren } from '@/components/catalog';
 
 type FilterFormProps = {

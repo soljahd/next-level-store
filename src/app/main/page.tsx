@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Container, Typography, Stack, Link as MuiLink } from '@mui/material';
+import { Container } from '@mui/material';
+import ImageSlider from '@/components/main/image-slider';
 
 export const metadata: Metadata = {
   title: 'Home | Next-Level Store',
@@ -20,17 +21,7 @@ export default function Home() {
         flex: 1,
       }}
     >
-      <Typography component="h1" variant="h4" align="center">
-        Main page
-      </Typography>
-      <Stack gap={2}>
-        <MuiLink href="/login">Login</MuiLink>
-        <MuiLink href="/register">Register</MuiLink>
-        <MuiLink href="/profile">Profile</MuiLink>
-        <MuiLink href="/catalog">Catalog</MuiLink>
-        <MuiLink href="/about">Authors</MuiLink>
-        <MuiLink href="/cart">Cart</MuiLink>
-      </Stack>
+      <ImageSlider />
     </Container>
   );
 }
