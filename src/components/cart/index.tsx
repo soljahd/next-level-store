@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
+import { useState, useEffect, type Dispatch, type SetStateAction, type FormEvent } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -195,7 +195,8 @@ function CartApplyPromoButton({ cart, setCart }: CartApplyPromoButtonProps) {
     }
   }, [errorMessage]);
 
-  const handleApplyPromo = async () => {
+  const handleApplyPromo = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     try {
       const cart = await applyDiscountCode(discountCode);
@@ -221,7 +222,7 @@ function CartApplyPromoButton({ cart, setCart }: CartApplyPromoButtonProps) {
         maxHeight: 'min-content',
       }}
     >
-      <Stack component="form">
+      <Stack component="form" onSubmit={(event) => void handleApplyPromo(event)}>
         <TextField
           value={discountCode}
           onChange={(event) => setDiscountCode(event.target.value)}
@@ -231,7 +232,7 @@ function CartApplyPromoButton({ cart, setCart }: CartApplyPromoButtonProps) {
           placeholder="Enter your promo code"
           sx={{ textAlign: 'center' }}
         />
-        <Button disabled={loading} variant="contained" onClick={() => void handleApplyPromo()}>
+        <Button type="submit" disabled={loading} variant="contained">
           apply promo code
         </Button>
       </Stack>
