@@ -55,7 +55,8 @@ export default function ProductCard({
       if (!cart) {
         throw new Error('No active cart');
       }
-      updateCartCount(cart.lineItems.length);
+      const totalQuantity = cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0;
+      updateCartCount(totalQuantity);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);

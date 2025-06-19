@@ -12,7 +12,8 @@ export const useCartStore = create<CartStore>((set) => ({
   initializeCart: async () => {
     try {
       const cart = await getActiveCart();
-      set({ cartCount: cart?.lineItems.length || 0 });
+      const totalQuantity = cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0;
+      set({ cartCount: totalQuantity });
     } catch (error) {
       console.error('Cart initialization failed:', error);
       set({ cartCount: 0 });

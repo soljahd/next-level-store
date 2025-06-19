@@ -58,7 +58,7 @@ export default function AddressForm(props: AddressFormProperty) {
           <FormControl fullWidth error={!!errors.country}>
             <InputLabel>Country</InputLabel>
             <Select label="Country" {...control.register(fieldNames.country)} defaultValue="">
-              <MenuItem value="BY">Belarussia</MenuItem>
+              <MenuItem value="BY">Belarus</MenuItem>
               <MenuItem value="RU">Russia</MenuItem>
             </Select>
             {errors.country && <FormHelperText>{errors.country.message}</FormHelperText>}

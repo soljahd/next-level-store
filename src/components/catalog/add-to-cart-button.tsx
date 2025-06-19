@@ -53,7 +53,8 @@ export default function AddToCartButton({ productId }: { productId: string }) {
       if (!cart) {
         throw new Error('No active cart');
       }
-      updateCartCount(cart.lineItems.length);
+      const totalQuantity = cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0;
+      updateCartCount(totalQuantity);
       setIsInCart(true);
     } catch (error) {
       if (error instanceof Error) {
@@ -73,7 +74,8 @@ export default function AddToCartButton({ productId }: { productId: string }) {
       if (!cart) {
         throw new Error('No active cart');
       }
-      updateCartCount(cart.lineItems.length);
+      const totalQuantity = cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0;
+      updateCartCount(totalQuantity);
       setIsInCart(false);
       enqueueSnackbar('Product successfully removed', { variant: 'success' });
     } catch (error) {
